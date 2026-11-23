@@ -10,9 +10,9 @@ Praktiline eestikeelne juhend, kuidas AI-st igapäevatöös rohkem kasu saada ja
 |---|---|
 | [AI-teejuht](index.html) | Põhitõed, turvaline kasutamine, hea prompt, seadistamine, automatiseerimine ja skillid |
 | [AI-häkid](hakid.html) | Lühikesed nipid koos promptidega, mida saab kopeerida ja oma töö jaoks kohandada |
-| [AI-edulood](edulood.html) | Näidislood eri valdkondadest, mis aitavad märgata, kus AI sinu töös aidata võiks |
+| [AI-ideed](edulood.html) | Ideed ja näidislood eri valdkondadest, mis näitavad, mida AI-ga teha saab |
 
-Häkkide ja edulugude lehel saab kirja panna ka oma nipid ja lood. Need salvestuvad ainult külastaja enda brauserisse ega jõua kellegi teiseni.
+Häkkide ja ideede lehel saab kirja panna ka oma nipid ja lood. Need salvestuvad ainult külastaja enda brauserisse ega jõua kellegi teiseni.
 
 ## Kellele
 

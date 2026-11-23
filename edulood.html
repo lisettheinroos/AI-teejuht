@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>AI-edulood: näited, mis panevad mõtlema</title>
+<title>AI-ideed: mida AI-ga teha saab</title>
 <meta name="author" content="Lisett Heinroos">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%F0%9F%8F%86%3C/text%3E%3C/svg%3E">
-<meta name="description" content="Näidislood sellest, kuidas AI võib igapäevatööd lihtsamaks teha. Loe, võta ideid ja kirjuta oma lugu.">
+<meta name="description" content="Ideed ja näidislood sellest, mida AI-ga igapäevatöös teha saab. Loe, võta ideid ja kirjuta oma lugu.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
@@ -324,8 +324,8 @@ details.more[open] summary::after{transform:rotate(180deg)}
     <div class="topbar">
       <a class="back" href="index.html">← AI-teejuht</a>
     </div>
-    <h1>AI-edulood</h1>
-    <p class="lead">Näited kontorist, müügist ja tootmisest, mis panevad mõtlema: kus sinu töös võiks juhtuda sama?<br>Loe, võta ideid ja kirjuta oma lugu. Lood on koondnäited tüüpilistest olukordadest, mitte konkreetsete inimeste kogemused.</p>
+    <h1>AI-ideed</h1>
+    <p class="lead">Ideed ja näited kontorist, müügist ja tootmisest, mis näitavad, mida AI-ga teha saab. Kus sinu töös võiks juhtuda sama?<br>Loe, võta ideid ja kirjuta oma lugu. Lood on koondnäited tüüpilistest olukordadest, mitte konkreetsete inimeste kogemused.</p>
     <p class="howto" id="summary"></p>
   </div>
 </header>
@@ -357,7 +357,7 @@ details.more[open] summary::after{transform:rotate(180deg)}
 
   <section class="view" id="v-lood">
   <div class="toolbar" style="margin-top:0">
-    <h2>Edulood ja toimivad lahendused</h2>
+    <h2>Ideed ja toimivad lahendused</h2>
     <button class="btn btn-primary" id="addTop" type="button">+ Lisa oma lugu</button>
   </div>
   <div class="filters">
@@ -455,7 +455,7 @@ details.more[open] summary::after{transform:rotate(180deg)}
   <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="dlgTitle">
     <div class="dialog-head">
       <div>
-        <h2 id="dlgTitle">Lisa oma edulugu</h2>
+        <h2 id="dlgTitle">Lisa oma lugu</h2>
         <p>Täida tärniga (*) väljad. Lugu salvestub sinu brauserisse ja ilmub lehele kohe.</p>
       </div>
       <button class="x" type="button" id="closeDlg" aria-label="Sulge">✕</button>
@@ -754,7 +754,7 @@ details.more[open] summary::after{transform:rotate(180deg)}
     if(!S.db){ notice("Lugude salvestamine ei ole selles brauseris võimalik."); return; }
     if(S.writeBlocked || S.canWrite===false){ notice("Lugude salvestamine ei ole selles brauseris võimalik."); return; }
     S.editing=item||null;
-    $("dlgTitle").textContent = item ? "Muuda lugu" : "Lisa oma edulugu";
+    $("dlgTitle").textContent = item ? "Muuda lugu" : "Lisa oma lugu";
     $("fTitle").value=item?item.title:""; $("fDept").value=item?item.dept:""; $("fCat").value=item?(kindOf(item)==="Muu"?"":kindOf(item)):(preKind||"");
     $("fStat").value=item?item.status:""; $("fBefore").value=item?item.before:""; $("fSolution").value=item?item.solution:"";
     $("fResult").value=item?item.result:""; $("fSaved").value=item?item.saved:""; $("fTip").value=item?item.tip:""; $("fAlso").value=item?item.alsoFor:""; $("fBeforeShort").value=item?item.beforeShort:""; $("fAfterShort").value=item?item.afterShort:"";
