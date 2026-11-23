@@ -118,3 +118,15 @@ document.querySelectorAll('.copy').forEach(function(btn){
   window.addEventListener('hashchange',function(){openFor(location.hash.slice(1));});
   if(location.hash)openFor(location.hash.slice(1));
 })();
+
+/* Pehme sissetulek kerimisel (austab prefers-reduced-motion) */
+(function(){
+  if(!('IntersectionObserver' in window))return;
+  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var els=[].slice.call(document.querySelectorAll('.hm-card,.hm-rule,.hm-about-in,.ix-card,.wm-story,.guide main > section'));
+  var vh=window.innerHeight||800;
+  els=els.filter(function(e){return e.getBoundingClientRect().top>vh*0.92;});
+  els.forEach(function(e){e.classList.add('rv');});
+  var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});},{rootMargin:'0px 0px -8% 0px',threshold:0.06});
+  els.forEach(function(e){io.observe(e);});
+})();

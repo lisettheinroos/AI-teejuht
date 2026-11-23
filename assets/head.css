@@ -29,3 +29,13 @@
 .sf-me{display:flex;align-items:center;gap:10px;font-weight:600;color:#59263B;font-size:15px}
 .sf-foto{width:40px;height:40px;border-radius:50%;object-fit:cover;object-position:50% 25%;border:2px solid #fff;box-shadow:0 1px 6px rgba(52,37,45,.2)}
 .sf-ig{padding:9px 14px}
+
+/* JALUS */
+.site-foot{background:#59263B;border-top:0;margin-top:48px}
+.sf-slogan{color:#F2D3DC}
+.sf-ig{background:#F2D3DC;color:#59263B!important}
+.sf-ig:hover{background:#fff}
+.sf-notes{border-top-color:rgba(242,211,220,.25)}
+.sf-notes p{color:#E7B9C6}
+.sf-me{color:#fff}
+.sf-foto{border-color:#F2D3DC;box-shadow:none}
