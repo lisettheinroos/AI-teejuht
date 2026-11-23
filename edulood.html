@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI-edulood: näited, mis panevad mõtlema</title>
+<meta name="author" content="Lisett Heinroos">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%F0%9F%8F%86%3C/text%3E%3C/svg%3E">
+<meta name="description" content="Näidislood sellest, kuidas AI võib igapäevatööd lihtsamaks teha. Loe, võta ideid ja kirjuta oma lugu.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: rahulik violetne päis, algaja juhis, otsing ja osakonnad, lihtsad lugude kaardid, lühike juhis, vorm dialoogis */
+:root{
+  --violet:#372770;
+  --violet-2:#897BAD;
+  --violet-3:#C2B8D9;
+  --red:#ED6F69;
+  --ink:#252731;
+  --muted:#676180;
+  --bg:#F7F7FB;
+  --surface:#FFFFFF;
+  --soft:#F2F2F7;
+  --line:#E3DFEC;
+  --accent:#372770;
+  --on-accent:#FFFFFF;
+  --ok:#2F7D63;
+  --ok-bg:#E3F2EC;
+  --warn:#B07A10;
+  --warn-bg:#FBF0D9;
+  --info:#372770;
+  --info-bg:#ECE8F5;
+  --font:"Roboto",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#ECEAF3; --muted:#ABA5C2; --bg:#16141F; --surface:#1F1C2B; --soft:#272338; --line:#353049;
+    --accent:#B7A9E6; --on-accent:#1A1530;
+    --ok:#7FD1B3; --ok-bg:#1D3A31; --warn:#F2C46B; --warn-bg:#3A3020; --info:#C9BEF0; --info-bg:#2C2547;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#ECEAF3; --muted:#ABA5C2; --bg:#16141F; --surface:#1F1C2B; --soft:#272338; --line:#353049;
+  --accent:#B7A9E6; --on-accent:#1A1530;
+  --ok:#7FD1B3; --ok-bg:#1D3A31; --warn:#F2C46B; --warn-bg:#3A3020; --info:#C9BEF0; --info-bg:#2C2547;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.55}
+h1,h2,h3{text-wrap:balance;margin:0;font-weight:700}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--violet-2);outline-offset:2px}
+.wrap{max-width:1100px;margin:0 auto;padding-left:20px;padding-right:20px}
+a{color:var(--accent)}
+
+/* Külgmenüü */
+.layout{display:grid;grid-template-columns:260px minmax(0,1fr);min-height:100vh}
+.side{background:var(--surface);border-right:1px solid var(--line);position:sticky;top:0;height:100vh;height:100dvh;display:flex;flex-direction:column;gap:26px;padding:28px 16px 24px;overflow:hidden auto}
+.brand{display:grid;gap:8px;text-decoration:none;padding:0 12px}
+.logo{width:92px;height:36px;background:var(--accent);-webkit-mask:var(--logo) no-repeat left center/contain;mask:var(--logo) no-repeat left center/contain}
+.brand span{font-weight:700;font-size:19px;color:var(--ink)}
+.side-h{margin:0 0 8px;padding:0 12px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+.nav{display:grid;gap:2px}
+.nav a{color:var(--ink);text-decoration:none;padding:9px 12px;border-radius:8px;font-size:15px;border-left:3px solid transparent}
+.nav a:hover{background:var(--soft)}
+.nav a[aria-current="page"]{background:var(--info-bg);color:var(--accent);font-weight:700;border-left-color:var(--accent)}
+.side-links{margin-top:auto;display:grid;gap:8px;padding-top:18px;border-top:1px solid var(--line)}
+.side-links .side-h{margin-bottom:2px}
+.pill-link{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;border:1px solid var(--violet-3);background:var(--info-bg);color:var(--accent);text-decoration:none;font-weight:700;font-size:15px}
+.pill-link:hover{filter:brightness(.97)}
+.pill-link svg{width:16px;height:16px;flex:none;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.pill-link .arr{margin-left:auto;font-weight:400;font-size:13px;color:var(--muted)}
+.main{min-width:0;padding-top:36px;padding-bottom:56px;margin-left:0;margin-right:0;padding-left:48px;padding-right:48px}
+.view{display:grid;gap:0}
+.page-head{display:flex;flex-wrap:wrap;gap:14px 24px;align-items:flex-end;justify-content:space-between}
+.page-head h1{font-size:clamp(28px,3.4vw,36px);line-height:1.15}
+.page-head p{margin:6px 0 0;color:var(--muted);max-width:60ch;font-size:16px}
+.page-head .sum{font-size:14px;margin-top:4px}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:8px;padding:11px 18px;font-weight:700;cursor:pointer;text-decoration:none;font-size:15px}
+.btn-primary{background:var(--accent);color:var(--on-accent)}
+.btn-primary:hover{filter:brightness(1.08)}
+.btn-plain{background:var(--soft);color:var(--ink)}
+.btn-plain:hover{background:var(--line)}
+.btn[disabled]{opacity:.55;cursor:not-allowed}
+
+.notice{margin-bottom:16px;padding:12px 14px;border-radius:10px;background:var(--info-bg);color:var(--ink);font-size:14px;display:none}
+.notice.show{display:block}
+
+/* Otsing ja filtrid */
+.toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:28px 0 12px}
+.toolbar h2{font-size:22px;margin-right:auto;text-transform:uppercase;letter-spacing:.04em;color:var(--accent)}
+.search{flex:1 1 240px;max-width:340px;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:9px 12px}
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:18px}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 13px;font-size:14px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.more-f{margin-left:auto;position:relative}
+.more-f summary{cursor:pointer;font-size:14px;color:var(--muted);list-style:none;padding:6px 4px}
+.more-f summary::-webkit-details-marker{display:none}
+.more-f summary::after{content:" ▾";font-size:11px}
+.more-f[open] summary{color:var(--accent)}
+.more-f .sels{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.sel{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:8px 10px;font-size:14px}
+.count{font-size:14px;color:var(--muted);margin:-6px 0 14px}
+.count:empty{display:none}
+
+/* Kaardid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;align-items:stretch}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 18px 12px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.meta{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:center;font-size:13px;color:var(--muted)}
+.st{display:inline-flex;align-items:center;gap:6px}
+.st::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--muted)}
+.st.kasutusel::before{background:var(--ok)}
+.st.katsetamisel::before{background:var(--warn)}
+.st.prototuup::before{background:var(--violet-2)}
+.card h3{font-size:17px;line-height:1.3;min-height:2.6em}
+.ba{--was-bg:#F3F0FA;--was-ink:#5B4C8F;--now-bg:var(--ok-bg);--now-ink:#1F5E49;display:grid;grid-template-rows:1fr 1fr;border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:15px;line-height:1.4;margin-bottom:auto}
+.ba p{margin:0;display:grid;grid-template-columns:62px minmax(0,1fr);gap:10px;align-items:center;min-height:64px;padding:10px 40px 10px 12px;position:relative}
+.ba .lbl{justify-self:start;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:3px 8px;border-radius:999px;margin-top:0}
+.ba .was{background:var(--was-bg);color:var(--was-ink)}
+.ba .was .lbl{background:#E4DEF2;color:var(--was-ink)}
+.ba .now{background:var(--now-bg);color:var(--now-ink);font-weight:500;border-top:1px solid var(--line)}
+.ba .now .lbl{background:var(--ok);color:#fff}
+.ba .now::before{content:"";background:var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M6 2v8M2.5 6.5 6 10l3.5-3.5' fill='none' stroke='%23676180' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/12px no-repeat;position:absolute;top:-11px;right:14px;width:20px;height:20px;border-radius:50%;border:1px solid var(--line)}
+:root[data-theme="dark"] .ba{--was-bg:#2A2540;--was-ink:#CFC5F0;--now-ink:#9FE0C6}
+:root[data-theme="dark"] .ba .was .lbl{background:#3A3358}
+:root[data-theme="dark"] .ba .now .lbl{color:#10261F}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ba{--was-bg:#2A2540;--was-ink:#CFC5F0;--now-ink:#9FE0C6}:root:not([data-theme="light"]) .ba .was .lbl{background:#3A3358}:root:not([data-theme="light"]) .ba .now .lbl{color:#10261F}}
+details.more{border-top:1px solid var(--line);padding-top:8px}
+details.more summary{cursor:pointer;color:var(--accent);font-weight:500;font-size:14px;list-style:none;display:inline-flex;align-items:center;gap:6px;padding:2px 0}
+details.more summary::-webkit-details-marker{display:none}
+details.more summary::after{content:"▾";font-size:12px;transition:transform .15s}
+details.more[open] summary::after{transform:rotate(180deg)}
+.story{display:grid;gap:12px;margin-top:10px}
+.blk small{display:block;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px;color:var(--muted)}
+.blk p{margin:0;font-size:15px;line-height:1.5}
+.tip{background:var(--info-bg);border-radius:8px;padding:10px 12px;font-size:15px}
+.tip b{color:var(--accent)}
+.facts{font-size:14px;color:var(--muted);display:grid;gap:3px}
+.facts b{color:var(--ink);font-weight:500}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:13px;border:0;background:none;color:var(--accent);padding:0;cursor:pointer;text-decoration:underline;text-decoration-color:var(--violet-3);text-underline-offset:3px}
+.card-foot{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;font-size:13px;color:var(--muted)}
+.card-actions{display:flex;gap:6px}
+.linkbtn{background:none;border:0;padding:4px 6px;border-radius:6px;cursor:pointer;color:var(--accent);font-size:13px;font-weight:500}
+.linkbtn:hover{background:var(--soft)}
+.linkbtn.danger{color:var(--red)}
+.empty{grid-column:1/-1;background:var(--surface);border:1px dashed var(--line);border-radius:12px;padding:28px;text-align:center;color:var(--muted)}
+
+/* Juhise ja andmekaitse lehed */
+.page{max-width:900px;display:grid;gap:28px}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;counter-reset:s}
+.steps li{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;display:grid;gap:8px;align-content:start;counter-increment:s}
+.steps li::before{content:counter(s);width:34px;height:34px;border-radius:50%;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font-weight:700}
+.steps b{font-size:16px}
+.steps span{color:var(--muted);font-size:15px}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;display:grid;gap:10px;align-content:start}
+.panel h2{font-size:18px}
+.kinds{margin:4px 0 0;padding:0;list-style:none;display:grid;gap:8px;counter-reset:k}
+.kinds li{display:grid;gap:2px;padding-left:12px;border-left:3px solid var(--violet-3)}
+.kinds b{color:var(--ink)}
+.kinds span{color:var(--muted);font-size:14.5px}
+.panel p{margin:0;color:var(--muted);font-size:15px}
+.page-actions{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+.page-actions a{font-weight:500}
+.rules{margin:0;padding:0;list-style:none;display:grid;gap:9px}
+.rules li{padding-left:26px;position:relative;font-size:15px}
+.rules li::before{position:absolute;left:0;top:0;font-weight:700}
+.rules.no li::before{content:"✕";color:var(--red)}
+.rules.yes li::before{content:"✓";color:var(--ok)}
+.panel.no{border-top:4px solid var(--red)}
+.panel.yes{border-top:4px solid var(--ok)}
+.remember{background:var(--info-bg);border-radius:12px;padding:18px 20px;display:grid;gap:4px}
+.remember b{color:var(--accent)}
+
+/* Dialoog */
+.overlay{position:fixed;inset:0;background:rgba(20,16,40,.55);display:none;align-items:flex-start;justify-content:center;padding:24px 16px;overflow-y:auto;z-index:20}
+.overlay.open{display:flex}
+.dialog{background:var(--surface);border-radius:14px;width:100%;max-width:680px;padding:24px;display:grid;gap:16px}
+.dialog-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.dialog-head h2{font-size:22px}
+.dialog-head p{margin:4px 0 0;color:var(--muted);font-size:14px}
+.x{background:var(--soft);border:0;border-radius:8px;width:36px;height:36px;cursor:pointer;font-size:18px;flex:none}
+.form{display:grid;gap:14px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{display:grid;gap:5px;min-width:0}
+.field label,.field .lbl{font-weight:500;font-size:14px}
+.field small{color:var(--muted);font-size:12.5px}
+.field input[type=text],.field textarea,.field select{border:1px solid var(--line);background:var(--bg);border-radius:8px;padding:9px 11px;width:100%}
+.field textarea{min-height:70px;resize:vertical}
+.toolpick{display:flex;flex-wrap:wrap;gap:6px}
+.optional{border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+.optional summary{cursor:pointer;font-weight:500;font-size:14px;color:var(--accent)}
+.optional[open] summary{margin-bottom:12px}
+.optional .inner{display:grid;gap:14px}
+.check{display:flex;gap:9px;align-items:flex-start;font-size:14px}
+.check input{margin-top:3px;width:18px;height:18px;accent-color:var(--violet)}
+.privacy{background:var(--warn-bg);border-radius:10px;padding:12px 14px;font-size:14px}
+.form-foot{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end;align-items:center}
+.form-msg{margin-right:auto;font-size:14px;color:var(--red)}
+.draft-note{margin:0;padding:10px 12px;border-radius:8px;background:var(--info-bg);font-size:14px}
+
+@media (max-width:900px){
+  .layout{grid-template-columns:1fr}
+  .side{position:static;height:auto;padding:16px;gap:14px;border-right:0;border-bottom:1px solid var(--line)}
+  .brand{grid-auto-flow:column;justify-content:start;align-items:center;gap:12px;padding:0}
+  .side-h{display:none}
+  .nav{grid-auto-flow:column;justify-content:start;overflow-x:auto}
+  .nav a{white-space:nowrap;border-left:0;border-bottom:3px solid transparent;border-radius:8px 8px 0 0}
+  .nav a[aria-current="page"]{border-bottom-color:var(--accent)}
+  .side-links{margin-top:0;display:flex;flex-wrap:wrap;gap:8px;padding-top:12px}
+  .pill-link{padding:7px 10px;font-size:14px}
+  .main{padding-top:24px}
+  .steps,.duo{grid-template-columns:1fr}
+}
+@media (max-width:520px){
+  .wrap{padding-left:16px;padding-right:16px}
+  .row2{grid-template-columns:1fr}
+  .grid{grid-template-columns:1fr}
+  .search{max-width:none}
+  .more-f{margin-left:0}
+}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+/* Päis nagu AI-häkkide lehel: Deep Violet, diagonaalsed kihid */
+.hero{position:relative;overflow:hidden;background:#372770;color:#fff}
+.layers{position:absolute;inset:0;pointer-events:none}
+.layers span{position:absolute;right:-14%;width:52%;height:40px;transform:rotate(-24deg);transform-origin:right center;border-radius:2px}
+.layers span:nth-child(1){top:22%;background:#4a3a8a}
+.layers span:nth-child(2){top:42%;background:#5a4b97;width:44%}
+.layers span:nth-child(3){top:62%;background:#897BAD;opacity:.5;width:38%}
+.hero-in{position:relative;max-width:1320px;margin:0 auto;padding:24px max(16px,env(safe-area-inset-right,0px)) 30px max(16px,env(safe-area-inset-left,0px))}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.topbar img{height:40px;width:auto;display:block}
+.back{color:#C2B8D9;font-size:14px;font-weight:500;text-decoration:none}
+.back:hover{color:#fff;text-decoration:underline}
+.hero h1{margin-top:26px;font-size:clamp(30px,4.4vw,44px);font-weight:900;line-height:1.1;text-transform:uppercase;letter-spacing:.02em}
+.lead{margin:12px 0 0;max-width:62ch;font-size:17px;color:#E9E5F4}
+.howto{margin:18px 0 0;display:flex;flex-wrap:wrap;gap:8px 18px;font-size:14px;color:#C2B8D9}
+.howto b{color:#fff}
+.howto:empty{display:none}
+
+/* Külgmenüü kaardina päise all */
+.layout{max-width:1320px;margin:0 auto;grid-template-columns:240px minmax(0,1fr);gap:28px;min-height:0;padding:28px max(16px,env(safe-area-inset-right,0px)) 40px max(16px,env(safe-area-inset-left,0px));align-items:start}
+.side{position:sticky;top:16px;height:auto;border:1px solid var(--line);border-radius:12px;padding:14px 10px;gap:18px;overflow:visible}
+.side-links{margin-top:0}
+.main.wrap{max-width:none;padding:0;margin:0}
+@media (max-width:900px){
+  .layout{grid-template-columns:minmax(0,1fr);gap:20px}
+  .side{position:static;border:1px solid var(--line);padding:12px}
+  .main.wrap{padding:0}
+}
+[hidden]{display:none!important}
+.kind-head{grid-column:1/-1;margin-top:14px;padding-bottom:4px;border-bottom:1px solid var(--line)}
+.grid > .kind-head:first-child{margin-top:0}
+.kind-head h3{display:flex;align-items:center;gap:10px;font-size:17px;color:var(--accent);text-transform:uppercase;letter-spacing:.04em}
+.kind-head .kn{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--accent);color:var(--on-accent);font-size:13px;letter-spacing:0}
+.kind-empty{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;border:1px dashed var(--line);border-radius:12px;padding:14px 18px;color:var(--muted);font-size:15px;background:var(--surface)}
+.dfilters button{justify-content:flex-start}
+.dfilters .tname{flex:1}
+.dfilters .tnum{flex:none;display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--info-bg);color:var(--accent);font-size:12px;font-weight:700}
+.dfilters button.on .tnum{background:var(--accent);color:var(--on-accent)}
+.level{display:inline-block;vertical-align:middle;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.level.l1{background:var(--ok-bg);color:var(--ok)}
+.level.l2{background:var(--info-bg);color:var(--accent)}
+.level.l3{background:var(--accent);color:var(--on-accent)}
+.kind-head h3 .level{margin-left:auto}
+/* Teekond: lahenduse liigid ühendatud joonega */
+#kindChips{gap:0}
+#kindChips button{margin-bottom:2px}
+#kindChips button.step{position:relative;padding-left:34px;margin-bottom:0;padding-top:9px;padding-bottom:9px}
+#kindChips button.step::before{content:"";position:absolute;left:15px;top:0;bottom:0;width:2px;background:var(--violet-3)}
+#kindChips button.step:first-of-type::before,#kindChips button:not(.step)+button.step::before{top:50%}
+#kindChips button.step:has(+ button:not(.step))::before,#kindChips button.step:last-child::before{bottom:50%}
+#kindChips button.step::after{content:"";position:absolute;left:10px;top:50%;width:12px;height:12px;margin-top:-6px;border-radius:50%;background:var(--surface);border:2px solid var(--violet-2);box-sizing:border-box}
+#kindChips button.step.lv1::after{border-color:var(--ok)}
+#kindChips button.step.lv3::after{border-color:var(--accent)}
+#kindChips button.step.on::after,#kindChips button.step:hover::after{background:var(--accent);border-color:var(--accent)}
+@media (max-width:900px){#kindChips{gap:6px}#kindChips button.step{padding-left:13px;padding-top:6px;padding-bottom:6px}#kindChips button.step::before,#kindChips button.step::after{display:none}}
+.dfilters .lvl{display:block;font-size:11.5px;font-weight:500;color:var(--muted);margin-top:1px}
+.dfilters button.on .lvl{color:var(--accent)}
+.kinds b .level{margin-left:6px}
+.kind-head .kc{font-size:12px;font-weight:700;color:var(--accent);background:var(--info-bg);border-radius:999px;padding:2px 9px}
+.kind-head p{margin:2px 0 0;font-size:14px;color:var(--muted)}
+/* Külgmenüü nagu AI-häkkide lehel */
+.side{display:block;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 10px}
+.side .search{display:block;width:100%;max-width:none;font-size:15px;background:var(--bg);margin-bottom:14px}
+.side-h{margin:4px 8px 8px;padding:0;font-size:12px;letter-spacing:.08em}
+.side-hint{margin:-6px 8px 8px;font-size:12.5px;color:var(--muted)}
+@media (max-width:900px){.side-hint{display:none}}
+.dfilters{display:flex;flex-direction:column;gap:2px}
+.dfilters button,.nav-link{display:flex;justify-content:space-between;align-items:center;gap:8px;width:100%;text-align:left;font:inherit;font-size:15px;font-weight:500;color:var(--ink);background:none;border:0;border-left:3px solid transparent;border-radius:6px;padding:8px 10px;cursor:pointer;text-decoration:none;line-height:1.3}
+.dfilters button:hover,.nav-link:hover{background:var(--soft);color:var(--accent)}
+.dfilters button.on,.nav-link.on{background:var(--info-bg);border-left-color:var(--accent);color:var(--accent);font-weight:700}
+.dfilters .n{font-variant-numeric:tabular-nums;font-size:13px;color:var(--muted);font-weight:500}
+.side .nav{display:flex;flex-direction:column;gap:2px}
+.nav-sep{height:1px;background:var(--line);margin:12px 8px}
+.nav-ext{display:grid;gap:8px}
+.xlink{display:flex;align-items:center;gap:8px;padding:10px 12px;background:#372770;border:1px solid #372770;border-radius:8px;color:#fff;font-size:14px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;line-height:1.3;box-shadow:0 2px 6px rgba(55,39,112,.18)}
+.xlink:hover{background:#4a3a8a;border-color:#4a3a8a;color:#fff}
+.xlink .xarr{margin-left:auto;font-size:13px;color:#C2B8D9;letter-spacing:0}
+@media (max-width:900px){
+  .side{position:static;padding:12px}
+  .side .side-h{display:none}
+  .dfilters{flex-direction:row;flex-wrap:wrap;gap:6px}
+  .dfilters button{width:auto;border:1px solid var(--line);border-radius:999px;padding:6px 13px;font-size:14px}
+  .dfilters button.on{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+  .dfilters button.on .n{color:var(--on-accent);opacity:.8}
+  .side .nav{flex-direction:row;flex-wrap:wrap;gap:6px}
+  .side .nav-link{width:auto;font-size:14px;padding:6px 10px}
+  .nav-ext{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .xlink{font-size:13px}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="layers" aria-hidden="true"><span></span><span></span><span></span></div>
+  <div class="hero-in">
+    <div class="topbar">
+      <a class="back" href="index.html">← AI-teejuht</a>
+    </div>
+    <h1>AI-edulood</h1>
+    <p class="lead">Näited kontorist, müügist ja tootmisest, mis panevad mõtlema: kus sinu töös võiks juhtuda sama?<br>Loe, võta ideid ja kirjuta oma lugu. Lood on koondnäited tüüpilistest olukordadest, mitte konkreetsete inimeste kogemused.</p>
+    <p class="howto" id="summary"></p>
+  </div>
+</header>
+
+<div class="layout">
+<aside class="side">
+  <input class="search" id="q" type="search" placeholder="Otsi lugu või valdkonda" aria-label="Otsi lugudest">
+  <p class="side-h">Lahenduse liik</p>
+  <p class="side-hint">Algajast edasijõudnuni</p>
+  <div class="dfilters" role="group" aria-label="Lahenduse liik" id="kindChips"></div>
+  <div class="nav-sep" aria-hidden="true"></div>
+  <p class="side-h">Valdkonnad</p>
+  <div class="dfilters" role="group" aria-label="Osakond" id="deptChips"></div>
+  <div class="nav-sep" aria-hidden="true"></div>
+  <nav class="nav" aria-label="Juhised">
+    <a class="nav-link" href="#lisamine" data-view="lisamine">Kuidas oma lugu kirjutada</a>
+    <a class="nav-link" href="#andmekaitse" data-view="andmekaitse">Andmekaitse</a>
+  </nav>
+  <div class="nav-sep" aria-hidden="true"></div>
+  <p class="side-h">Vaata ka</p>
+  <div class="nav-ext">
+    <a class="xlink" href="index.html"><span>AI-teejuht</span><span class="xarr" aria-hidden="true">↗</span></a>
+    <a class="xlink" href="hakid.html"><span>AI-häkid</span><span class="xarr" aria-hidden="true">↗</span></a>
+  </div>
+</aside>
+
+<main class="main wrap">
+  <div class="notice" id="notice" role="status"></div>
+
+  <section class="view" id="v-lood">
+  <div class="toolbar" style="margin-top:0">
+    <h2>Edulood ja toimivad lahendused</h2>
+    <button class="btn btn-primary" id="addTop" type="button">+ Lisa oma lugu</button>
+  </div>
+  <div class="filters">
+    <details class="more-f">
+      <summary>Rohkem filtreid</summary>
+      <div class="sels">
+        <select class="sel" id="fTool" aria-label="Tööriist"><option value="">Kõik tööriistad</option></select>
+        <select class="sel" id="fStatus" aria-label="Staatus">
+          <option value="">Kõik staatused</option>
+          <option value="kasutusel">Igapäevases kasutuses</option>
+          <option value="katsetamisel">Katsetamisel</option>
+          <option value="prototuup">Prototüüp</option>
+          <option value="idee">Idee</option>
+        </select>
+      </div>
+    </details>
+  </div>
+  <p class="count" id="count"></p>
+  <section class="grid" id="grid" aria-live="polite">
+    <div class="empty" id="loading">Laen lugusid…</div>
+  </section>
+
+  </section>
+
+  <section class="view page" id="v-lisamine" hidden>
+    <div class="page-head">
+      <div>
+        <h1>Kuidas oma lugu kirjutada</h1>
+        <p>Lugu ei pea olema suur projekt. Ka üks kiri, mis varem võttis pool tundi ja nüüd viis minutit, on hea lugu. Juba kirjapanemine aitab märgata, kus AI sinu töös päriselt aega säästab.</p>
+      </div>
+    </div>
+    <ol class="steps">
+      <li><b>Vajuta „Lisa oma lugu“</b><span>Nupp on lehe ülaosas. Avaneb lühike vorm, mis juhatab sind küsimustega läbi.</span></li>
+      <li><b>Kirjelda, mis oli enne ja mis nüüd</b><span>Paar lauset piisab: mis oli tülikas, mida tegid ja mis muutus. Kirjuta nii, et kolleeg saaks aru ka ilma tehniliste teadmisteta.</span></li>
+      <li><b>Anna kolleegile nõuanne</b><span>Kuidas võiks teine sarnasega alustada? See on loo kõige kasulikum osa.</span></li>
+      <li><b>Jaga seda</b><span>Lugu salvestub ainult sinu brauserisse. Kui see on valmis, jaga seda kolleegidega, näiteks koosolekul või meeskonna vestluses.</span></li>
+    </ol>
+    <div class="panel">
+      <h2>Vali lahenduse liik</h2>
+      <p>Liigid ja tasemed järgivad AI-teejuhti ning on järjestatud lihtsamast keerukamani: algajale, kesktasemele ja edasijõudnule.</p>
+      <ol class="kinds"><li><b>Vestlus ja prompt <span class="level l1">Algajale</span></b><span>Hea küsimus Chatis. Lihtsaim viis alustada.</span></li><li><b>Claude'i projekt <span class="level l1">Algajale</span></b><span>Kaust, mille juhised ja dokumendid kehtivad kõigis selle projekti vestlustes.</span></li><li><b>Skill <span class="level l1">Algajale</span></b><span>Salvestatud juhend korduva töö jaoks. Vorm ja toon on alati ühesugused.</span></li><li><b>Cowork ja ajastatud ülesanne <span class="level l2">Kesktasemele</span></b><span>Chat vastab ja kirjutab. Cowork oskab lisaks töötada failide, Outlooki kirjade ja kalendriga ning teeb rutiinse töö ka ajastatult ise ära.</span></li><li><b>Muu automaatika <span class="level l2">Kesktasemele</span></b><span>Power Automate, Forms ja teised automaatsed vood.</span></li><li><b>Vaibkoodimine (vibe coding) <span class="level l3">Edasijõudnule</span></b><span>Oma tööriist või leht, mille tegid AI abil ilma programmeerimata. Prototüüp ise demoandmetega, kasutuselevõtt IT kaudu.</span></li></ol>
+    </div>
+    <div class="duo">
+      <div class="panel">
+        <h2>Nimi või anonüümne</h2>
+        <p>Kui jagad lugu kolleegidega, lisa juurde oma nimi, et nad saaksid sinult lisa küsida. Lugu ise kirjuta nii, et selles ei oleks teiste inimeste nimesid.</p>
+      </div>
+      <div class="panel">
+        <h2>Kus lugu hoitakse?</h2>
+        <p>Ainult sinu brauseris. Keegi teine seda ei näe. Kui tühjendad brauseri andmed, kaob ka lugu, seega kopeeri hea lugu enne endale alles.</p>
+      </div>
+    </div>
+    <div class="page-actions">
+      <button class="btn btn-primary" id="addGuide" type="button">+ Lisa oma lugu</button>
+      <a href="#andmekaitse">Loe enne andmekaitse reegleid</a>
+    </div>
+  </section>
+
+  <section class="view page" id="v-andmekaitse" hidden>
+    <div class="page-head">
+      <div>
+        <h1>Andmekaitse</h1>
+        <p>Kui jagad oma lugu teistega, kirjuta see nii, et selle põhjal ei saaks kedagi tuvastada.</p>
+      </div>
+    </div>
+    <div class="duo">
+      <div class="panel no">
+        <h2>Ära lisa</h2>
+        <ul class="rules no">
+          <li>kolleegide, kandidaatide ega klientide nimesid</li>
+          <li>isikuandmeid, palkasid, terviseandmeid ega isikukoode</li>
+          <li>hindu, pakkumisi ega muud ärisaladust</li>
+          <li>paroole, linke sisesüsteemidesse ega ekraanipilte päris andmetega</li>
+        </ul>
+      </div>
+      <div class="panel yes">
+        <h2>Lisa julgelt</h2>
+        <ul class="rules yes">
+          <li>osakond ja tööülesande tüüp</li>
+          <li>kasutatud tööriist (Claude, ChatGPT, Excel jne)</li>
+          <li>mis muutus ja kui palju aega säästsid</li>
+          <li>mis ei õnnestunud ja mida õppisid</li>
+        </ul>
+      </div>
+    </div>
+    <div class="remember">
+      <b>Pea meeles</b>
+      <span>Kasuta AI-d oma ettevõtte AI-poliitika järgi ja ainult töökontoga. AI tulemuse vaatab alati üle inimene.</span>
+    </div>
+  </section>
+</main>
+</div>
+
+<div class="overlay" id="overlay" aria-hidden="true">
+  <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="dlgTitle">
+    <div class="dialog-head">
+      <div>
+        <h2 id="dlgTitle">Lisa oma edulugu</h2>
+        <p>Täida tärniga (*) väljad. Lugu salvestub sinu brauserisse ja ilmub lehele kohe.</p>
+      </div>
+      <button class="x" type="button" id="closeDlg" aria-label="Sulge">✕</button>
+    </div>
+    <form class="form" id="form" novalidate>
+      <div class="privacy"><b>Enne kirjutamist:</b> ära lisa nimesid, isikuandmeid, hindu ega ärisaladusi. Kirjelda tööülesannet üldiselt.</div>
+      <div class="field">
+        <label for="fTitle">Pealkiri *</label>
+        <input type="text" id="fTitle" maxlength="90" placeholder="nt Kuuaruanne valmib nüüd automaatselt">
+      </div>
+      <div class="row2">
+        <div class="field">
+          <label for="fDept">Osakond *</label>
+          <input type="text" id="fDept" list="deptList" maxlength="40" placeholder="Vali või kirjuta">
+          <datalist id="deptList"></datalist>
+        </div>
+        <div class="field">
+          <label for="fStat">Kui kaugel see on? *</label>
+          <select id="fStat">
+            <option value="">Vali</option>
+            <option value="kasutusel">Igapäevases kasutuses</option>
+            <option value="katsetamisel">Katsetamisel</option>
+            <option value="prototuup">Prototüüp</option>
+            <option value="idee">Idee</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <span class="lbl" id="toolsLbl">Mida kasutasid? *</span>
+        <div class="toolpick" id="toolPick" role="group" aria-labelledby="toolsLbl"></div>
+        <input type="text" id="fToolOther" maxlength="40" placeholder="Muu tööriist (valikuline)" aria-label="Muu tööriist">
+      </div>
+      <div class="field">
+        <label for="fCat">Lahenduse liik *</label>
+        <select id="fCat"><option value="">Vali</option><option value="Vestlus ja prompt">Vestlus ja prompt (algajale)</option><option value="Claude'i projekt">Claude'i projekt (algajale)</option><option value="Skill">Skill (algajale)</option><option value="Cowork ja ajastatud ülesanne">Cowork ja ajastatud ülesanne (kesktasemele)</option><option value="Muu automaatika">Muu automaatika (kesktasemele)</option><option value="Vaibkoodimine (vibe coding)">Vaibkoodimine (vibe coding) (edasijõudnule)</option></select>
+        <small>Liigid ja tasemed järgivad AI-teejuhti ning on järjestatud lihtsamast keerukamani.</small>
+      </div>
+      <div class="row2">
+        <div class="field">
+          <label for="fBeforeShort">Enne, paari sõnaga *</label>
+          <input type="text" id="fBeforeShort" maxlength="50" placeholder="Iga kiri nullist">
+        </div>
+        <div class="field">
+          <label for="fAfterShort">Nüüd, paari sõnaga *</label>
+          <input type="text" id="fAfterShort" maxlength="50" placeholder="Kiri valmis minutitega">
+        </div>
+      </div>
+      <div class="field">
+        <label for="fBefore">Mis oli enne? *</label>
+        <textarea id="fBefore" maxlength="600" placeholder="Mis oli tülikas, aeganõudev või kippus ununema?"></textarea>
+      </div>
+      <div class="field">
+        <label for="fSolution">Mida tegid? *</label>
+        <textarea id="fSolution" maxlength="900" placeholder="Kirjuta nii, et kolleeg saaks aru ka ilma tehniliste teadmisteta."></textarea>
+      </div>
+      <div class="field">
+        <label for="fResult">Mis muutus? *</label>
+        <textarea id="fResult" maxlength="600" placeholder="Aja kokkuhoid, vähem vigu, parem ülevaade…"></textarea>
+      </div>
+      <details class="optional" id="optBox">
+        <summary>Lisa soovi korral rohkem</summary>
+        <div class="inner">
+          <div class="field">
+            <label for="fTip">Nõuanne kolleegile</label>
+            <input type="text" id="fTip" maxlength="300" placeholder="Kuidas võiks kolleeg sarnasega alustada?">
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label for="fSaved">Ajavõit</label>
+              <input type="text" id="fSaved" maxlength="60" placeholder="nt 2 h kuus">
+            </div>
+
+          </div>
+          <div class="field">
+            <label for="fAlso">Sobib ka</label>
+            <input type="text" id="fAlso" maxlength="200" placeholder="nt pakkumiste saatekirjad, tarnijatele vastamine">
+          </div>
+          <div class="field">
+            <label for="fTags">Märksõnad</label>
+            <input type="text" id="fTags" maxlength="120" placeholder="nt skill, Excel, ajastatud ülesanne">
+            <small>Eralda märksõnad komaga.</small>
+          </div>
+        </div>
+      </details>
+      <input type="checkbox" id="fShowName" hidden>
+      <label class="check"><input type="checkbox" id="fConfirm"> <span>Kinnitan, et loos ei ole isikuandmeid, nimesid ega ärisaladusi *</span></label>
+      <div class="form-foot">
+        <span class="form-msg" id="formMsg" role="alert"></span>
+        <button class="btn btn-plain" type="button" id="cancelDlg">Loobu</button>
+        <button class="btn btn-primary" type="submit" id="saveBtn">Salvesta lugu</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+(function(){
+  const TOOLS = ["Claude","Claude Code","Claude Cowork","Claude skill","ChatGPT","Power Automate","Microsoft Forms","Excel"];
+  const DEPTS = ["HR","Müük","Klienditugi","Tootmine","Kvaliteet","Projektijuhtimine","Finants","Turundus","IT","Juhtkond"];
+  // Lahenduse liigid AI-teejuhi järgi (lihtsamast keerukamani)
+  const KINDS = [
+    {id:"Vestlus ja prompt", lv:1, d:"Hea küsimus Chatis. Lihtsaim viis alustada."},
+    {id:"Claude'i projekt", lv:1, d:"Kaust, mille juhised ja dokumendid kehtivad kõigis selle projekti vestlustes."},
+    {id:"Skill", lv:1, d:"Salvestatud juhend korduva töö jaoks. Vorm ja toon on alati ühesugused."},
+    {id:"Cowork ja ajastatud ülesanne", lv:2, d:"Chat vastab ja kirjutab. Cowork oskab lisaks töötada failide, Outlooki kirjade ja kalendriga ning teeb rutiinse töö ka ajastatult ise ära."},
+    {id:"Muu automaatika", lv:2, d:"Power Automate, Forms ja teised automaatsed vood."},
+    {id:"Vaibkoodimine (vibe coding)", lv:3, d:"Oma tööriist või leht, mille tegid AI abil ilma programmeerimata. Prototüüp ise demoandmetega, kasutuselevõtt IT kaudu."}
+  ];
+  const KIND_IDS = KINDS.map(k=>k.id);
+  const LEVELS = {1:"Algajale",2:"Kesktasemele",3:"Edasijõudnule"};
+  const lvBadge = kd => { const b=document.createElement("span"); b.className="level l"+kd.lv; b.textContent=LEVELS[kd.lv]; return b; };
+  const KIND_ALIAS = {"Agent ja ajastatud ülesanne":"Cowork ja ajastatud ülesanne","Vibe-kodeeritud rakendus":"Vaibkoodimine (vibe coding)","Oma prototüüp":"Vaibkoodimine (vibe coding)"};
+  const kindOf = i => { const c=KIND_ALIAS[i.category]||i.category; return KIND_IDS.includes(c) ? c : "Muu"; };
+  const STATUS = {kasutusel:"Igapäevases kasutuses",katsetamisel:"Katsetamisel",prototuup:"Prototüüp",idee:"Idee"};
+  const STATUS_ORDER = {kasutusel:0,katsetamisel:1,prototuup:2,idee:3};
+
+  const S = {open:new Set(), docs:[], db:null, user:null, me:null, owner:false, canWrite:null, writeBlocked:false, names:{}, loaded:false,
+             q:"", dept:"", kind:"", tool:"", status:"", editing:null};
+  const $ = id => document.getElementById(id);
+  const el = (tag, cls, text) => { const n=document.createElement(tag); if(cls) n.className=cls; if(text!=null) n.textContent=text; return n; };
+  const str = (v, max) => (typeof v === "string" ? v : "").slice(0, max || 2000);
+
+  function notice(msg){ const n=$("notice"); n.textContent=msg||""; n.classList.toggle("show", !!msg); }
+
+  function allItems(){
+    const out=[];
+    for(const d of S.docs){
+      const items = Array.isArray(d.data.items) ? d.data.items : [];
+      for(const it of items){
+        if(!it || typeof it!=="object") continue;
+        out.push({
+          id:str(it.id,80), docId:d.id,
+          title:str(it.title,120), dept:str(it.dept,60), category:str(it.category,60),
+          tools:Array.isArray(it.tools)?it.tools.filter(t=>typeof t==="string").map(t=>t.slice(0,40)).slice(0,8):[],
+          tags:Array.isArray(it.tags)?it.tags.filter(t=>typeof t==="string").map(t=>t.slice(0,30)).slice(0,6):[],
+          status:STATUS[it.status]?it.status:"idee",
+          before:str(it.before,800), solution:str(it.solution,1200), result:str(it.result,800),
+          saved:str(it.saved,80), tip:str(it.tip,400), alsoFor:str(it.alsoFor,300), author:str(it.author,40), beforeShort:str(it.beforeShort,60), afterShort:str(it.afterShort,60), showName:it.showName===true,
+          createdAt:typeof it.createdAt==="number"?it.createdAt:0
+        });
+      }
+    }
+    return out;
+  }
+
+  function canManage(item){ return S.owner || (S.me && item.docId===S.me); }
+
+  function renderStats(items){
+    if(!S.loaded || !items.length){ $("summary").textContent=""; return; }
+    const use=items.filter(i=>i.status==="kasutusel").length;
+    const depts=new Set(items.map(i=>i.dept.trim().toLowerCase()).filter(Boolean)).size;
+    $("summary").innerHTML = "<span><b>"+items.length+"</b> lugu</span><span><b>"+depts+"</b> valdkonda</span><span><b>"+use+"</b> igapäevases kasutuses</span>";
+  }
+
+  // Kui otsing vastab osakonna nimele (või selle algusele), otsitakse osakonna järgi
+  function deptHits(items){
+    const q=S.q.trim().toLowerCase(); if(!q) return null;
+    const ds=[...new Set(items.map(i=>(i.dept||"").trim()).filter(Boolean))].filter(d=>d.toLowerCase().startsWith(q));
+    return ds.length ? ds : null;
+  }
+
+  function renderFilters(items){
+    { const kb=$("kindChips"); kb.textContent="";
+      const onL = curView===null || curView==="lood";
+      const mkK=(label,val,n,num)=>{ const b=el("button",(onL&&S.kind===val)?"on":null); b.type="button"; b.setAttribute("aria-pressed",String(S.kind===val));
+        const nm=el("span","tname",label); const kd0=KINDS.find(x=>x.id===val); if(kd0){ nm.appendChild(el("small","lvl",LEVELS[kd0.lv])); b.classList.add("step","lv"+kd0.lv); } b.appendChild(nm);
+        b.addEventListener("click",()=>{ S.kind=val; if(location.hash && location.hash!=="#lood") location.hash="lood"; render(); }); kb.appendChild(b); };
+      mkK("Kõik","",items.length);
+      KIND_IDS.forEach((k,ix)=>mkK(k,k,items.filter(i=>kindOf(i)===k).length,ix+1));
+      { const n=items.filter(i=>kindOf(i)==="Muu").length; if(n) mkK("Muu","Muu",n); }
+    }
+    const depts=[...new Set(items.map(i=>i.dept).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"et"));
+    const box=$("deptChips"); box.textContent="";
+    const onLood = curView===null || curView==="lood";
+    const hits=deptHits(items);
+    const isOn=val=> hits ? hits.includes(val) : S.dept===val;
+    const mk=(label,val,n)=>{ const b=el("button",(onLood&&isOn(val))?"on":null); b.type="button"; b.setAttribute("aria-pressed", String(S.dept===val));
+      b.appendChild(el("span",null,label));
+      b.addEventListener("click",()=>{ S.dept=val; if(S.q){ S.q=""; $("q").value=""; } if(location.hash && location.hash!=="#lood") location.hash="lood"; render(); }); box.appendChild(b); };
+    mk("Kõik","",items.length);
+    depts.forEach(d=>mk(d,d,items.filter(i=>i.dept===d).length));
+    const tools=[...new Set(items.flatMap(i=>i.tools))].sort((a,b)=>a.localeCompare(b,"et"));
+    const sel=$("fTool"); const cur=S.tool; sel.textContent="";
+    const o0=el("option",null,"Kõik tööriistad"); o0.value=""; sel.appendChild(o0);
+    tools.forEach(t=>{ const o=el("option",null,t); o.value=t; sel.appendChild(o); });
+    sel.value = tools.includes(cur)?cur:"";
+    const dl=$("deptList"); dl.textContent="";
+    [...new Set(DEPTS.concat(depts))].forEach(d=>{ const o=document.createElement("option"); o.value=d; dl.appendChild(o); });
+  }
+
+  function card(it){
+    const c=el("article","card");
+    const meta=el("div","meta");
+    const nm = it.showName ? (it.author || S.names[it.docId] || "").trim().split(/\s+/)[0] : "";
+    if(it.dept) meta.appendChild(el("span",null, nm ? it.dept+" ("+nm+")" : it.dept));
+    meta.appendChild(el("span","st "+it.status, STATUS[it.status]));
+    c.appendChild(meta);
+    c.appendChild(el("h3",null,it.title||"Nimetu lugu"));
+    if(it.beforeShort&&it.afterShort){
+      const ba=el("div","ba");
+      const p0=el("p","was"); p0.appendChild(el("span","lbl","Enne")); p0.appendChild(el("span",null,it.beforeShort));
+      const p1=el("p","now"); p1.appendChild(el("span","lbl","Nüüd")); p1.appendChild(el("span",null,it.afterShort));
+      ba.appendChild(p0); ba.appendChild(p1); c.appendChild(ba);
+    }
+    const det=el("details","more"); const key=it.docId+"/"+it.id;
+    if(S.open.has(key)) det.open=true;
+    det.addEventListener("toggle",()=>{ det.open?S.open.add(key):S.open.delete(key); });
+    det.appendChild(el("summary",null,"Loe lähemalt"));
+    const body=el("div","story");
+    const sec=(label,text)=>{ if(!text) return; const d=el("div","blk"); d.appendChild(el("small",null,label)); d.appendChild(el("p",null,text)); body.appendChild(d); };
+    sec("Mis oli enne",it.before); sec("Mida tegin",it.solution); sec("Mis muutus",it.result);
+    if(it.tip){ const t=el("div","tip"); t.appendChild(el("b",null,"Proovi ise: ")); t.appendChild(document.createTextNode(it.tip)); body.appendChild(t); }
+    const f=el("div","facts");
+    const fact=(label,text)=>{ if(!text) return; const r=el("div"); r.appendChild(el("b",null,label+": ")); r.appendChild(document.createTextNode(text)); f.appendChild(r); };
+    fact("Tööriistad",it.tools.join(", ")); fact("Ajavõit",it.saved); fact("Sobib ka",it.alsoFor);
+    if(f.childNodes.length) body.appendChild(f);
+    if(it.tags.length){ const g=el("div","tags"); it.tags.forEach(x=>{ const b=el("button","tag","#"+x); b.type="button"; b.title="Näita kõiki selle märksõnaga lugusid"; b.addEventListener("click",()=>{ S.q=x; $("q").value=x; render(); $("q").scrollIntoView({block:"center"}); }); g.appendChild(b); }); body.appendChild(g); }
+    det.appendChild(body); c.appendChild(det);
+    const foot=el("div","card-foot");
+    foot.appendChild(el("span",null, it.createdAt ? new Date(it.createdAt).toLocaleDateString("et-EE",{month:"long",year:"numeric"}) : ""));
+    if(canManage(it) && S.db && !S.writeBlocked){
+      const a=el("div","card-actions");
+      const e=el("button","linkbtn","Muuda"); e.type="button"; e.addEventListener("click",()=>openForm(it));
+      const d=el("button","linkbtn danger","Kustuta"); d.type="button"; d.addEventListener("click",()=>askDelete(it,d));
+      a.appendChild(e); a.appendChild(d); foot.appendChild(a);
+    }
+    c.appendChild(foot);
+    return c;
+  }
+
+  function render(){
+    const items=allItems();
+    renderStats(items); renderFilters(items);
+    const q=S.q.trim().toLowerCase();
+    const hits=deptHits(items);
+    const list=items.filter(i=> (!S.kind||kindOf(i)===S.kind)).filter(i=> hits ? (hits.includes((i.dept||"").trim()) && (!S.tool||i.tools.includes(S.tool)) && (!S.status||i.status===S.status)) :
+      (!S.dept||i.dept===S.dept) && (!S.tool||i.tools.includes(S.tool)) && (!S.status||i.status===S.status) &&
+      (!q || [i.title,i.dept,i.category,i.before,i.solution,i.result,i.tip,i.alsoFor,i.beforeShort,i.afterShort,i.tools.join(" "),i.tags.join(" ")].join(" ").toLowerCase().includes(q))
+    ).sort((a,b)=> (STATUS_ORDER[a.status]-STATUS_ORDER[b.status]) || (b.createdAt-a.createdAt));
+    const grid=$("grid"); grid.textContent="";
+    $("count").textContent="";
+    if(!S.loaded){ grid.appendChild(el("div","empty","Laen lugusid…")); return; }
+    if(!items.length){ grid.appendChild(el("div","empty","Lugusid veel ei ole. Ole esimene ja lisa oma lugu!")); return; }
+    const showEmpty = !q && !S.dept && !S.tool && !S.status;
+    if(!list.length && !showEmpty){ grid.appendChild(el("div","empty","Nende filtritega lugusid ei leitud. Proovi teist otsingut või valdkonda.")); }
+    KIND_IDS.concat(["Muu"]).forEach(k=>{
+      const g=list.filter(i=>kindOf(i)===k);
+      if(!g.length && !(showEmpty && KIND_IDS.includes(k) && (!S.kind||S.kind===k))) return;
+      const kd=KINDS.find(x=>x.id===k);
+      const h=el("div","kind-head");
+      const t=el("h3",null,k); if(kd) t.appendChild(lvBadge(kd)); h.appendChild(t);
+      if(kd) h.appendChild(el("p",null,kd.d));
+      grid.appendChild(h);
+      g.forEach(i=>grid.appendChild(card(i)));
+      if(!g.length){ const e=el("div","kind-empty"); e.appendChild(el("span",null,"Siin pole veel lugu.")); const b=el("button","linkbtn","+ Lisa esimene"); b.type="button"; b.addEventListener("click",()=>openForm(null,k)); e.appendChild(b); grid.appendChild(e); }
+    });
+    if(list.length!==items.length) $("count").textContent = "Näitan "+list.length+" lugu "+items.length+"-st";
+  }
+
+  async function resolveNames(){
+    if(!S.user || typeof S.user.profiles!=="function") return;
+    const ids=[...new Set(allItems().filter(i=>i.showName).map(i=>i.docId))];
+    if(!ids.length) return;
+    try{
+      const ps=await S.user.profiles(ids);
+      let changed=false;
+      ids.forEach(id=>{ const n=(ps && ps[id] && ps[id].name) || ""; if(n && S.names[id]!==n){ S.names[id]=n; changed=true; } });
+      if(changed) render();
+    }catch(e){}
+  }
+
+  // Vorm
+  const toolSel=new Set();
+  // Pooleli jäänud loo mustand jääb selle kasutaja brauserisse alles, kuni lugu on salvestatud
+  const DRAFT_KEY="ai-edulood-mustand";
+  const DRAFT_IDS=["fTitle","fDept","fCat","fStat","fBeforeShort","fAfterShort","fBefore","fSolution","fResult","fSaved","fTip","fAlso","fTags","fToolOther"];
+  const TEXT_IDS=DRAFT_IDS.filter(id=>id!=="fCat"&&id!=="fStat");
+  function loadDraft(){ try{ return JSON.parse(localStorage.getItem(DRAFT_KEY)||"null"); }catch(e){ return null; } }
+  function clearDraft(){ try{ localStorage.removeItem(DRAFT_KEY); }catch(e){} }
+  function saveDraft(){
+    if(S.editing) return;
+    try{
+      const d={tools:[...toolSel], showName:$("fShowName").checked};
+      DRAFT_IDS.forEach(id=>{ d[id]=$(id).value; });
+      const any=TEXT_IDS.some(id=>d[id].trim());
+      if(any) localStorage.setItem(DRAFT_KEY, JSON.stringify(d)); else localStorage.removeItem(DRAFT_KEY);
+    }catch(e){}
+  }
+  function buildToolPick(){
+    const box=$("toolPick"); box.textContent="";
+    TOOLS.forEach(t=>{ const b=el("button","chip",t); b.type="button"; b.setAttribute("aria-pressed",String(toolSel.has(t)));
+      b.addEventListener("click",()=>{ toolSel.has(t)?toolSel.delete(t):toolSel.add(t); b.setAttribute("aria-pressed",String(toolSel.has(t))); saveDraft(); });
+      box.appendChild(b); });
+  }
+  function openForm(item, preKind){
+    if(!S.db){ notice("Lugude salvestamine ei ole selles brauseris võimalik."); return; }
+    if(S.writeBlocked || S.canWrite===false){ notice("Lugude salvestamine ei ole selles brauseris võimalik."); return; }
+    S.editing=item||null;
+    $("dlgTitle").textContent = item ? "Muuda lugu" : "Lisa oma edulugu";
+    $("fTitle").value=item?item.title:""; $("fDept").value=item?item.dept:""; $("fCat").value=item?(kindOf(item)==="Muu"?"":kindOf(item)):(preKind||"");
+    $("fStat").value=item?item.status:""; $("fBefore").value=item?item.before:""; $("fSolution").value=item?item.solution:"";
+    $("fResult").value=item?item.result:""; $("fSaved").value=item?item.saved:""; $("fTip").value=item?item.tip:""; $("fAlso").value=item?item.alsoFor:""; $("fBeforeShort").value=item?item.beforeShort:""; $("fAfterShort").value=item?item.afterShort:"";
+    $("fShowName").checked=item?item.showName:false; $("fConfirm").checked=!!item;
+    toolSel.clear(); const others=[];
+    (item?item.tools:[]).forEach(t=>TOOLS.includes(t)?toolSel.add(t):others.push(t));
+    $("fToolOther").value=others.join(", ");
+    $("fTags").value=item?item.tags.join(", "):"";
+    $("optBox").open = !!(item && (item.tip||item.saved||item.alsoFor||item.tags.length));
+    buildToolPick(); $("formMsg").textContent="";
+    let dn=$("draftNote"); if(!dn){ dn=el("p","draft-note"); dn.id="draftNote"; $("form").insertBefore(dn,$("form").firstChild); }
+    dn.textContent=""; dn.hidden=true;
+    if(!item){ const d=loadDraft(); if(d){
+      DRAFT_IDS.forEach(id=>{ if(typeof d[id]==="string" && d[id]) $(id).value=d[id]; });
+      if(Array.isArray(d.tools)){ toolSel.clear(); d.tools.forEach(t=>{ if(typeof t==="string") toolSel.add(t); }); buildToolPick(); }
+      $("fShowName").checked=!!d.showName;
+      if(d.fSaved||d.fTip||d.fAlso||d.fTags) $("optBox").open=true;
+      dn.appendChild(document.createTextNode("Jätkad pooleli jäänud lugu. "));
+      const nb=el("button","linkbtn","Alusta tühjalt"); nb.type="button"; nb.addEventListener("click",()=>{ clearDraft(); openForm(null, preKind); }); dn.appendChild(nb);
+      dn.hidden=false;
+    } }
+    $("overlay").classList.add("open"); $("overlay").setAttribute("aria-hidden","false");
+    setTimeout(()=>$("fTitle").focus(),30);
+  }
+  function closeForm(){ const wasNew=!S.editing; $("overlay").classList.remove("open"); $("overlay").setAttribute("aria-hidden","true"); S.editing=null; if(wasNew && loadDraft()) notice("Sinu lugu jäi mustandina alles. Jätkamiseks vajuta uuesti „Lisa oma lugu“."); }
+
+  async function writeDoc(docId, items){
+    const ref=S.db.collection("stories").doc(docId);
+    await ref.set({items:items, updatedAt:Date.now()});
+  }
+  function docItems(docId){
+    const d=S.docs.find(x=>x.id===docId);
+    return d && Array.isArray(d.data.items) ? d.data.items.map(x=>Object.assign({},x)) : [];
+  }
+
+  async function save(ev){
+    ev.preventDefault();
+    const msg=$("formMsg"); msg.textContent="";
+    const other=$("fToolOther").value.split(",").map(s=>s.trim()).filter(Boolean);
+    const tools=[...toolSel].concat(other).slice(0,8);
+    const v={beforeShort:$("fBeforeShort").value.trim(), afterShort:$("fAfterShort").value.trim(), title:$("fTitle").value.trim(), dept:$("fDept").value.trim(), category:$("fCat").value, status:$("fStat").value,
+             before:$("fBefore").value.trim(), solution:$("fSolution").value.trim(), result:$("fResult").value.trim(),
+             saved:$("fSaved").value.trim(), tip:$("fTip").value.trim(), alsoFor:$("fAlso").value.trim(), showName:$("fShowName").checked, tools,
+             tags:$("fTags").value.split(",").map(s=>s.trim().replace(/^#/,"")).filter(Boolean).slice(0,6)};
+    if(!v.title||!v.dept||!v.category||!v.status||!v.beforeShort||!v.afterShort||!v.before||!v.solution||!v.result){ msg.textContent="Täida kõik tärniga väljad."; return; }
+    if(!tools.length){ msg.textContent="Vali vähemalt üks tööriist."; return; }
+    if(!$("fConfirm").checked){ msg.textContent="Kinnita, et loos ei ole isikuandmeid ega ärisaladusi."; return; }
+    const btn=$("saveBtn"); btn.disabled=true; btn.textContent="Salvestan…";
+    try{
+      const ed=S.editing;
+      const docId = ed ? ed.docId : S.me;
+      if(!docId) throw {code:"no_id"};
+      const items=docItems(docId);
+      if(ed){
+        const ix=items.findIndex(x=>x && x.id===ed.id);
+        const base= ix>=0 ? items[ix] : {id:ed.id, createdAt:ed.createdAt||Date.now()};
+        const upd=Object.assign({},base,v,{updatedAt:Date.now()});
+        if(ix>=0) items[ix]=upd; else items.push(upd);
+      } else {
+        items.push(Object.assign({id:"l"+Date.now().toString(36)+Math.random().toString(36).slice(2,6), createdAt:Date.now()}, v));
+      }
+      await writeDoc(docId, items);
+      if(!ed) clearDraft();
+      closeForm();
+      notice(ed ? "Muudatus on salvestatud." : "Valmis! Sinu lugu on lehel. Seda näed ainult sina, kuni jagad seda kolleegidega.");
+    }catch(e){
+      const code=e&&e.code;
+      if(code==="invalid_argument"){ S.writeBlocked=true; msg.textContent="Salvestamine ei ole selles brauseris võimalik."; render(); }
+      else if(code==="no_id"){ msg.textContent="Salvestamine ei õnnestunud."; }
+      else if(code==="quota_exceeded"){ msg.textContent="Brauseri salvestusruum on täis."; }
+      else { msg.textContent="Salvestamine ei õnnestunud. Proovi mõne hetke pärast uuesti."; }
+    }finally{ btn.disabled=false; btn.textContent="Salvesta lugu"; }
+  }
+
+  function askDelete(item, btn){
+    if(btn.dataset.armed!=="1"){ btn.dataset.armed="1"; btn.textContent="Kinnita kustutamine"; setTimeout(()=>{ if(btn.isConnected){ btn.dataset.armed=""; btn.textContent="Kustuta"; } },4000); return; }
+    btn.disabled=true;
+    const items=docItems(item.docId).filter(x=>!(x && x.id===item.id));
+    writeDoc(item.docId, items).then(()=>notice("Lugu on kustutatud.")).catch(e=>{
+      if(e&&e.code==="invalid_argument"){ S.writeBlocked=true; render(); }
+      notice("Kustutamine ei õnnestunud. Proovi uuesti."); btn.disabled=false;
+    });
+  }
+
+  $("q").addEventListener("input",e=>{ S.q=e.target.value; if(location.hash && location.hash!=="#lood") location.hash="lood"; render(); });
+  $("fTool").addEventListener("change",e=>{ S.tool=e.target.value; render(); });
+  $("fStatus").addEventListener("change",e=>{ S.status=e.target.value; render(); });
+  $("addTop").addEventListener("click",()=>openForm(null));
+  $("addGuide").addEventListener("click",()=>openForm(null));
+
+  // Menüü
+  const VIEWS=["lood","lisamine","andmekaitse"];
+  let curView=null;
+  function route(){
+    const h=(location.hash||"").slice(1);
+    const v=VIEWS.includes(h)?h:"lood";
+    VIEWS.forEach(x=>{ $("v-"+x).hidden = x!==v; });
+    document.querySelectorAll(".nav a").forEach(a=>{ const on=a.dataset.view===v; a.classList.toggle("on",on); if(on) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current"); });
+    if(curView!==null && curView!==v) window.scrollTo(0,0);
+    curView=v;
+    render();
+  }
+  window.addEventListener("hashchange",route);
+  route();
+  $("closeDlg").addEventListener("click",closeForm);
+  $("cancelDlg").addEventListener("click",closeForm);
+  $("overlay").addEventListener("click",e=>{ if(e.target.id==="overlay") closeForm(); });
+  document.addEventListener("keydown",e=>{ if(e.key==="Escape" && $("overlay").classList.contains("open")) closeForm(); });
+  $("form").addEventListener("submit",save);
+  $("form").addEventListener("input",saveDraft);
+  $("form").addEventListener("change",saveDraft);
+
+  render();
+
+
+  // Kohalik andmehoidla: näidislood + külastaja enda lood (ainult selle brauseri sees)
+  const SEED_STORIES = [{"title": "Tervituskiri uuele töötajale ühe lausega", "dept": "HR", "category": "Skill", "status": "kasutusel", "tools": ["Claude", "Claude skill"], "beforeShort": "Iga kiri nullist", "afterShort": "Kiri valmis minutiga", "before": "Iga uue töötaja tervituskiri kirjutati uuesti. Vahel jäi mõni oluline asi mainimata, näiteks kuhu esimesel päeval tulla või kellelt küsida.", "solution": "Kirja vorm, kohustuslik info ja toon pandi üks kord skilli kirja. Nüüd piisab lausest „Tee tervituskiri: nimi, ametikoht, alguskuupäev, juht“.", "result": "Kõik kirjad on ühesugused ja täielikud. Kirjutamise asemel kulub aeg ülelugemisele.", "saved": "umbes 20 min iga uue töötaja kohta", "tip": "Vali töö, mida teed vähemalt kord kuus samas vormis. See on sinu esimene skill.", "alsoFor": "lahkumise checklist, ametijuhendid, töölepingu saatekirjad", "tags": ["skill", "onboarding"], "id": "n1", "createdAt": 1782864000000, "showName": false, "author": ""}, {"title": "Pakkumise saatekiri kliendi keeles ilma hirmuta", "dept": "Müük", "category": "Vestlus ja prompt", "status": "kasutusel", "tools": ["Claude"], "beforeShort": "Tõlkeprogramm ja kahtlus", "afterShort": "Tõlge koos tagasitõlkega", "before": "Soome ja Läti klientidele kirjutati kiri inglise keeles, sest tõlkimisel ei olnud kindlust, kas toon jääb viisakaks.", "solution": "Kiri kirjutatakse eesti keeles ja AI-lt küsitakse tõlget koos eestikeelse tagasitõlkega. Nii saab ise kontrollida, et sisu ja toon jäid samaks.", "result": "Kliendid vastavad kiiremini, sest kiri on nende emakeeles. Hinnad ja tähtajad lisatakse alles pärast tõlget käsitsi.", "saved": "paar kirja nädalas kiiremini", "tip": "Palu alati tagasitõlget. Kui tagasitõlge ütleb midagi muud kui sinu algtekst, on tõlkes viga.", "alsoFor": "tarnijatele vastamine, juhendid võõrkeelsetele töötajatele", "tags": ["tõlge", "kliendikiri"], "id": "n2", "createdAt": 1783641600000, "showName": false, "author": ""}, {"title": "Ohutusjuhend, mida ka päriselt loetakse", "dept": "Tootmine", "category": "Vestlus ja prompt", "status": "katsetamisel", "tools": ["Claude"], "beforeShort": "Pikk ja ametlik tekst", "afterShort": "Lühikesed sammud kahes keeles", "before": "Ohutusjuhend oli pikk ja ametlikus keeles. Uued töötajad allkirjastasid selle, aga sisust jäi vähe meelde.", "solution": "Juhend anti AI-le ja paluti see muuta lihtsateks sammudeks: mida teha, mida mitte ja miks. Seejärel tõlge vene keelde koos tagasitõlkega. Lõpptekst vaadati üle töökeskkonnaspetsialistiga.", "result": "Meistrid kasutavad lühiversiooni esmajuhendamisel. Ametlik juhend jääb kehtima, lühiversioon aitab sellest aru saada.", "saved": "", "tip": "AI teeb lihtsamaks, aga vastutus jääb inimesele. Lase lõpptekst üle vaadata kellelgi, kes valdkonda tunneb.", "alsoFor": "töökorralduse reeglid, kvaliteedijuhendid", "tags": ["tööohutus", "lihtne keel"], "id": "n3", "createdAt": 1784419200000, "showName": false, "author": ""}, {"title": "Esmaspäeva hommikul on tasumata arvete ülevaade juba valmis", "dept": "Finants", "category": "Cowork ja ajastatud ülesanne", "status": "kasutusel", "tools": ["Claude Cowork", "Excel"], "beforeShort": "Tabelite kokkupanek käsitsi", "afterShort": "Ülevaade ootab postkastis", "before": "Igal esmaspäeval kulus tund aega, et panna eri tabelitest kokku tasumata arved ja otsustada, kellele meeldetuletus saata.", "solution": "Coworkis on ajastatud ülesanne, mis loeb kaustas olevad tabelid läbi ja koostab lühikese ülevaate: mis on üle tähtaja, kui palju ja mida soovitab teha. Meeldetuletuste mustandid on valmis, aga saatmise otsustab inimene.", "result": "Esmaspäeva hommik algab otsustamisest, mitte tabelite kokkupanekust.", "saved": "umbes 1 h nädalas", "tip": "Mõtle, mis on sul iga nädal samal päeval ees. Kui see algab „ma panen kokku…“, sobib see ajastatud ülesandeks.", "alsoFor": "nädala müügiülevaade, puudumiste kokkuvõte", "tags": ["ajastatud ülesanne", "aruandlus"], "id": "n4", "createdAt": 1785196800000, "showName": false, "author": ""}, {"title": "Projekti mälu, mis ei lähe puhkusele", "dept": "Projektijuhtimine", "category": "Claude'i projekt", "status": "kasutusel", "tools": ["Claude"], "beforeShort": "Info laiali kirjades", "afterShort": "Kõik ühes projektis", "before": "Projekti otsused olid laiali kirjades ja märkmetes. Kui projektijuht oli puhkusel, ei teadnud keegi, mida oli kokku lepitud.", "solution": "Igal suuremal projektil on Claude'is oma projekt, kuhu lisatakse koosolekute kokkuvõtted ja olulised dokumendid. Juhistes on kirjas projekti eesmärk ja kes mille eest vastutab.", "result": "Küsimusele „mida me tarnetähtajas kokku leppisime?“ saab vastuse sekunditega koos viitega koosolekule.", "saved": "", "tip": "Pane projekti juhistesse ka see, mida AI teha ei tohi, näiteks lubadusi kliendile.", "alsoFor": "värbamisprojektid, iga-aastased üritused", "tags": ["projekt", "koosolekud"], "id": "n5", "createdAt": 1785974400000, "showName": false, "author": ""}, {"title": "Kõrvalekalde teade otse telefonist", "dept": "Kvaliteet", "category": "Muu automaatika", "status": "katsetamisel", "tools": ["Microsoft Forms", "Power Automate"], "beforeShort": "Paberlehed ja meeldetuletused", "afterShort": "Teade jõuab kohe õigele inimesele", "before": "Kõrvalekalded pandi kirja paberile ja need jõudsid kvaliteedijuhini alles päeva lõpus, kui üldse.", "solution": "QR-kood viib lihtsale vormile. Pärast saatmist läheb teade automaatselt vastutajale ja rida lisandub tabelisse. Vormi ja töövoo kirjeldused kirjutati AI abiga.", "result": "Teated jõuavad kohe kohale ja kuu lõpus on kokkuvõte olemas.", "saved": "", "tip": "Alusta kõige väiksemast sammust: üks vorm ja üks automaatne kiri. Täienda alles siis, kui inimesed on seda kasutama hakanud.", "alsoFor": "ideede kogumine, töövahendite tellimine", "tags": ["Forms", "Power Automate"], "id": "n6", "createdAt": 1786752000000, "showName": false, "author": ""}, {"title": "Vastuargumendid enne koosolekut, mitte koosolekul", "dept": "Juhtkond", "category": "Vestlus ja prompt", "status": "idee", "tools": ["Claude"], "beforeShort": "Arutelu venis", "afterShort": "Kriitika on juba laual", "before": "Otsuse ettepanekud tulid koosolekule ühe variandiga ja arutelu läks vastuväidete otsimiseks.", "solution": "Enne koosolekut antakse AI-le ettepanek ja palutakse: „Mängi skeptilist juhatuse liiget. Too välja 5 kõige tugevamat vastuargumenti ja üks alternatiiv.“ Vastused lisatakse ettepanekusse.", "result": "Idee on alles katsetamata. Esimesed proovid näitavad, et ettepanekud on läbimõeldumad.", "saved": "", "tip": "Ära palu AI-lt, kas su idee on hea. Palu, miks see võiks ebaõnnestuda.", "alsoFor": "eelarve põhjendused, uue tööviisi tutvustamine", "tags": ["otsused", "juhtimine"], "id": "n7", "createdAt": 1787529600000, "showName": false, "author": ""}, {"title": "Puhkuste planeerija, mille tegin ise", "dept": "HR", "category": "Vaibkoodimine (vibe coding)", "status": "prototuup", "tools": ["Claude", "Claude Code"], "beforeShort": "Tabel, mida keegi ei uuendanud", "afterShort": "Lihtne vaade, kus kattuvused on näha", "before": "Puhkuste tabelis ei olnud näha, kui samast meeskonnast olid mitu inimest korraga ära.", "solution": "Kirjeldasin oma sõnadega, millist vaadet vajan, ja AI kirjutas lihtsa veebilehe. Katsetasin seda ainult väljamõeldud nimedega. Päris kasutuseks peab IT selle turvaliseks tegema.", "result": "Prototüüp näitas juhtidele kohe, milline võiks lahendus olla. Arutelu läks palju kiiremini kui sõnadega selgitades.", "saved": "", "tip": "Prototüüp demoandmetega on parim viis ideed tutvustada. Päris andmed alles siis, kui IT on lahenduse üle vaadanud.", "alsoFor": "koolituste register, töövahendite nimekiri", "tags": ["vaibkoodimine", "prototüüp"], "id": "n8", "createdAt": 1788307200000, "showName": false, "author": ""}, {"title": "Sama küsimus, sama vastus kõigile", "dept": "Klienditugi", "category": "Claude'i projekt", "status": "kasutusel", "tools": ["Claude"], "beforeShort": "Igaüks vastas omamoodi", "afterShort": "Ühine alus kõigi vastuste jaoks", "before": "Samale küsimusele vastasid eri inimesed erinevalt. Uus kolleeg pidi kõike teistelt küsima.", "solution": "Projekti lisati korduma kippuvad küsimused, tingimused ja head näidisvastused. AI teeb vastuse mustandi, inimene kohandab selle konkreetsele kliendile.", "result": "Vastused on ühtlasemad ja uus kolleeg saab iseseisvalt hakkama juba esimesel nädalal.", "saved": "umbes 5 min vastuse kohta", "tip": "Kogu kokku 10 vastust, mille üle oled kõige uhkem. Need õpetavad AI-le sinu stiili paremini kui pikk juhend.", "alsoFor": "sisemised IT-küsimused, HR-i korduvad küsimused", "tags": ["klienditugi", "projekt"], "id": "n9", "createdAt": 1789084800000, "showName": false, "author": ""}];
+  const LOCAL = (function(){
+    const KEY="ai-edulood-v1"; const subs=[];
+    const load=()=>{ try{ return JSON.parse(localStorage.getItem(KEY)||"{}")||{}; }catch(e){ return {}; } };
+    const snap=()=>{ const st=load(); const docs=[{id:"naited",exists:true,data:()=>({items:SEED_STORIES})}];
+      Object.keys(st).forEach(id=>docs.push({id,exists:true,data:()=>st[id]})); return {metadata:{fromCache:false},docs}; };
+    const db={collection:()=>({
+      doc:id=>({set:async data=>{ const st=load(); st[id]=data; try{ localStorage.setItem(KEY,JSON.stringify(st)); }catch(e){ throw {code:"quota_exceeded"}; } subs.forEach(cb=>cb(snap())); }}),
+      onSnapshot:cb=>{ subs.push(cb); setTimeout(()=>cb(snap()),0); }
+    })};
+    let ok=true; try{ localStorage.setItem("ai-edulood-test","1"); localStorage.removeItem("ai-edulood-test"); }catch(e){ ok=false; }
+    const user={isOwner:()=>false,can:()=>ok,id:async()=>"minu",profiles:async()=>({})};
+    return {use:async n=> n==="db"?db : n==="user"?user : null};
+  })();
+  async function init(){
+    let timer=setTimeout(()=>{ if(!S.loaded){ S.timerFired=true; notice("Lugude laadimine võtab tavalisest kauem."); } },10000);
+    let db=null, user=null;
+    try{ [db,user]=await Promise.all([LOCAL.use("db"), LOCAL.use("user")]); }catch(e){}
+    S.user=user;
+    if(user){
+      try{ S.owner = !!user.isOwner(); }catch(e){}
+      try{ const c=user.can("data.write"); S.canWrite = (c===true||c===false) ? c : null; }catch(e){}
+      try{ S.me = await user.id(); }catch(e){}
+    }
+    if(!db){ clearTimeout(timer); S.loaded=true; render(); notice("Lugusid ei saa praegu laadida."); return; }
+    S.db=db;
+    if(S.canWrite===false){ $("addTop").title="Sul on ainult lugemisõigus"; }
+    db.collection("stories").onSnapshot(snap=>{
+      S.docs = snap.docs.filter(d=>d.exists).map(d=>({id:d.id, data:d.data()||{}}));
+      if(!snap.metadata.fromCache){ clearTimeout(timer); if(S.timerFired){ S.timerFired=false; notice(""); } }
+      S.loaded=true; render(); resolveNames();
+    }, err=>{
+      clearTimeout(timer); S.loaded=true; render();
+      notice("Lugude laadimine katkes. Värskenda lehte veidi hiljem.");
+    });
+  }
+  init();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI-häkid: lühikesed nipid, mis säästavad aega</title>
+<meta name="description" content="Lühikesed AI-nipid igapäevatööks. Kopeeri prompt, kohanda ja proovi.">
+<meta name="author" content="Lisett Heinroos">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%E2%9A%A1%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+/* Estanci CVI nagu juhendis: Deep Violet päis, hele taust. Paigutus: vasakul põhihäkkide nimekiri filtriga, paremal kleepuv lemmikute ja saatmisvormi veerg, all kolleegide häkid. */
+:root{
+  --violet:#372770;
+  --violet-2:#4a3a8a;
+  --lav:#897BAD;
+  --lilac:#C2B8D9;
+  --lilac-bg:#EEEAF6;
+  --lilac-hover:#E2DBF0;
+  --line:#D9D3E7;
+  --grey:#F2F2F7;
+  --ink:#252731;
+  --muted:#676180;
+  --red:#ED6F69;
+  --red-deep:#CF4B45;
+  --red-ink:#8a2f2a;
+  --red-bg:#FDEDEC;
+  --red-line:#F6C3C0;
+  --bg:#FAFAFD;
+  --card:#FFFFFF;
+  --on-violet:#E9E5F4;
+  --font:"Roboto",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --radius:10px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{margin:0;text-wrap:balance}
+p{margin:0}
+a{color:var(--violet)}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--lav);outline-offset:2px}
+.pad{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1320px;margin:0 auto}
+
+/* Päis */
+.hero{position:relative;overflow:hidden;background:var(--violet);color:#fff}
+.layers{position:absolute;inset:0;pointer-events:none}
+.layers span{position:absolute;right:-14%;width:52%;height:40px;transform:rotate(-24deg);transform-origin:right center;border-radius:2px}
+.layers span:nth-child(1){top:22%;background:var(--violet-2)}
+.layers span:nth-child(2){top:42%;background:#5a4b97;width:44%}
+.layers span:nth-child(3){top:62%;background:var(--lav);opacity:.5;width:38%}
+.hero-in{position:relative;padding-block:24px 30px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.topbar img{height:40px;width:auto;display:block}
+.back{color:var(--lilac);font-size:14px;font-weight:500;text-decoration:none}
+.back:hover{color:#fff;text-decoration:underline}
+.hero h1{margin-top:26px;font-size:clamp(30px,4.4vw,44px);font-weight:900;line-height:1.1;text-transform:uppercase;letter-spacing:.02em}
+.lead{margin-top:12px;max-width:62ch;font-size:17px;color:var(--on-violet)}
+.howto{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px 18px;font-size:14px;color:var(--lilac)}
+.howto b{color:#fff}
+.safe{margin-top:14px;display:inline-flex;align-items:center;gap:8px;font-size:14.5px;color:var(--on-violet);background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:8px;padding:7px 12px}
+.safe a{color:#fff;font-weight:700}
+.safe a:hover{text-decoration:none}
+.hk-warn a{font-weight:700}
+
+/* Paigutus */
+.layout{display:grid;grid-template-columns:220px minmax(0,1fr) 320px;gap:28px;padding-block:28px 40px;align-items:start}
+.sidenav{grid-column:1;grid-row:1;position:sticky;top:16px;min-width:0}
+.list-col{grid-column:2;grid-row:1;min-width:0}
+aside{grid-column:3;grid-row:1;position:sticky;top:16px;display:grid;gap:14px;min-width:0}
+@media (max-width:1180px){.layout{grid-template-columns:200px minmax(0,1fr)}aside{grid-column:2;grid-row:2;position:static}}
+@media (max-width:760px){.layout{grid-template-columns:minmax(0,1fr);gap:20px}.sidenav,.list-col,aside{grid-column:1;grid-row:auto}.sidenav{position:static}}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px}
+.card h2{font-size:18px;color:var(--violet)}
+.small{font-size:14px;color:var(--muted)}
+
+/* Vasak menüü */
+.sidenav{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 10px}
+.nav-label{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700;margin:4px 8px 8px}
+.search{display:block;width:100%;font:inherit;font-size:15px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 11px;margin-bottom:14px}
+.filters{display:flex;flex-direction:column;gap:2px}
+.filters button,.nav-link{display:flex;justify-content:space-between;align-items:center;gap:8px;width:100%;text-align:left;font:inherit;font-size:15px;font-weight:500;color:var(--ink);background:none;border:0;border-left:3px solid transparent;border-radius:6px;padding:8px 10px;cursor:pointer;text-decoration:none;line-height:1.3}
+.filters button:hover,.nav-link:hover{background:var(--grey);color:var(--violet)}
+.filters button.on{background:var(--lilac-bg);border-left-color:var(--violet);color:var(--violet);font-weight:700}
+.filters .n{font-variant-numeric:tabular-nums;font-size:13px;color:var(--muted);font-weight:500}
+.filters button{justify-content:flex-start}
+.filters .tname{flex:1}
+.tnum{flex:none;display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--lilac-bg);color:var(--violet);font-size:12px;font-weight:900}
+.filters button.on .tnum{background:var(--violet);color:#fff}
+.group h2 .step{margin-left:10px;font-size:12px;letter-spacing:.04em;color:var(--lav);font-weight:700}
+.pager{display:flex;flex-wrap:wrap;gap:12px;border-top:1px solid var(--line);padding-top:22px;margin-top:6px}
+.pg{font:inherit;text-align:left;display:flex;flex-direction:column;gap:3px;border-radius:var(--radius);padding:14px 20px;cursor:pointer;min-width:min(100%,240px);text-decoration:none;transition:transform .15s,box-shadow .15s}
+.pg small{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.pg b{font-size:17px;line-height:1.3}
+.pg.prev{background:var(--card);border:1px solid var(--line);color:var(--violet)}
+.pg.prev small{color:var(--muted)}
+.pg.prev:hover{border-color:var(--violet)}
+.pg.next{margin-left:auto;background:var(--violet);border:1px solid var(--violet);color:#fff}
+.pg.next small{color:var(--lilac)}
+.pg.next:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(55,39,112,.25)}
+@media (max-width:560px){.pg.next,.pg.prev{margin-left:0;width:100%}}
+.nav-sep{height:1px;background:var(--line);margin:12px 8px}
+.nav-ext{display:grid;gap:8px}
+.xlink{display:flex;align-items:center;gap:8px;padding:10px 12px;background:#372770;border:1px solid #372770;border-radius:8px;color:#fff;font-size:14px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;line-height:1.3;box-shadow:0 2px 6px rgba(55,39,112,.18)}
+.xlink:hover{background:#4a3a8a;border-color:#4a3a8a;color:#fff}
+.xlink .xarr{margin-left:auto;font-size:13px;color:#C2B8D9;letter-spacing:0}
+@media (max-width:760px){
+  .sidenav{padding:12px}
+  .filters{flex-direction:row;flex-wrap:wrap;gap:6px}
+  .filters button{width:auto;border:1px solid var(--line);border-radius:999px;padding:6px 13px;font-size:14px}
+  .filters button.on{background:var(--violet);border-color:var(--violet);color:#fff}
+  .filters button.on .n{color:#fff;opacity:.8}
+  .filters button{padding:4px 12px 4px 4px}
+  .filters button.on .tnum{background:#fff;color:var(--violet)}
+  .nav-label,.nav-sep,.nav-link{display:none}
+  .nav-ext{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:12px}
+  .xlink{font-size:13px}
+}
+
+/* Häkkide nimekiri */
+.group{margin-bottom:26px}
+.group h2{font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700;margin:0 0 8px 2px}
+.hacks{list-style:none;margin:0;padding:0;background:var(--card);border:1px solid var(--line);border-radius:var(--radius)}
+.hack{display:grid;grid-template-columns:30px minmax(0,1fr);gap:4px 12px;padding:16px 18px;border-top:1px solid var(--line);scroll-margin-top:16px}
+.list-col{scroll-margin-top:16px}
+.hack:first-child{border-top:0}
+.hack:target{background:var(--lilac-bg)}
+.hack .num{grid-row:1/span 3;width:28px;height:28px;border-radius:50%;background:var(--lilac-bg);color:var(--violet);font-weight:900;font-size:13px;display:grid;place-items:center;font-variant-numeric:tabular-nums}
+.hack h3{font-size:16.5px;line-height:1.35;color:var(--ink)}
+.hack p.d{color:var(--muted);font-size:15px}
+.ex{margin-top:8px;background:var(--grey);border-left:3px solid var(--violet);border-radius:6px;padding:9px 12px;font-size:14.5px;line-height:1.45;overflow-wrap:anywhere}
+.actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+.hack .actions{grid-column:2}
+.copy{font:inherit;font-size:13px;font-weight:700;color:var(--violet);background:var(--lilac-bg);border:1px solid var(--lilac);border-radius:6px;padding:5px 10px;cursor:pointer}
+.copy:hover{background:var(--lilac-hover);border-color:var(--violet)}
+.copy.done{background:var(--violet);color:#fff;border-color:var(--violet)}
+.like{display:inline-flex;gap:6px;align-items:center;font:inherit;font-size:13px;font-weight:700;color:var(--red-ink);background:var(--red-bg);border:1px solid var(--red-line);border-radius:999px;padding:4px 10px;cursor:pointer}
+.like svg{width:14px;height:14px;color:var(--red)}
+.like:hover:not([disabled]){border-color:var(--red);background:#FBE1DF}
+.like.on{color:#fff;background:var(--red-deep);border-color:var(--red-deep)}
+.like.on svg{color:#fff}
+.like[disabled]{opacity:.55;cursor:default}
+.like .n{font-variant-numeric:tabular-nums}
+.empty-filter{background:var(--card);border:1px dashed var(--line);border-radius:var(--radius);padding:18px;color:var(--muted)}
+
+/* Lemmikud */
+.toplist{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px;counter-reset:top}
+.toplist li{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:10px;align-items:center;padding:9px 10px;background:var(--grey);border-radius:8px;counter-increment:top}
+.toplist li::before{content:counter(top);display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--violet);color:#fff;font-weight:900;font-size:13px}
+.toplist li.empty{display:block;background:none;padding:0;color:var(--muted);font-size:14px}
+.toplist li.empty::before{content:none}
+.toplist .t{font-weight:700;line-height:1.3;font-size:14.5px;min-width:0}
+.toplist .t a{color:var(--ink);text-decoration:none}
+.toplist .t a:hover{color:var(--violet);text-decoration:underline}
+.toplist .s{display:block;font-size:12.5px;font-weight:400;color:var(--muted)}
+.toplist .c{font-weight:900;color:var(--red-ink);font-variant-numeric:tabular-nums;display:inline-flex;gap:5px;align-items:center}
+.toplist .c svg{width:14px;height:14px;color:var(--red)}
+
+/* Vorm */
+#hk-form{display:flex;flex-direction:column;gap:6px}
+#hk-form label{font-size:14px;font-weight:500;margin-top:6px}
+#hk-form input[type=text],#hk-form textarea,#hk-form select{font:inherit;font-size:15px;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:9px 11px;background:var(--card);width:100%}
+#hk-form textarea{resize:vertical;min-height:90px}
+.hk-check{display:flex;gap:10px;align-items:center;margin-top:8px}
+.hk-check input{width:18px;height:18px;accent-color:var(--violet);margin:0}
+.hk-check label{margin:0!important;font-weight:400!important}
+.hk-warn{font-size:13px;color:var(--muted);margin-top:4px}
+.hk-btn{align-self:flex-start;margin-top:8px;font:inherit;font-weight:700;color:#fff;background:var(--violet);border:0;border-radius:8px;padding:10px 18px;cursor:pointer}
+.hk-btn:hover:not([disabled]){background:var(--violet-2)}
+.hk-btn[disabled]{opacity:.5;cursor:default}
+.hk-msg{font-size:14px;min-height:1.4em}
+.hk-msg.err{color:var(--red-ink)}
+
+/* Kolleegide häkid */
+.colleagues{padding-block:0 48px}
+.chead{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:14px;padding-top:24px;border-top:1px solid var(--line)}
+.chead h2{font-size:24px;color:var(--violet)}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--card)}
+.seg button{font:inherit;font-size:13px;font-weight:700;color:var(--violet);background:none;border:0;padding:6px 14px;cursor:pointer}
+.seg button.on{background:var(--violet);color:#fff}
+.cgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:920px){.cgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.cgrid{grid-template-columns:1fr}}
+.hk-item{display:flex;flex-direction:column;gap:8px;scroll-margin-top:16px}
+.hk-item:target{border-color:var(--violet);background:var(--lilac-bg)}
+.hk-item h3{font-size:16.5px}
+.hk-item .txt{white-space:pre-wrap;overflow-wrap:anywhere}
+.hk-item .by{font-size:13px;color:var(--muted)}
+.hk-item .actions{margin-top:auto}
+.tool{align-self:flex-start;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--violet);background:var(--grey);padding:3px 8px;border-radius:4px}
+.hk-del{font:inherit;font-size:13px;color:var(--muted);background:none;border:0;text-decoration:underline;cursor:pointer;padding:4px}
+.hk-del:hover{color:var(--red-ink)}
+.hk-empty{grid-column:1/-1;color:var(--muted);background:var(--card);border:1px dashed var(--line);border-radius:var(--radius);padding:18px}
+
+footer{border-top:1px solid var(--line);background:var(--card)}
+footer .wrap{padding-block:20px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--muted)}
+footer .values{color:var(--violet);font-weight:700}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+html{scroll-behavior:smooth}
+/* Teekond: teemad ühendatud joonega, tase nime all (nagu AI-edulugudes) */
+.nav-hint{margin:-6px 8px 8px;font-size:12.5px;color:var(--muted)}
+.filters .lvl{display:block;font-size:11.5px;font-weight:500;color:var(--muted);margin-top:1px;letter-spacing:0;text-transform:none}
+.filters button.on .lvl{color:var(--violet)}
+#filters{gap:0}
+#filters button.step{position:relative;padding-left:34px;padding-top:9px;padding-bottom:9px}
+#filters button.step::before{content:"";position:absolute;left:15px;top:0;bottom:0;width:2px;background:var(--lilac)}
+#filters button.step:first-child::before{top:50%}
+#filters button.step:last-child::before{bottom:50%}
+#filters button.step::after{content:"";position:absolute;left:10px;top:50%;width:12px;height:12px;margin-top:-6px;border-radius:50%;background:var(--card);border:2px solid var(--lav);box-sizing:border-box}
+#filters button.step.lv1::after{border-color:#2F7D63}
+#filters button.step.lv3::after{border-color:var(--violet)}
+#filters button.step.on::after,#filters button.step:hover::after{background:var(--violet);border-color:var(--violet)}
+.group h2{display:flex;align-items:center;flex-wrap:wrap;gap:4px 0}
+.group h2 .level{margin-left:auto}
+.level{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.only-cl{display:inline-block;margin-left:8px;vertical-align:2px;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:3px 9px;border-radius:999px;white-space:nowrap;background:var(--grey);color:var(--muted);border:1px solid var(--line)}
+.level.l1{background:#E3F2EC;color:#2F7D63}
+.level.l2{background:var(--lilac-bg);color:var(--violet)}
+.level.l3{background:var(--violet);color:#fff}
+@media (max-width:760px){.nav-hint{display:none}#filters{gap:6px}#filters button.step{padding:6px 13px}#filters button.step::before,#filters button.step::after{display:none}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="layers" aria-hidden="true"><span></span><span></span><span></span></div>
+  <div class="hero-in pad"><div class="wrap">
+    <div class="topbar">
+      <a class="back" href="index.html">← AI-teejuht</a>
+    </div>
+    <h1>AI-häkid</h1>
+    <p class="lead">Lühikesed nipid, mis säästavad iga päev aega.<br>Kopeeri prompt, kohanda see oma töö jaoks ja märgi „Kasulik“, et nipp jõuaks sinu lemmikutesse.</p>
+    <p class="howto"><span><b>27</b> põhihäkki</span><span>Enamik töötab nii ChatGPT-s kui ka Claude'is</span><span>Pane kirja ka oma nipid</span></p>
+    <p class="safe">Enne kasutamist vaata AI-teejuhist <a href="index.html#andmed">andmete valgusfoori</a>: mida tohib AI-sse panna.</p>
+  </div></div>
+</header>
+
+<div class="pad"><div class="wrap layout">
+  <nav class="sidenav" aria-label="Teemad">
+    <input class="search" id="q" type="search" placeholder="Otsi häkki" aria-label="Otsi häkki">
+    <p class="nav-label">Teemad</p>
+    <p class="nav-hint">Lihtsamast keerukamani</p>
+    <div class="filters" role="group" aria-label="Teema" id="filters"></div>
+    <div class="nav-sep" aria-hidden="true"></div>
+    <a class="nav-link" href="#kolleegid">Häkid, mis panevad mõtlema</a>
+    <div class="nav-sep" aria-hidden="true"></div>
+    <p class="nav-label">Vaata ka</p>
+    <div class="nav-ext">
+      <a class="xlink" href="index.html" title="AI-teejuht: põhitõed, igapäevane töö AI-ga, automatiseerimine ja skillid."><span>AI-teejuht</span><span class="xarr" aria-hidden="true">↗</span></a>
+      <a class="xlink" href="edulood.html" title="Näidislood, kuidas AI võib tööd kergemaks teha."><span>AI-edulood</span><span class="xarr" aria-hidden="true">↗</span></a>
+    </div>
+  </nav>
+  <div class="list-col" id="list-top">
+    <div id="hacks"></div>
+  </div>
+
+  <aside>
+    <div class="card">
+      <h2>Sinu lemmikud</h2>
+      <p class="small">Häkid, mille oled märkinud kasulikuks. Need jäävad alles sinu brauserisse.</p>
+      <ol id="hk-toplist" class="toplist"><li class="empty">Laadin…</li></ol>
+    </div>
+    <form class="card" id="hk-form" novalidate>
+      <h2>Pane oma häkk kirja</h2>
+      <p class="small">Mis on sulle kõige rohkem aega säästnud? Häkk salvestub ainult sinu brauserisse. Kui see töötab, jaga seda ka kolleegidega.</p>
+      <label for="hk-title">Pealkiri</label>
+      <input type="text" id="hk-title" maxlength="80" placeholder="Nt Exceli valem sõnalise kirjelduse põhjal">
+      <label for="hk-text">Kuidas see töötab? Lisa näide või prompt</label>
+      <textarea id="hk-text" maxlength="600" rows="4" placeholder="Kirjeldan Claude'ile oma sõnadega, mida tahan arvutada. Vastuseks saan valmis valemi."></textarea>
+      <label for="hk-tool">Tööriist</label>
+      <select id="hk-tool"><option>Claude Chat</option><option>Claude Cowork</option><option>ChatGPT</option><option>Muu</option></select>
+      <input type="checkbox" id="hk-name" hidden>
+      <p class="hk-warn">Ära lisa isikuandmeid ega konfidentsiaalset infot. Kasuta näidetes demoandmeid. Vaata ka <a href="index.html#andmed">andmete valgusfoori</a>.</p>
+      <button type="submit" class="hk-btn" id="hk-submit" disabled>Salvesta häkk</button>
+      <p class="hk-msg" id="hk-msg" aria-live="polite"></p>
+    </form>
+  </aside>
+</div></div>
+
+<section class="colleagues pad" id="kolleegid"><div class="wrap">
+  <div class="chead">
+    <div><h2>Häkid, mis panevad mõtlema</h2><p class="small">Natuke julgemad ideed. Loe ja mõtle: kus sinu töös võiks see aidata? Siia ilmuvad ka sinu enda kirja pandud häkid.</p></div>
+    <div class="seg" role="group" aria-label="Järjestus"><button type="button" data-sort="top" class="on">Kõik</button><button type="button" data-sort="new">Minu omad ees</button></div>
+  </div>
+  <div id="hk-list" class="cgrid"><p class="hk-empty">Laadin…</p></div>
+</div></section>
+
+<footer class="pad">
+  <div class="wrap">
+    <span>Koostanud Lisett Heinroos · Kasuta ja kohanda julgelt oma meeskonnale</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var HEART='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.8 4.5c2.1 0 3.6 1.1 4.4 2.5.8-1.4 2.3-2.5 4.4-2.5 3.8 0 5.9 3.9 4.4 7.3C19.5 16.4 12 21 12 21z"/></svg>';
+
+  var CATS=[
+    {id:'prompt',name:'Hea prompt',lv:1},
+    {id:'vestlus',name:'Projektid ja vestlused',lv:1},
+    {id:'kiir',name:'Kiirnipid',lv:1},
+    {id:'auto',name:'Automatiseerimine',lv:2}
+  ];
+  var LEVELS={1:'Algajale',2:'Kesktasemele',3:'Edasijõudnule'};
+  var HACKS=[
+    {id:'b-kontekst',c:'prompt',t:'Anna kontekst, mitte ainult käsk',d:'Ütle, kes teksti loeb, mis on eesmärk ja millisel kujul vastust ootad.',ex:'Kirjuta uuele kolleegile lühike tervituskiri. Ta alustab esmaspäeval tootmises. Toon olgu sõbralik, pikkus kuni 80 sõna.'},
+    {id:'b-naide',c:'prompt',t:'Lisa näide',d:'Üks hea varasem tekst aitab rohkem kui pikk stiilikirjeldus.',ex:'Siin on üks meie varasem hea kiri: [kleebi kiri]. Kirjuta samas stiilis kiri teemal [teema].'},
+    {id:'b-kusi',c:'prompt',t:'Lase AI-l enne sulle küsimusi esitada',d:'Sobib eriti siis, kui mõte on alles udune.',ex:'Enne vastamist küsi mult 3 täpsustavat küsimust.'},
+    {id:'b-vorm',c:'prompt',t:'Määra vastuse vorm',d:'Näiteks tabel, punktid, Exceli valem või Formsi küsimused koos vastusevariantidega.',ex:'Esita vastus tabelina veergudega: tegevus, vastutaja, tähtaeg.'},
+    {id:'b-kriitika',c:'prompt',t:'Lase AI-l oma teksti kritiseerida',d:'Leiad nõrgad kohad enne, kui lugeja need leiab.',ex:'Leia sellest tekstist 3 nõrka kohta ja paku igaühele parandus.'},
+    {id:'b-variandid',c:'prompt',t:'Küsi mitu varianti',d:'Saad valida parima või panna kahest kokku ühe.',ex:'Paku 3 erinevat pealkirja: üks ametlik, üks sõbralik ja üks lühike.'},
+    {id:'b-keelud',c:'prompt',t:'Ütle, mida mitte teha',d:'Keelud on sama olulised kui soovid.',ex:'Ära kasuta pikka kriipsu ega ingliskeelseid sõnu. Ära lisa lõppu kokkuvõtet.'},
+    {id:'b-allikad',c:'prompt',t:'Palu allikaid',d:'Veebiotsinguga leiab AI värsket infot. Otsingu keel sõltub sellest, mis keeles küsid. Ava lingid ja kontrolli, kas allikas ütleb päriselt sama, mida AI.',ex:'Otsi veebist nii eesti kui ka inglise keeles. Too iga väite juurde link algallikale.'},
+    {id:'b-muuda',c:'vestlus',t:'Vastus ei meeldi? Muuda algset prompti',d:'Vii hiir oma sõnumi kohale ja vajuta pliiatsiikooni. Telefonis hoia sõrme sõnumil. Paranda prompti ja saada uuesti. Vale vastus ei jää vestlusesse segama.'},
+    {id:'b-peata',c:'vestlus',t:'Unustasid midagi? Peata vastus',d:'Vajuta sisestuskastis ruudukujulist nuppu ■, lisa puuduv info ja saada sõnum uuesti.',ex:'Täpsustus: kiri peab olema inglise keeles ja lugeja on uus kolleeg.'},
+    {id:'b-lihvi',c:'vestlus',t:'Lihvi järelsõnumiga',d:'Sobib, kui suund on õige. Kui suund on vale, muuda algset prompti.',ex:'Tee lühemaks ja vähem ametlikuks. Lisa lõppu tähtaeg.'},
+    {id:'b-uus-vestlus',c:'vestlus',t:'Pikk vestlus? Alusta uut kokkuvõttega',d:'Iga uue sõnumiga saadetakse AI-le uuesti kaasa kogu senine vestlus. Pikk vestlus kulutab seetõttu rohkem ja vastused muutuvad ebatäpsemaks.',ex:'Tee lühike kokkuvõte sellest, mida otsustasime ja mis on järgmine samm. Kleebin selle uue vestluse algusesse.'},
+    {id:'b-projekt',c:'vestlus',t:'Projekt iga suurema teema jaoks',d:'Kirjuta projekti juhistesse, kes sa oled, mis on projekti eesmärk ja mida AI teha ei tohi. Siis ei pea konteksti iga kord uuesti selgitama.'},
+    {id:'b-dictation',c:'kiir',t:'Räägi sisse (Dictation)',d:'Vajuta mikrofoni nuppu, ütle mõtted häälega ja lase AI-l need vormistada.',ex:'Vormista minu sisse räägitud mõtted lühikeseks ja selgeks e-kirjaks.'},
+    {id:'b-ekraanipilt',c:'kiir',t:'Küsi ekraanipildi kohta',d:'Lisa pilt veateatest, tabelist või vormist ja küsi otse.',ex:'Mis siin valesti on ja kuidas seda parandada?'},
+    {id:'b-excel',c:'kiir',t:'Exceli valem sõnadega',d:'Kirjelda oma sõnadega, mida tahad arvutada. Vastuseks saad valmis valemi.',ex:'Kirjuta Exceli valem, mis liidab kokku veeru C väärtused nendel ridadel, kus veerus A on „Tootmine“.'},
+    {id:'b-tagasitolge',c:'kiir',t:'Tõlgi ja kontrolli tagasitõlkega',d:'Nii näed ise, kas sisu jäi samaks.',ex:'Tõlgi see tekst vene keelde ja lisa eestikeelne tagasitõlge, et saaksin sisu üle kontrollida.'},
+    {id:'b-koosolek',c:'kiir',t:'Koosolekumärkmetest memo ja tegevuste tabel',d:'Kleebi märkmed ilma isikuandmeteta (asenda nimed tähistega, näiteks [Osaleja A]) ja anna AI-le memo struktuur ette. Nii on iga koosoleku kokkuvõte ühesugune ja otsused ning tähtajad ei kao ära.',ex:'Tee nendest märkmetest koosoleku memo. Struktuur: 1) teema ja kuupäev, 2) arutatud teemad lühidalt, 3) tehtud otsused, 4) tegevuste tabel veergudega: kes, mida ja mis kuupäevaks, 5) lahtised küsimused ja järgmine kohtumine. Ära lisa midagi, mida märkmetes ei ole. Kui tähtaeg puudub, kirjuta „täpsustada“.'},
+    {id:'b-salvestus',c:'kiir',t:'Salvesta koosolek ja lase AI-l teha kokkuvõte',d:'Lülita Teamsi koosolekul sisse salvestamine ja transkriptsioon. Teavita osalejaid enne alustamist. Pärast koosolekut leiad transkriptsiooni koosoleku vestlusest, laadi see alla ja lisa Claude\'ile. Enne lisamist asenda nimed tähistega, näiteks [Osaleja A], ja eemalda muu tundlik info.',ex:'Siin on koosoleku transkriptsioon. Tee sellest koosoleku memo: teema, arutatud teemad, otsused, tegevuste tabel (kes, mida ja mis kuupäevaks) ja lahtised küsimused. Hoia memo ühe lehekülje piires.'},
+    {id:'b-esitlus',c:'kiir',cl:1,t:'Lase AI-l teha oma andmetest esitlus',d:'Lisa Exceli tabel, raport või märkmed ja Claude teeb neist valmis slaidid. Kui sul on esitluse skill, tuleb esitlus kohe ettevõtte kujunduses ja PowerPointi failina. Eemalda enne isikuandmed ja muu tundlik info.',ex:'Tee nendest andmetest 5-slaidiline esitlus juhtkonnale: peamised numbrid, muutus võrreldes eelmise perioodiga, 3 järeldust ja üks ettepanek. Kasuta Estanci kujundust.'},
+    {id:'b-anonuumi',c:'kiir',t:'Asenda nimed enne kleepimist',d:'Kirjuta nimede asemele [Töötaja A] või [Klient B]. AI saab ülesandest aru ka ilma päris nimedeta.'},
+    {id:'b-leia-3',c:'auto',t:'Leia oma tööst 3 asja, mida automatiseerida',d:'Pane tavalised tööülesanded kirja ilma nimede ja isikuandmeteta.',ex:'Minu ametikoht on [ametikoht]. Minu tavalises nädalas on need korduvad tööd: [loetle 5 kuni 7 tööd]. Too välja 3 tööd, mida saab AI abil kõige rohkem kiirendada. Kirjuta iga idee juurde, kas selleks sobib Chat, projekt, skill, Cowork, ajastatud ülesanne või vaibkoodimine. Lisa, mida mul selleks vaja on ja umbes kui palju aega see nädalas säästab.'},
+    {id:'b-mustand',c:'auto',t:'Palu Outlooki mustandit, mitte saatmist',d:'Lase Claude\'il koostada mustand. Pärast ülelugemist saadad kirja ise.',ex:'Pane sellele kirjale vastuse mustand Outlooki valmis. Ära saada.'},
+    {id:'b-connector',c:'auto',t:'Ühenda Outlook, Teams ja SharePoint',d:'Claude leiab kirjad, kohtumised ja failid ise üles ning teksti ei pea kopeerima. Seaded → Customize → Connectors → Microsoft 365.',ex:'Tee kokkuvõte selle nädala kirjadest projekti X kohta.'},
+    {id:'b-skillid',c:'auto',lv:1,cl:1,t:'Skill korduva töö jaoks',d:'Kui teed sama kirja või dokumenti ikka ja jälle, tee sellest skill. Siis ei pea iga kord kõike uuesti selgitama ning vorm ja toon on alati ühesugused.'},
+    {id:'b-ajastatud',c:'auto',cl:1,t:'Ajastatud hommikune ülevaade',d:'Coworkis saad ajastada igahommikuse ülevaate, kus on näiteks päeva kohtumised, olulised kirjad ja tähtajad. See on valmis juba enne tööpäeva algust.'},
+    {id:'b-vaibkood',c:'auto',lv:3,t:'Tee oma tööriist vaibkoodimisega (vibe coding)',d:'Kirjelda oma sõnadega, millist tööriista või lehte vajad, ja AI kirjutab koodi. Proovi ideed demoandmetega. Kui lahendus hakkab töötlema isikuandmeid, teeb IT selle enne kasutuselevõttu turvaliseks.',ex:'Tee mulle lihtne leht, kus saab [mida teha]. Kasuta ainult demoandmeid. Selgita lõpus, kuidas seda kasutada.'}
+  ];
+  var BUILTIN={};HACKS.forEach(function(h,i){h.n=i+1;BUILTIN[h.id]=h;});
+  var catName={};CATS.forEach(function(c){catName[c.id]=c.name;});
+
+  var S={db:null,user:null,uid:null,canWrite:false,isOwner:false,suggestions:[],counts:{},myLikes:new Set(),sort:'top',names:{},ready:false,available:true,filter:'prompt',q:''};
+
+  // Kopeerimine
+  function copyText(btn,text){
+    var done=function(){btn.textContent='Kopeeritud';btn.classList.add('done');setTimeout(function(){btn.textContent='Kopeeri';btn.classList.remove('done');},1600);};
+    var fail=function(){var ex=btn.closest('.hack');ex=ex&&ex.querySelector('.ex');if(ex){var r=document.createRange();r.selectNodeContents(ex);var s=window.getSelection();s.removeAllRanges();s.addRange(r);}btn.textContent='Vajuta Ctrl+C';};
+    try{navigator.clipboard.writeText(text).then(done).catch(fail);}catch(e){fail();}
+  }
+
+  function likeButton(id){
+    var b=document.createElement('button');b.type='button';b.className='like';b.dataset.like=id;b.disabled=true;
+    b.innerHTML=HEART+'<span>Kasulik</span><span class="n"></span>';
+    b.setAttribute('aria-pressed','false');
+    b.addEventListener('click',function(){toggleLike(id);});
+    if(!S.available)b.hidden=true;
+    return b;
+  }
+
+  // Filtrid
+  var filtersEl=document.getElementById('filters');
+  function renderFilters(){
+    filtersEl.textContent='';
+    CATS.forEach(function(c,i){
+      var b=document.createElement('button');b.type='button';b.dataset.f=c.id;
+      var cnt=HACKS.filter(function(h){return h.c===c.id;}).length;
+      b.classList.add('step','lv'+c.lv);
+      var nm=document.createElement('span');nm.className='tname';nm.textContent=c.name;
+      var lv=document.createElement('small');lv.className='lvl';lv.textContent=LEVELS[c.lv];nm.appendChild(lv);b.appendChild(nm);
+      var on=!S.q&&S.filter===c.id;
+      b.classList.toggle('on',on);b.setAttribute('aria-pressed',on?'true':'false');
+      b.addEventListener('click',function(){goTopic(c.id);});
+      filtersEl.appendChild(b);
+    });
+  }
+  function goTopic(id,keepScroll){
+    S.filter=id;S.q='';document.getElementById('q').value='';
+    renderFilters();renderHacks();
+    if(!keepScroll){var lt=document.getElementById('list-top');if(lt&&lt.getBoundingClientRect().top<0)lt.scrollIntoView({block:'start'});}
+  }
+  document.getElementById('q').addEventListener('input',function(e){S.q=e.target.value.trim().toLowerCase();renderFilters();renderHacks();});
+
+  var hacksEl=document.getElementById('hacks');
+  function renderHacks(){
+    hacksEl.textContent='';var shown=0;
+    var ci=CATS.findIndex(function(c){return c.id===S.filter;});
+    CATS.forEach(function(c,idx){
+      if(!S.q&&S.filter!==c.id)return;
+      var items=HACKS.filter(function(h){
+        if(h.c!==c.id)return false;
+        if(!S.q)return true;
+        return (h.t+' '+h.d+' '+(h.ex||'')).toLowerCase().indexOf(S.q)>-1;
+      });
+      if(!items.length)return;
+      var g=document.createElement('section');g.className='group';
+      var h2=document.createElement('h2');h2.textContent=c.name;
+      if(!S.q){var k=document.createElement('span');k.className='step';k.textContent='Teema '+(idx+1)+'/'+CATS.length;h2.appendChild(k);}
+      var lp=document.createElement('span');lp.className='level l'+c.lv;lp.textContent=LEVELS[c.lv];h2.appendChild(lp);
+      g.appendChild(h2);
+      var ul=document.createElement('ol');ul.className='hacks';
+      items.forEach(function(h){
+        shown++;
+        var li=document.createElement('li');li.className='hack';li.id=h.id;
+        var num=document.createElement('span');num.className='num';num.textContent=h.n;num.setAttribute('aria-hidden','true');li.appendChild(num);
+        var t=document.createElement('h3');t.textContent=h.t;if(h.lv&&h.lv!==c.lv){var lb=document.createElement('span');lb.className='level l'+h.lv;lb.textContent=LEVELS[h.lv];lb.style.marginLeft='8px';lb.style.verticalAlign='2px';t.appendChild(document.createTextNode(' '));t.appendChild(lb);}if(h.cl){var cb2=document.createElement('span');cb2.className='only-cl';cb2.textContent="Ainult Claude'is";t.appendChild(document.createTextNode(' '));t.appendChild(cb2);}li.appendChild(t);
+        var body=document.createElement('div');
+        var d=document.createElement('p');d.className='d';d.textContent=h.d;body.appendChild(d);
+        if(h.ex){var ex=document.createElement('p');ex.className='ex';ex.textContent=h.ex;body.appendChild(ex);}
+        li.appendChild(body);
+        var a=document.createElement('div');a.className='actions';
+        if(h.ex){var cb=document.createElement('button');cb.type='button';cb.className='copy';cb.textContent='Kopeeri';cb.addEventListener('click',function(){copyText(cb,h.ex);});a.appendChild(cb);}
+        a.appendChild(likeButton(h.id));
+        li.appendChild(a);ul.appendChild(li);
+      });
+      g.appendChild(ul);hacksEl.appendChild(g);
+    });
+    if(!shown){var p=document.createElement('p');p.className='empty-filter';p.textContent='Selle otsingu järgi häkke ei leitud. Proovi mõnda teist sõna.';hacksEl.appendChild(p);}
+    if(!S.q&&ci>-1){
+      var pg=document.createElement('div');pg.className='pager';
+      if(ci>0){var pv=document.createElement('button');pv.type='button';pv.className='pg prev';pv.innerHTML='<small>← Eelmine teema</small><b></b>';pv.querySelector('b').textContent=ci+'. '+CATS[ci-1].name;pv.addEventListener('click',function(){goTopic(CATS[ci-1].id);});pg.appendChild(pv);}
+      if(ci<CATS.length-1){var nx=document.createElement('button');nx.type='button';nx.className='pg next';nx.innerHTML='<small>Järgmine teema →</small><b></b>';nx.querySelector('b').textContent=(ci+2)+'. '+CATS[ci+1].name;nx.addEventListener('click',function(){goTopic(CATS[ci+1].id);});pg.appendChild(nx);}
+      else{var en=document.createElement('a');en.className='pg next';en.href='#kolleegid';en.innerHTML='<small>Kõik teemad läbi! Edasi</small><b>Häkid, mis panevad mõtlema ↓</b>';pg.appendChild(en);}
+      hacksEl.appendChild(pg);
+    }
+    paintLikes();
+  }
+
+  var msg=document.getElementById('hk-msg'),submit=document.getElementById('hk-submit'),form=document.getElementById('hk-form');
+  var listEl=document.getElementById('hk-list'),topEl=document.getElementById('hk-toplist');
+  function setMsg(text,err){msg.textContent=text;msg.className='hk-msg'+(err?' err':'');}
+
+  function paintLikes(){
+    document.querySelectorAll('.like[data-like]').forEach(function(b){
+      var id=b.dataset.like,n=S.counts[id]||0,on=S.myLikes.has(id);
+      b.querySelector('.n').textContent='';
+      b.classList.toggle('on',on);b.setAttribute('aria-pressed',on?'true':'false');
+      b.disabled=!(S.ready&&S.canWrite);
+      b.title=S.canWrite?(on?'Võta märge tagasi':'Märgi kasulikuks'):'Märkimiseks on vaja lehel kaastöötaja õigust';
+    });
+  }
+
+  var likeWriting=false,likeDirty=false;
+  function toggleLike(id){
+    if(!S.canWrite||!S.uid)return;
+    if(S.myLikes.has(id)){S.myLikes.delete(id);S.counts[id]=Math.max(0,(S.counts[id]||1)-1);}else{S.myLikes.add(id);S.counts[id]=(S.counts[id]||0)+1;}
+    paintLikes();renderTop();if(S.sort==='top')renderList();flushLikes();
+  }
+  async function flushLikes(){
+    if(likeWriting){likeDirty=true;return;}
+    likeWriting=true;
+    try{do{likeDirty=false;await S.db.doc('likes/'+S.uid).set({ids:Array.from(S.myLikes)});}while(likeDirty);}
+    catch(e){handleWriteError(e);}
+    likeWriting=false;
+  }
+  function handleWriteError(e){
+    var code=e&&e.code;
+    if(code==='invalid_argument'||code==='not_granted'||code==='permission_denied'){S.canWrite=false;setReadOnly();}
+    else if(code==='quota_exceeded'){setMsg('Brauseri salvestusruum on täis.',true);}
+    else{setMsg('Salvestamine ebaõnnestus. Proovi hetke pärast uuesti.',true);}
+  }
+  function setReadOnly(){
+    submit.disabled=true;
+    form.querySelectorAll('input,textarea,select').forEach(function(x){x.disabled=true;});
+    setMsg('Salvestamine ei ole selles brauseris võimalik. Häkke saad ikka lugeda ja kopeerida.');
+    paintLikes();
+  }
+
+  function fmtDate(ts){try{return new Date(ts).toLocaleDateString('et-EE');}catch(e){return '';}}
+  function authorName(it){return it.authorId===S.uid?'Sinu häkk':'Mõtteaine';}
+  async function resolveNames(){
+    if(!S.user||!S.user.profiles)return;
+    var ids=Array.from(new Set(S.suggestions.filter(function(i){return !i.anon;}).map(function(i){return i.authorId;})));
+    if(!ids.length)return;
+    try{var ps=await S.user.profiles(ids);ids.forEach(function(id){S.names[id]=(ps&&ps[id]&&ps[id].name)||'Kolleeg';});}catch(e){}
+    renderList();renderTop();
+  }
+
+  function renderTop(){
+    if(!S.available)return;
+    var rows=[];
+    Object.keys(S.counts).forEach(function(id){
+      var n=S.counts[id];if(!n)return;
+      if(BUILTIN[id]){rows.push({n:n,title:BUILTIN[id].t,src:catName[BUILTIN[id].c],href:'#'+id});}
+      else{var it=S.suggestions.find(function(x){return x.id===id;});if(it)rows.push({n:n,title:it.title,src:authorName(it),href:'#hk-'+it.id,ts:it.createdAt});}
+    });
+    rows.sort(function(a,b){return b.n-a.n||(b.ts||0)-(a.ts||0);});
+    topEl.textContent='';
+    if(!rows.length){var li=document.createElement('li');li.className='empty';li.textContent='Märkeid veel pole. Vajuta „Kasulik“ häki juures, mis sind on aidanud.';topEl.appendChild(li);return;}
+    rows.slice(0,5).forEach(function(r){
+      var li=document.createElement('li');
+      var t=document.createElement('span');t.className='t';var a=document.createElement('a');a.href=r.href;a.textContent=r.title;t.appendChild(a);
+      a.addEventListener('click',function(){var bh=BUILTIN[r.href.slice(1)];if(bh&&(S.filter!==bh.c||S.q))goTopic(bh.c,true);});
+      var s=document.createElement('span');s.className='s';s.textContent=r.src;t.appendChild(s);
+      var c=document.createElement('span');c.className='c';c.innerHTML=HEART;
+      li.appendChild(t);li.appendChild(c);topEl.appendChild(li);
+    });
+  }
+
+  function renderList(){
+    if(!S.available)return;
+    var items=S.suggestions.slice();
+    if(S.sort==='top'){items.sort(function(a,b){return (a.ord||0)-(b.ord||0);});}
+    else{items.sort(function(a,b){var ma=a.authorId===S.uid?1:0,mb=b.authorId===S.uid?1:0;return mb-ma||b.createdAt-a.createdAt||(a.ord||0)-(b.ord||0);});}
+    listEl.textContent='';
+    if(!items.length){var p=document.createElement('p');p.className='hk-empty';p.textContent='Laadin…';listEl.appendChild(p);return;}
+    items.forEach(function(it){
+      var card=document.createElement('article');card.className='card hk-item';card.id='hk-'+it.id;
+      var chip=document.createElement('span');chip.className='tool';chip.textContent=it.tool||'Muu';card.appendChild(chip);
+      var h=document.createElement('h3');h.textContent=it.title;card.appendChild(h);
+      if(it.text){var p=document.createElement('p');p.className='txt';p.textContent=it.text;card.appendChild(p);}
+      var by=document.createElement('p');by.className='by';by.textContent=it.authorId===S.uid?('Sinu häkk · '+fmtDate(it.createdAt)):'Mõtteaine';card.appendChild(by);
+      var actions=document.createElement('div');actions.className='actions';
+      if(it.text){var cb=document.createElement('button');cb.type='button';cb.className='copy';cb.textContent='Kopeeri';cb.addEventListener('click',function(){copyText(cb,it.text);});actions.appendChild(cb);}
+      actions.appendChild(likeButton(it.id));
+      if(S.canWrite&&(it.authorId===S.uid||S.isOwner)){
+        var d=document.createElement('button');d.type='button';d.className='hk-del';d.textContent='Kustuta';
+        d.addEventListener('click',function(){removeItem(it,d);});actions.appendChild(d);
+      }
+      card.appendChild(actions);listEl.appendChild(card);
+    });
+    paintLikes();
+  }
+
+  var itemWriting=false;
+  async function removeItem(it,btn){
+    if(itemWriting)return;
+    if(btn.dataset.confirm!=='1'){btn.dataset.confirm='1';btn.textContent='Kinnita kustutamine';setTimeout(function(){btn.dataset.confirm='';btn.textContent='Kustuta';},4000);return;}
+    itemWriting=true;btn.disabled=true;
+    try{
+      var ref=S.db.doc('suggestions/'+it.authorId);
+      var snap=await ref.get();var data=snap.exists?snap.data():{items:[]};
+      await ref.set({items:(data.items||[]).filter(function(x){return x.id!==it.id;})});
+    }catch(e){handleWriteError(e);btn.disabled=false;}
+    itemWriting=false;
+  }
+
+  form.addEventListener('submit',async function(ev){
+    ev.preventDefault();
+    if(!S.canWrite||!S.uid||itemWriting)return;
+    var title=document.getElementById('hk-title').value.trim();
+    var text=document.getElementById('hk-text').value.trim();
+    var tool=document.getElementById('hk-tool').value;
+    var anon=!document.getElementById('hk-name').checked;
+    if(!title){setMsg('Lisa häkile pealkiri.',true);document.getElementById('hk-title').focus();return;}
+    itemWriting=true;submit.disabled=true;setMsg('Saadan…');
+    var item={id:'s-'+Date.now().toString(36)+Math.random().toString(36).slice(2,6),title:title.slice(0,80),text:text.slice(0,600),tool:tool,anon:anon,createdAt:Date.now()};
+    try{
+      var ref=S.db.doc('suggestions/'+S.uid);
+      var snap=await ref.get();var data=snap.exists?snap.data():{items:[]};
+      var items=(data.items||[]).slice();items.push(item);
+      await ref.set({items:items});
+      form.reset();document.getElementById('hk-name').checked=false;
+      setMsg('Salvestatud! Leiad oma häki allpool. See on näha ainult sinu brauseris.');
+    }catch(e){handleWriteError(e);}
+    itemWriting=false;if(S.canWrite)submit.disabled=false;
+  });
+
+  document.querySelectorAll('.seg button').forEach(function(b){
+    b.addEventListener('click',function(){S.sort=b.dataset.sort;document.querySelectorAll('.seg button').forEach(function(x){x.classList.toggle('on',x===b);});renderList();});
+  });
+
+  function unavailable(){
+    S.available=false;
+    setMsg('Salvestamine ei ole selles brauseris võimalik. Häkke saad ikka lugeda ja kopeerida.');
+    submit.disabled=true;
+    document.querySelectorAll('.like').forEach(function(b){b.hidden=true;});
+  }
+
+
+  // Kohalik andmehoidla: kõik märked ja omad häkid jäävad ainult selle külastaja brauserisse
+  var INSPO=[
+    {t:'Lase AI-l olla sinu kõige kriitilisem lugeja',x:'Enne olulise kirja saatmist: Oled [juht või klient], kes on kiire ja skeptiline. Loe see kiri läbi ja ütle ausalt, mis sind ärritab, mis jääb arusaamatuks ja mida sa vastuseks küsiksid. [kleebi kiri]',tool:'Claude Chat'},
+    {t:'Harjuta rasket vestlust enne päris vestlust',x:'Mängi kolleegi, kellele pean ütlema, et tema puhkusesoov sellele nädalale ei sobi. Reageeri nagu päris inimene, kes on pettunud. Pärast viit vahetust astu rollist välja ja anna mulle tagasisidet: mis töötas ja mida võiksin öelda teisiti.',tool:'Claude Chat'},
+    {t:'Küsi küsimusi, mida sa ei osanud küsida',x:'Kavatsen [plaan, nt viia meeskonna koosolekud üle lühematele]. Too välja 5 küsimust, mida ma pole endalt veel küsinud, aga peaksin. Alusta kõige ebamugavamast.',tool:'Claude Chat'},
+    {t:'Pööra probleem pea peale',x:'Kuidas me saaksime [olukorra, nt uue töötaja esimese nädala] kindlasti halvemaks teha? Too 10 viisi. Seejärel pööra iga punkt ümber ja märgi, millega me juba praegu kogemata hakkama saame.',tool:'Claude Chat'},
+    {t:'Lase AI-l sind intervjueerida, et teadmine ei kaoks',x:'Intervjueeri mind ükshaaval küsimustega selle kohta, kuidas ma teen [töö, mida ainult mina oskan]. Kui oled lõpetanud, kirjuta vastuste põhjal juhend, millega kolleeg saab minu puhkuse ajal hakkama.',tool:'Claude Chat'},
+    {t:'Tee tunnisest koosolekust poole tunnine',x:'Siin on järgmise koosoleku päevakord: [päevakord]. Millised punktid saab lahendada ühe e-kirjaga ja millised vajavad päriselt arutelu? Paku lühem päevakord ja kirjuta e-kirja mustand nende punktide kohta, mis koosolekut ei vaja.',tool:'Claude Chat'},
+    {t:'Küsi, mis ei peaks üldse sinu laual olema',x:'Siin on minu tavalise nädala korduvad tööd: [loetelu]. Millised neist võiks üldse ära jätta, kellelegi teisele anda või automatiseerida? Põhjenda iga soovitust ühe lausega.',tool:'Claude Chat'},
+    {t:'Õpi uus teema selgeks nagu esimesel tööpäeval',x:'Selgita mulle [teema, nt rahavoogude aruanne] nii, nagu oleksin esimest päeva tööl. Kasuta ühte igapäevast näidet. Seejärel küsi minult 3 küsimust, et kontrollida, kas sain aru.',tool:'Claude Chat'},
+    {t:'Mis siis, kui see oleks kaks korda kiirem?',x:'Teen [töö] praegu umbes [aeg]. Kui see peaks valmima poole kiiremini, mida peaksin teisiti tegema? Paku 3 julget ideed ja 1 täiesti hullumeelset.',tool:'Claude Chat'}
+  ];
+  var LOCAL=(function(){
+    var KEY='ai-hakid-v1',subs={};
+    var seed={suggestions:{naited:{items:INSPO.map(function(h,i){return {id:'i-'+(i+1),title:h.t,text:h.x,tool:h.tool,anon:true,createdAt:0,ord:i+1};})}}};
+    function load(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')||{};}catch(e){return {};}}
+    function save(o){localStorage.setItem(KEY,JSON.stringify(o));}
+    function all(col){var st=load(),o={},k;var a=seed[col]||{},b=st[col]||{};for(k in a)o[k]=a[k];for(k in b)o[k]=b[k];return o;}
+    function snap(col){var o=all(col);return {metadata:{fromCache:false},docs:Object.keys(o).map(function(id){return {id:id,exists:true,data:function(){return o[id];}};})};}
+    function ref(col,id){return {
+      get:function(){var o=all(col);return Promise.resolve(o[id]?{exists:true,data:function(){return o[id];}}:{exists:false,data:function(){return {};}});},
+      set:function(data){try{var st=load();(st[col]=st[col]||{})[id]=data;save(st);}catch(e){return Promise.reject({code:'quota_exceeded'});}(subs[col]||[]).forEach(function(cb){cb(snap(col));});return Promise.resolve();}
+    };}
+    var db={doc:function(p){var a=p.split('/');return ref(a[0],a[1]);},collection:function(col){return {doc:function(id){return ref(col,id);},onSnapshot:function(cb){(subs[col]=subs[col]||[]).push(cb);setTimeout(function(){cb(snap(col));},0);}};}};
+    var user={id:function(){return Promise.resolve('minu');},isOwner:function(){return false;},can:function(){return true;}};
+    var ok=true;try{localStorage.setItem('ai-hakid-test','1');localStorage.removeItem('ai-hakid-test');}catch(e){ok=false;}
+    return {use:function(n){return Promise.resolve(n==='db'?db:n==='user'?(ok?user:null):null);}};
+  })();
+  async function start(){
+    var res=await Promise.all([LOCAL.use('db'),LOCAL.use('user')]);
+    S.db=res[0];S.user=res[1];
+    if(!S.db){unavailable();return;}
+    if(S.user){
+      try{S.uid=await S.user.id();}catch(e){S.uid=null;}
+      try{S.isOwner=!!(await Promise.resolve(S.user.isOwner()));}catch(e){}
+      var cw=null;try{cw=await Promise.resolve(S.user.can('data.write'));}catch(e){}
+      S.canWrite=!!S.uid&&cw!==false;
+    }
+    var timer=setTimeout(function(){if(!S.ready)setMsg('Andmete laadimine võtab tavalisest kauem. Näidatud info ei pruugi olla värske.',true);},10000);
+    var gotS=false,gotL=false;
+    function maybeReady(snap){
+      if(snap&&!(snap.metadata&&snap.metadata.fromCache)){clearTimeout(timer);}
+      if(gotS&&gotL&&!S.ready){S.ready=true;if(S.canWrite){submit.disabled=false;setMsg('');}else{setReadOnly();}}
+    }
+    S.db.collection('suggestions').onSnapshot(function(snap){
+      var all=[];
+      snap.docs.forEach(function(d){var data=d.data()||{};(Array.isArray(data.items)?data.items:[]).forEach(function(it){
+        if(!it||typeof it.title!=='string'||typeof it.id!=='string')return;
+        all.push({ord:Number(it.ord)||0,id:it.id,title:String(it.title).slice(0,80),text:typeof it.text==='string'?it.text.slice(0,800):'',tool:typeof it.tool==='string'?it.tool.slice(0,30):'Muu',anon:!!it.anon,createdAt:Number(it.createdAt)||0,authorId:d.id});
+      });});
+      S.suggestions=all;gotS=true;maybeReady(snap);renderList();renderTop();
+    },function(){gotS=true;maybeReady();setMsg('Häkkide laadimine katkes. Värskenda lehte.',true);});
+    S.db.collection('likes').onSnapshot(function(snap){
+      var counts={};var mine=null;
+      snap.docs.forEach(function(d){var ids=(d.data()||{}).ids;if(!Array.isArray(ids))return;
+        new Set(ids).forEach(function(id){if(typeof id==='string')counts[id]=(counts[id]||0)+1;});
+        if(d.id===S.uid)mine=ids;});
+      if(!likeWriting&&!likeDirty){S.counts=counts;if(mine)S.myLikes=new Set(mine.filter(function(x){return typeof x==='string';}));}
+      gotL=true;maybeReady(snap);paintLikes();renderTop();renderList();
+    },function(){gotL=true;maybeReady();});
+  }
+
+  (function(){var hid=(location.hash||'').slice(1);if(BUILTIN[hid])S.filter=BUILTIN[hid].c;})();
+  renderFilters();renderHacks();
+  start();
+})();
+</script>
+</body>
+</html>
