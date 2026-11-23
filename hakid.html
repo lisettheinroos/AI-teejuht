@@ -11,26 +11,26 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
-/* Estanci CVI nagu juhendis: Deep Violet päis, hele taust. Paigutus: vasakul põhihäkkide nimekiri filtriga, paremal kleepuv lemmikute ja saatmisvormi veerg, all kolleegide häkid. */
+/* Värvid nagu juhendis: pastelne roosa-sinine päis, hele taust. Paigutus: vasakul põhihäkkide nimekiri filtriga, paremal kleepuv lemmikute ja saatmisvormi veerg, all kolleegide häkid. */
 :root{
-  --violet:#372770;
-  --violet-2:#4a3a8a;
-  --lav:#897BAD;
-  --lilac:#C2B8D9;
-  --lilac-bg:#EEEAF6;
-  --lilac-hover:#E2DBF0;
-  --line:#D9D3E7;
-  --grey:#F2F2F7;
-  --ink:#252731;
-  --muted:#676180;
+  --violet:#324871;
+  --violet-2:#425a87;
+  --lav:#5F89AD;
+  --lilac:#A7C2DA;
+  --lilac-bg:#FCE6EA;
+  --lilac-hover:#F9D4DB;
+  --line:#C9D9E7;
+  --grey:#F9F0F2;
+  --ink:#232830;
+  --muted:#576780;
   --red:#ED6F69;
   --red-deep:#CF4B45;
   --red-ink:#8a2f2a;
   --red-bg:#FDEDEC;
   --red-line:#F6C3C0;
-  --bg:#FAFAFD;
+  --bg:#FEF9FA;
   --card:#FFFFFF;
-  --on-violet:#E9E5F4;
+  --on-violet:#FAE0E5;
   --font:"Roboto",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
   --radius:10px;
   color-scheme:light;
@@ -49,7 +49,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 .layers{position:absolute;inset:0;pointer-events:none}
 .layers span{position:absolute;right:-14%;width:52%;height:40px;transform:rotate(-24deg);transform-origin:right center;border-radius:2px}
 .layers span:nth-child(1){top:22%;background:var(--violet-2)}
-.layers span:nth-child(2){top:42%;background:#5a4b97;width:44%}
+.layers span:nth-child(2){top:42%;background:#516994;width:44%}
 .layers span:nth-child(3){top:62%;background:var(--lav);opacity:.5;width:38%}
 .hero-in{position:relative;padding-block:24px 30px}
 .topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
@@ -100,13 +100,13 @@ aside{grid-column:3;grid-row:1;position:sticky;top:16px;display:grid;gap:14px;mi
 .pg.prev:hover{border-color:var(--violet)}
 .pg.next{margin-left:auto;background:var(--violet);border:1px solid var(--violet);color:#fff}
 .pg.next small{color:var(--lilac)}
-.pg.next:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(55,39,112,.25)}
+.pg.next:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(50,72,113,.25)}
 @media (max-width:560px){.pg.next,.pg.prev{margin-left:0;width:100%}}
 .nav-sep{height:1px;background:var(--line);margin:12px 8px}
 .nav-ext{display:grid;gap:8px}
-.xlink{display:flex;align-items:center;gap:8px;padding:10px 12px;background:#372770;border:1px solid #372770;border-radius:8px;color:#fff;font-size:14px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;line-height:1.3;box-shadow:0 2px 6px rgba(55,39,112,.18)}
-.xlink:hover{background:#4a3a8a;border-color:#4a3a8a;color:#fff}
-.xlink .xarr{margin-left:auto;font-size:13px;color:#C2B8D9;letter-spacing:0}
+.xlink{display:flex;align-items:center;gap:8px;padding:10px 12px;background:#324871;border:1px solid #324871;border-radius:8px;color:#fff;font-size:14px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;line-height:1.3;box-shadow:0 2px 6px rgba(50,72,113,.18)}
+.xlink:hover{background:#425a87;border-color:#425a87;color:#fff}
+.xlink .xarr{margin-left:auto;font-size:13px;color:#A7C2DA;letter-spacing:0}
 @media (max-width:760px){
   .sidenav{padding:12px}
   .filters{flex-direction:row;flex-wrap:wrap;gap:6px}
@@ -221,6 +221,21 @@ html{scroll-behavior:smooth}
 .level.l2{background:var(--lilac-bg);color:var(--violet)}
 .level.l3{background:var(--violet);color:#fff}
 @media (max-width:760px){.nav-hint{display:none}#filters{gap:6px}#filters button.step{padding:6px 13px}#filters button.step::before,#filters button.step::after{display:none}}
+
+/* Pastelne päis: heleroosa ja helesinine */
+.hero{background:linear-gradient(115deg,#FBD3E1 0%,#F7DDEB 38%,#DAE7F8 68%,#C4DCF6 100%);color:#324871}
+.hero h1{color:#324871}
+.layers span:nth-child(1){background:rgba(255,255,255,.55);opacity:1}
+.layers span:nth-child(2){background:rgba(247,184,208,.55);opacity:1}
+.layers span:nth-child(3){background:rgba(168,203,242,.6);opacity:1}
+.layers span:nth-child(4){background:rgba(255,255,255,.5);opacity:1}
+.hero .lead{color:#232830}
+.hero .back{color:#566789}
+.hero .back:hover{color:#324871}
+.hero .howto{color:#566789}
+.hero .howto b{color:#324871}
+.hero .safe{color:#232830;background:rgba(255,255,255,.6);border-color:rgba(255,255,255,.95)}
+.hero .safe a{color:#324871}
 </style>
 </head>
 <body>

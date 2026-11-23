@@ -11,41 +11,41 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-/* Layout: rahulik violetne päis, algaja juhis, otsing ja osakonnad, lihtsad lugude kaardid, lühike juhis, vorm dialoogis */
+/* Layout: rahulik pastelne päis, algaja juhis, otsing ja osakonnad, lihtsad lugude kaardid, lühike juhis, vorm dialoogis */
 :root{
-  --violet:#372770;
-  --violet-2:#897BAD;
-  --violet-3:#C2B8D9;
+  --violet:#324871;
+  --violet-2:#5F89AD;
+  --violet-3:#A7C2DA;
   --red:#ED6F69;
-  --ink:#252731;
-  --muted:#676180;
-  --bg:#F7F7FB;
+  --ink:#232830;
+  --muted:#576780;
+  --bg:#FCF5F7;
   --surface:#FFFFFF;
-  --soft:#F2F2F7;
-  --line:#E3DFEC;
-  --accent:#372770;
+  --soft:#F9F0F2;
+  --line:#F2DBDF;
+  --accent:#324871;
   --on-accent:#FFFFFF;
   --ok:#2F7D63;
   --ok-bg:#E3F2EC;
   --warn:#B07A10;
   --warn-bg:#FBF0D9;
-  --info:#372770;
-  --info-bg:#ECE8F5;
+  --info:#324871;
+  --info-bg:#FBE4E8;
   --font:"Roboto",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
   color-scheme:light;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --ink:#ECEAF3; --muted:#ABA5C2; --bg:#16141F; --surface:#1F1C2B; --soft:#272338; --line:#353049;
-    --accent:#B7A9E6; --on-accent:#1A1530;
-    --ok:#7FD1B3; --ok-bg:#1D3A31; --warn:#F2C46B; --warn-bg:#3A3020; --info:#C9BEF0; --info-bg:#2C2547;
+    --ink:#F7E7EA; --muted:#95ADC2; --bg:#11161F; --surface:#171F2B; --soft:#1D2738; --line:#283549;
+    --accent:#87BAE5; --on-accent:#0D1A2F;
+    --ok:#7FD1B3; --ok-bg:#1D3A31; --warn:#F2C46B; --warn-bg:#3A3020; --info:#A3CCEF; --info-bg:#323E52;
     color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
-  --ink:#ECEAF3; --muted:#ABA5C2; --bg:#16141F; --surface:#1F1C2B; --soft:#272338; --line:#353049;
-  --accent:#B7A9E6; --on-accent:#1A1530;
-  --ok:#7FD1B3; --ok-bg:#1D3A31; --warn:#F2C46B; --warn-bg:#3A3020; --info:#C9BEF0; --info-bg:#2C2547;
+  --ink:#F7E7EA; --muted:#95ADC2; --bg:#11161F; --surface:#171F2B; --soft:#1D2738; --line:#283549;
+  --accent:#87BAE5; --on-accent:#0D1A2F;
+  --ok:#7FD1B3; --ok-bg:#1D3A31; --warn:#F2C46B; --warn-bg:#3A3020; --info:#A3CCEF; --info-bg:#323E52;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
@@ -117,18 +117,18 @@ a{color:var(--accent)}
 .st.katsetamisel::before{background:var(--warn)}
 .st.prototuup::before{background:var(--violet-2)}
 .card h3{font-size:17px;line-height:1.3;min-height:2.6em}
-.ba{--was-bg:#F3F0FA;--was-ink:#5B4C8F;--now-bg:var(--ok-bg);--now-ink:#1F5E49;display:grid;grid-template-rows:1fr 1fr;border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:15px;line-height:1.4;margin-bottom:auto}
+.ba{--was-bg:#FFEDF0;--was-ink:#53688E;--now-bg:var(--ok-bg);--now-ink:#1F5E49;display:grid;grid-template-rows:1fr 1fr;border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:15px;line-height:1.4;margin-bottom:auto}
 .ba p{margin:0;display:grid;grid-template-columns:62px minmax(0,1fr);gap:10px;align-items:center;min-height:64px;padding:10px 40px 10px 12px;position:relative}
 .ba .lbl{justify-self:start;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:3px 8px;border-radius:999px;margin-top:0}
 .ba .was{background:var(--was-bg);color:var(--was-ink)}
-.ba .was .lbl{background:#E4DEF2;color:var(--was-ink)}
+.ba .was .lbl{background:#FAD7DE;color:var(--was-ink)}
 .ba .now{background:var(--now-bg);color:var(--now-ink);font-weight:500;border-top:1px solid var(--line)}
 .ba .now .lbl{background:var(--ok);color:#fff}
 .ba .now::before{content:"";background:var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M6 2v8M2.5 6.5 6 10l3.5-3.5' fill='none' stroke='%23676180' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/12px no-repeat;position:absolute;top:-11px;right:14px;width:20px;height:20px;border-radius:50%;border:1px solid var(--line)}
-:root[data-theme="dark"] .ba{--was-bg:#2A2540;--was-ink:#CFC5F0;--now-ink:#9FE0C6}
-:root[data-theme="dark"] .ba .was .lbl{background:#3A3358}
+:root[data-theme="dark"] .ba{--was-bg:#1D2A40;--was-ink:#AED1F0;--now-ink:#9FE0C6}
+:root[data-theme="dark"] .ba .was .lbl{background:#3F4B61}
 :root[data-theme="dark"] .ba .now .lbl{color:#10261F}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ba{--was-bg:#2A2540;--was-ink:#CFC5F0;--now-ink:#9FE0C6}:root:not([data-theme="light"]) .ba .was .lbl{background:#3A3358}:root:not([data-theme="light"]) .ba .now .lbl{color:#10261F}}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ba{--was-bg:#1D2A40;--was-ink:#AED1F0;--now-ink:#9FE0C6}:root:not([data-theme="light"]) .ba .was .lbl{background:#3F4B61}:root:not([data-theme="light"]) .ba .now .lbl{color:#10261F}}
 details.more{border-top:1px solid var(--line);padding-top:8px}
 details.more summary{cursor:pointer;color:var(--accent);font-weight:500;font-size:14px;list-style:none;display:inline-flex;align-items:center;gap:6px;padding:2px 0}
 details.more summary::-webkit-details-marker{display:none}
@@ -178,7 +178,7 @@ details.more[open] summary::after{transform:rotate(180deg)}
 .remember b{color:var(--accent)}
 
 /* Dialoog */
-.overlay{position:fixed;inset:0;background:rgba(20,16,40,.55);display:none;align-items:flex-start;justify-content:center;padding:24px 16px;overflow-y:auto;z-index:20}
+.overlay{position:fixed;inset:0;background:rgba(9,20,39,.55);display:none;align-items:flex-start;justify-content:center;padding:24px 16px;overflow-y:auto;z-index:20}
 .overlay.open{display:flex}
 .dialog{background:var(--surface);border-radius:14px;width:100%;max-width:680px;padding:24px;display:grid;gap:16px}
 .dialog-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
@@ -225,21 +225,21 @@ details.more[open] summary::after{transform:rotate(180deg)}
   .more-f{margin-left:0}
 }
 @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
-/* Päis nagu AI-häkkide lehel: Deep Violet, diagonaalsed kihid */
-.hero{position:relative;overflow:hidden;background:#372770;color:#fff}
+/* Päis nagu AI-häkkide lehel: pastelne üleminek, diagonaalsed kihid */
+.hero{position:relative;overflow:hidden;background:#324871;color:#fff}
 .layers{position:absolute;inset:0;pointer-events:none}
 .layers span{position:absolute;right:-14%;width:52%;height:40px;transform:rotate(-24deg);transform-origin:right center;border-radius:2px}
-.layers span:nth-child(1){top:22%;background:#4a3a8a}
-.layers span:nth-child(2){top:42%;background:#5a4b97;width:44%}
-.layers span:nth-child(3){top:62%;background:#897BAD;opacity:.5;width:38%}
+.layers span:nth-child(1){top:22%;background:#425a87}
+.layers span:nth-child(2){top:42%;background:#516994;width:44%}
+.layers span:nth-child(3){top:62%;background:#5F89AD;opacity:.5;width:38%}
 .hero-in{position:relative;max-width:1320px;margin:0 auto;padding:24px max(16px,env(safe-area-inset-right,0px)) 30px max(16px,env(safe-area-inset-left,0px))}
 .topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
 .topbar img{height:40px;width:auto;display:block}
-.back{color:#C2B8D9;font-size:14px;font-weight:500;text-decoration:none}
+.back{color:#A7C2DA;font-size:14px;font-weight:500;text-decoration:none}
 .back:hover{color:#fff;text-decoration:underline}
 .hero h1{margin-top:26px;font-size:clamp(30px,4.4vw,44px);font-weight:900;line-height:1.1;text-transform:uppercase;letter-spacing:.02em}
-.lead{margin:12px 0 0;max-width:62ch;font-size:17px;color:#E9E5F4}
-.howto{margin:18px 0 0;display:flex;flex-wrap:wrap;gap:8px 18px;font-size:14px;color:#C2B8D9}
+.lead{margin:12px 0 0;max-width:62ch;font-size:17px;color:#FAE0E5}
+.howto{margin:18px 0 0;display:flex;flex-wrap:wrap;gap:8px 18px;font-size:14px;color:#A7C2DA}
 .howto b{color:#fff}
 .howto:empty{display:none}
 
@@ -299,9 +299,9 @@ details.more[open] summary::after{transform:rotate(180deg)}
 .side .nav{display:flex;flex-direction:column;gap:2px}
 .nav-sep{height:1px;background:var(--line);margin:12px 8px}
 .nav-ext{display:grid;gap:8px}
-.xlink{display:flex;align-items:center;gap:8px;padding:10px 12px;background:#372770;border:1px solid #372770;border-radius:8px;color:#fff;font-size:14px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;line-height:1.3;box-shadow:0 2px 6px rgba(55,39,112,.18)}
-.xlink:hover{background:#4a3a8a;border-color:#4a3a8a;color:#fff}
-.xlink .xarr{margin-left:auto;font-size:13px;color:#C2B8D9;letter-spacing:0}
+.xlink{display:flex;align-items:center;gap:8px;padding:10px 12px;background:#324871;border:1px solid #324871;border-radius:8px;color:#fff;font-size:14px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;line-height:1.3;box-shadow:0 2px 6px rgba(50,72,113,.18)}
+.xlink:hover{background:#425a87;border-color:#425a87;color:#fff}
+.xlink .xarr{margin-left:auto;font-size:13px;color:#A7C2DA;letter-spacing:0}
 @media (max-width:900px){
   .side{position:static;padding:12px}
   .side .side-h{display:none}
@@ -314,6 +314,21 @@ details.more[open] summary::after{transform:rotate(180deg)}
   .nav-ext{grid-template-columns:repeat(2,minmax(0,1fr))}
   .xlink{font-size:13px}
 }
+
+/* Pastelne päis: heleroosa ja helesinine */
+.hero{background:linear-gradient(115deg,#FBD3E1 0%,#F7DDEB 38%,#DAE7F8 68%,#C4DCF6 100%);color:#324871}
+.hero h1{color:#324871}
+.layers span:nth-child(1){background:rgba(255,255,255,.55);opacity:1}
+.layers span:nth-child(2){background:rgba(247,184,208,.55);opacity:1}
+.layers span:nth-child(3){background:rgba(168,203,242,.6);opacity:1}
+.layers span:nth-child(4){background:rgba(255,255,255,.5);opacity:1}
+.hero .lead{color:#232830}
+.hero .back{color:#566789}
+.hero .back:hover{color:#324871}
+.hero .howto{color:#566789}
+.hero .howto b{color:#324871}
+.hero .safe{color:#232830;background:rgba(255,255,255,.6);border-color:rgba(255,255,255,.95)}
+.hero .safe a{color:#324871}
 </style>
 </head>
 <body>
