@@ -2,7 +2,7 @@
 
 Praktiline eestikeelne juhend, kuidas AI-st igapäevatöös rohkem kasu saada ja seda turvaliselt kasutada. Juhend lähtub Claude'ist, kuid samad põhimõtted kehtivad ka ChatGPT-s ja teistes AI-tööriistades.
 
-**Vaata lehte:** https://lisettheinroos.github.io/AI-teejuht/
+**Vaata lehte:** https://pilveaim.ee/
 
 ## Lehed
 
