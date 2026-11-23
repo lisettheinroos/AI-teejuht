@@ -761,3 +761,18 @@ summary:focus-visible{outline:3px solid var(--lav);outline-offset:2px;border-rad
 .hm-foot-bar{max-width:1040px;margin:0 auto;padding:16px 24px 26px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center;justify-content:space-between}
 .hm-foot-bar small{flex:1 1 320px;max-width:62ch;font-size:13px;color:var(--muted);line-height:1.45}
 @media (max-width:820px){.hm-links{grid-template-columns:1fr}.hm-foot-in{flex-direction:column;align-items:flex-start;padding:28px 16px 18px}.hm-foot-bar{padding:14px 16px 22px}}
+
+/* Ühtne jalus */
+.site-foot{border-top:1px solid #EAD3DA;background:#FBEFF2;margin-top:40px;font-family:"Figtree",system-ui,sans-serif}
+.sf-in{max-width:1240px;margin:0 auto;padding:22px 24px 26px;display:grid;gap:14px}
+.sf-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px}
+.sf-brand{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px}
+.sf-brand img{height:26px;width:auto;display:block}
+.sf-slogan{font-family:"Caveat",cursive;font-size:22px;color:#59263B;line-height:1.1}
+.sf-ig{display:inline-flex;align-items:center;gap:8px;white-space:nowrap;background:#59263B;color:#fff!important;text-decoration:none;font-weight:600;font-size:14px;padding:9px 16px;border-radius:999px}
+.sf-ig:hover{background:#A0506C}
+.sf-ig svg{width:17px;height:17px;flex:none}
+.sf-ig span{opacity:.85;font-weight:500}
+.sf-notes{display:grid;gap:4px;border-top:1px solid #EAD3DA;padding-top:12px}
+.sf-notes p{margin:0;font-size:13px;line-height:1.45;color:#6B5560;max-width:90ch}
+@media (max-width:560px){.sf-in{padding:18px 16px 22px}}
