@@ -24,7 +24,7 @@ Lihtne staatiline veebileht: HTML, CSS ja JavaScript, ilma ehitussammu ja server
 
 ## Litsents
 
-Sisu on avaldatud litsentsiga [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.et). Võid juhendit vabalt jagada ja kohandada, kui viitad autorile.
+© 2026 Lisett Heinroos. Kõik õigused kaitstud. Lehte võid vaadata ja selle linki jagada. Lehel olevaid prompte võid oma töös vabalt kasutada. Lehe sisu kopeerimiseks, muutmiseks või edasi avaldamiseks küsi autorilt luba.
 
 ## Autor
 
