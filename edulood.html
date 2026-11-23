@@ -6,12 +6,12 @@
 <title>AI-ideed: mida AI-ga teha saab</title>
 <meta name="author" content="Lisett Heinroos">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%F0%9F%8F%86%3C/text%3E%3C/svg%3E">
-<meta name="description" content="Ideed ja näidislood sellest, mida AI-ga igapäevatöös teha saab. Loe, võta ideid ja kirjuta oma lugu.">
+<meta name="description" content="Ideed ja näidislood sellest, mida AI-ga igapäevatöös teha saab. Loe ja võta ideid oma töö jaoks.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-/* Layout: rahulik pastelne päis, algaja juhis, otsing ja osakonnad, lihtsad lugude kaardid, lühike juhis, vorm dialoogis */
+/* Layout: rahulik pastelne päis, algaja juhis, otsing ja osakonnad, lihtsad lugude kaardid */
 :root{
   --violet:#324871;
   --violet-2:#5F89AD;
@@ -340,7 +340,7 @@ details.more[open] summary::after{transform:rotate(180deg)}
       <a class="back" href="index.html">← AI-teejuht</a>
     </div>
     <h1>AI-ideed</h1>
-    <p class="lead">Ideed ja näited kontorist, müügist ja tootmisest, mis näitavad, mida AI-ga teha saab. Kus sinu töös võiks juhtuda sama?<br>Loe, võta ideid ja kirjuta oma lugu. Lood on koondnäited tüüpilistest olukordadest, mitte konkreetsete inimeste kogemused.</p>
+    <p class="lead">Ideed ja näited kontorist, müügist ja tootmisest, mis näitavad, mida AI-ga teha saab. Kus sinu töös võiks juhtuda sama?<br>Loe ja võta ideid oma töö jaoks. Lood on koondnäited tüüpilistest olukordadest, mitte konkreetsete inimeste kogemused.</p>
     <p class="howto" id="summary"></p>
   </div>
 </header>
@@ -355,11 +355,6 @@ details.more[open] summary::after{transform:rotate(180deg)}
   <p class="side-h">Valdkonnad</p>
   <div class="dfilters" role="group" aria-label="Osakond" id="deptChips"></div>
   <div class="nav-sep" aria-hidden="true"></div>
-  <nav class="nav" aria-label="Juhised">
-    <a class="nav-link" href="#lisamine" data-view="lisamine">Kuidas oma lugu kirjutada</a>
-    <a class="nav-link" href="#andmekaitse" data-view="andmekaitse">Andmekaitse</a>
-  </nav>
-  <div class="nav-sep" aria-hidden="true"></div>
   <p class="side-h">Vaata ka</p>
   <div class="nav-ext">
     <a class="xlink" href="index.html"><span>AI-teejuht</span><span class="xarr" aria-hidden="true">↗</span></a>
@@ -373,7 +368,6 @@ details.more[open] summary::after{transform:rotate(180deg)}
   <section class="view" id="v-lood">
   <div class="toolbar" style="margin-top:0">
     <h2>Ideed ja toimivad lahendused</h2>
-    <button class="btn btn-primary" id="addTop" type="button">+ Lisa oma lugu</button>
   </div>
   <div class="filters">
     <details class="more-f">
@@ -397,173 +391,7 @@ details.more[open] summary::after{transform:rotate(180deg)}
 
   </section>
 
-  <section class="view page" id="v-lisamine" hidden>
-    <div class="page-head">
-      <div>
-        <h1>Kuidas oma lugu kirjutada</h1>
-        <p>Lugu ei pea olema suur projekt. Ka üks kiri, mis varem võttis pool tundi ja nüüd viis minutit, on hea lugu. Juba kirjapanemine aitab märgata, kus AI sinu töös päriselt aega säästab.</p>
-      </div>
-    </div>
-    <ol class="steps">
-      <li><b>Vajuta „Lisa oma lugu“</b><span>Nupp on lehe ülaosas. Avaneb lühike vorm, mis juhatab sind küsimustega läbi.</span></li>
-      <li><b>Kirjelda, mis oli enne ja mis nüüd</b><span>Paar lauset piisab: mis oli tülikas, mida tegid ja mis muutus. Kirjuta nii, et kolleeg saaks aru ka ilma tehniliste teadmisteta.</span></li>
-      <li><b>Anna kolleegile nõuanne</b><span>Kuidas võiks teine sarnasega alustada? See on loo kõige kasulikum osa.</span></li>
-      <li><b>Jaga seda</b><span>Lugu salvestub ainult sinu brauserisse. Kui see on valmis, jaga seda kolleegidega, näiteks koosolekul või meeskonna vestluses.</span></li>
-    </ol>
-    <div class="panel">
-      <h2>Vali lahenduse liik</h2>
-      <p>Liigid ja tasemed järgivad AI-teejuhti ning on järjestatud lihtsamast keerukamani: algajale, kesktasemele ja edasijõudnule.</p>
-      <ol class="kinds"><li><b>Vestlus ja prompt <span class="level l1">Algajale</span></b><span>Hea küsimus Chatis. Lihtsaim viis alustada.</span></li><li><b>Claude'i projekt <span class="level l1">Algajale</span></b><span>Kaust, mille juhised ja dokumendid kehtivad kõigis selle projekti vestlustes.</span></li><li><b>Skill <span class="level l1">Algajale</span></b><span>Salvestatud juhend korduva töö jaoks. Vorm ja toon on alati ühesugused.</span></li><li><b>Cowork ja ajastatud ülesanne <span class="level l2">Kesktasemele</span></b><span>Chat vastab ja kirjutab. Cowork oskab lisaks töötada failide, Outlooki kirjade ja kalendriga ning teeb rutiinse töö ka ajastatult ise ära.</span></li><li><b>Muu automaatika <span class="level l2">Kesktasemele</span></b><span>Power Automate, Forms ja teised automaatsed vood.</span></li><li><b>Vaibkoodimine (vibe coding) <span class="level l3">Edasijõudnule</span></b><span>Oma tööriist või leht, mille tegid AI abil ilma programmeerimata. Prototüüp ise demoandmetega, kasutuselevõtt IT kaudu.</span></li></ol>
-    </div>
-    <div class="duo">
-      <div class="panel">
-        <h2>Nimi või anonüümne</h2>
-        <p>Kui jagad lugu kolleegidega, lisa juurde oma nimi, et nad saaksid sinult lisa küsida. Lugu ise kirjuta nii, et selles ei oleks teiste inimeste nimesid.</p>
-      </div>
-      <div class="panel">
-        <h2>Kus lugu hoitakse?</h2>
-        <p>Ainult sinu brauseris. Keegi teine seda ei näe. Kui tühjendad brauseri andmed, kaob ka lugu, seega kopeeri hea lugu enne endale alles.</p>
-      </div>
-    </div>
-    <div class="page-actions">
-      <button class="btn btn-primary" id="addGuide" type="button">+ Lisa oma lugu</button>
-      <a href="#andmekaitse">Loe enne andmekaitse reegleid</a>
-    </div>
-  </section>
-
-  <section class="view page" id="v-andmekaitse" hidden>
-    <div class="page-head">
-      <div>
-        <h1>Andmekaitse</h1>
-        <p>Kui jagad oma lugu teistega, kirjuta see nii, et selle põhjal ei saaks kedagi tuvastada.</p>
-      </div>
-    </div>
-    <div class="duo">
-      <div class="panel no">
-        <h2>Ära lisa</h2>
-        <ul class="rules no">
-          <li>kolleegide, kandidaatide ega klientide nimesid</li>
-          <li>isikuandmeid, palkasid, terviseandmeid ega isikukoode</li>
-          <li>hindu, pakkumisi ega muud ärisaladust</li>
-          <li>paroole, linke sisesüsteemidesse ega ekraanipilte päris andmetega</li>
-        </ul>
-      </div>
-      <div class="panel yes">
-        <h2>Lisa julgelt</h2>
-        <ul class="rules yes">
-          <li>osakond ja tööülesande tüüp</li>
-          <li>kasutatud tööriist (Claude, ChatGPT, Excel jne)</li>
-          <li>mis muutus ja kui palju aega säästsid</li>
-          <li>mis ei õnnestunud ja mida õppisid</li>
-        </ul>
-      </div>
-    </div>
-    <div class="remember">
-      <b>Pea meeles</b>
-      <span>Kasuta AI-d oma ettevõtte AI-poliitika järgi ja ainult töökontoga. AI tulemuse vaatab alati üle inimene.</span>
-    </div>
-  </section>
 </main>
-</div>
-
-<div class="overlay" id="overlay" aria-hidden="true">
-  <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="dlgTitle">
-    <div class="dialog-head">
-      <div>
-        <h2 id="dlgTitle">Lisa oma lugu</h2>
-        <p>Täida tärniga (*) väljad. Lugu salvestub sinu brauserisse ja ilmub lehele kohe.</p>
-      </div>
-      <button class="x" type="button" id="closeDlg" aria-label="Sulge">✕</button>
-    </div>
-    <form class="form" id="form" novalidate>
-      <div class="privacy"><b>Enne kirjutamist:</b> ära lisa nimesid, isikuandmeid, hindu ega ärisaladusi. Kirjelda tööülesannet üldiselt.</div>
-      <div class="field">
-        <label for="fTitle">Pealkiri *</label>
-        <input type="text" id="fTitle" maxlength="90" placeholder="nt Kuuaruanne valmib nüüd automaatselt">
-      </div>
-      <div class="row2">
-        <div class="field">
-          <label for="fDept">Osakond *</label>
-          <input type="text" id="fDept" list="deptList" maxlength="40" placeholder="Vali või kirjuta">
-          <datalist id="deptList"></datalist>
-        </div>
-        <div class="field">
-          <label for="fStat">Kui kaugel see on? *</label>
-          <select id="fStat">
-            <option value="">Vali</option>
-            <option value="kasutusel">Igapäevases kasutuses</option>
-            <option value="katsetamisel">Katsetamisel</option>
-            <option value="prototuup">Prototüüp</option>
-            <option value="idee">Idee</option>
-          </select>
-        </div>
-      </div>
-      <div class="field">
-        <span class="lbl" id="toolsLbl">Mida kasutasid? *</span>
-        <div class="toolpick" id="toolPick" role="group" aria-labelledby="toolsLbl"></div>
-        <input type="text" id="fToolOther" maxlength="40" placeholder="Muu tööriist (valikuline)" aria-label="Muu tööriist">
-      </div>
-      <div class="field">
-        <label for="fCat">Lahenduse liik *</label>
-        <select id="fCat"><option value="">Vali</option><option value="Vestlus ja prompt">Vestlus ja prompt (algajale)</option><option value="Claude'i projekt">Claude'i projekt (algajale)</option><option value="Skill">Skill (algajale)</option><option value="Cowork ja ajastatud ülesanne">Cowork ja ajastatud ülesanne (kesktasemele)</option><option value="Muu automaatika">Muu automaatika (kesktasemele)</option><option value="Vaibkoodimine (vibe coding)">Vaibkoodimine (vibe coding) (edasijõudnule)</option></select>
-        <small>Liigid ja tasemed järgivad AI-teejuhti ning on järjestatud lihtsamast keerukamani.</small>
-      </div>
-      <div class="row2">
-        <div class="field">
-          <label for="fBeforeShort">Enne, paari sõnaga *</label>
-          <input type="text" id="fBeforeShort" maxlength="50" placeholder="Iga kiri nullist">
-        </div>
-        <div class="field">
-          <label for="fAfterShort">Nüüd, paari sõnaga *</label>
-          <input type="text" id="fAfterShort" maxlength="50" placeholder="Kiri valmis minutitega">
-        </div>
-      </div>
-      <div class="field">
-        <label for="fBefore">Mis oli enne? *</label>
-        <textarea id="fBefore" maxlength="600" placeholder="Mis oli tülikas, aeganõudev või kippus ununema?"></textarea>
-      </div>
-      <div class="field">
-        <label for="fSolution">Mida tegid? *</label>
-        <textarea id="fSolution" maxlength="900" placeholder="Kirjuta nii, et kolleeg saaks aru ka ilma tehniliste teadmisteta."></textarea>
-      </div>
-      <div class="field">
-        <label for="fResult">Mis muutus? *</label>
-        <textarea id="fResult" maxlength="600" placeholder="Aja kokkuhoid, vähem vigu, parem ülevaade…"></textarea>
-      </div>
-      <details class="optional" id="optBox">
-        <summary>Lisa soovi korral rohkem</summary>
-        <div class="inner">
-          <div class="field">
-            <label for="fTip">Nõuanne kolleegile</label>
-            <input type="text" id="fTip" maxlength="300" placeholder="Kuidas võiks kolleeg sarnasega alustada?">
-          </div>
-          <div class="row2">
-            <div class="field">
-              <label for="fSaved">Ajavõit</label>
-              <input type="text" id="fSaved" maxlength="60" placeholder="nt 2 h kuus">
-            </div>
-
-          </div>
-          <div class="field">
-            <label for="fAlso">Sobib ka</label>
-            <input type="text" id="fAlso" maxlength="200" placeholder="nt pakkumiste saatekirjad, tarnijatele vastamine">
-          </div>
-          <div class="field">
-            <label for="fTags">Märksõnad</label>
-            <input type="text" id="fTags" maxlength="120" placeholder="nt skill, Excel, ajastatud ülesanne">
-            <small>Eralda märksõnad komaga.</small>
-          </div>
-        </div>
-      </details>
-      <input type="checkbox" id="fShowName" hidden>
-      <label class="check"><input type="checkbox" id="fConfirm"> <span>Kinnitan, et loos ei ole isikuandmeid, nimesid ega ärisaladusi *</span></label>
-      <div class="form-foot">
-        <span class="form-msg" id="formMsg" role="alert"></span>
-        <button class="btn btn-plain" type="button" id="cancelDlg">Loobu</button>
-        <button class="btn btn-primary" type="submit" id="saveBtn">Salvesta lugu</button>
-      </div>
-    </form>
-  </div>
 </div>
 
 <script>
@@ -616,8 +444,6 @@ details.more[open] summary::after{transform:rotate(180deg)}
     return out;
   }
 
-  function canManage(item){ return S.owner || (S.me && item.docId===S.me); }
-
   function renderStats(items){
     if(!S.loaded || !items.length){ $("summary").textContent=""; return; }
     const use=items.filter(i=>i.status==="kasutusel").length;
@@ -657,8 +483,6 @@ details.more[open] summary::after{transform:rotate(180deg)}
     const o0=el("option",null,"Kõik tööriistad"); o0.value=""; sel.appendChild(o0);
     tools.forEach(t=>{ const o=el("option",null,t); o.value=t; sel.appendChild(o); });
     sel.value = tools.includes(cur)?cur:"";
-    const dl=$("deptList"); dl.textContent="";
-    [...new Set(DEPTS.concat(depts))].forEach(d=>{ const o=document.createElement("option"); o.value=d; dl.appendChild(o); });
   }
 
   function card(it){
@@ -691,12 +515,6 @@ details.more[open] summary::after{transform:rotate(180deg)}
     det.appendChild(body); c.appendChild(det);
     const foot=el("div","card-foot");
     foot.appendChild(el("span",null, it.createdAt ? new Date(it.createdAt).toLocaleDateString("et-EE",{month:"long",year:"numeric"}) : ""));
-    if(canManage(it) && S.db && !S.writeBlocked){
-      const a=el("div","card-actions");
-      const e=el("button","linkbtn","Muuda"); e.type="button"; e.addEventListener("click",()=>openForm(it));
-      const d=el("button","linkbtn danger","Kustuta"); d.type="button"; d.addEventListener("click",()=>askDelete(it,d));
-      a.appendChild(e); a.appendChild(d); foot.appendChild(a);
-    }
     c.appendChild(foot);
     return c;
   }
@@ -713,7 +531,7 @@ details.more[open] summary::after{transform:rotate(180deg)}
     const grid=$("grid"); grid.textContent="";
     $("count").textContent="";
     if(!S.loaded){ grid.appendChild(el("div","empty","Laen lugusid…")); return; }
-    if(!items.length){ grid.appendChild(el("div","empty","Lugusid veel ei ole. Ole esimene ja lisa oma lugu!")); return; }
+    if(!items.length){ grid.appendChild(el("div","empty","Lugusid veel ei ole.")); return; }
     const showEmpty = !q && !S.dept && !S.tool && !S.status;
     if(!list.length && !showEmpty){ grid.appendChild(el("div","empty","Nende filtritega lugusid ei leitud. Proovi teist otsingut või valdkonda.")); }
     KIND_IDS.concat(["Muu"]).forEach(k=>{
@@ -725,7 +543,7 @@ details.more[open] summary::after{transform:rotate(180deg)}
       if(kd) h.appendChild(el("p",null,kd.d));
       grid.appendChild(h);
       g.forEach(i=>grid.appendChild(card(i)));
-      if(!g.length){ const e=el("div","kind-empty"); e.appendChild(el("span",null,"Siin pole veel lugu.")); const b=el("button","linkbtn","+ Lisa esimene"); b.type="button"; b.addEventListener("click",()=>openForm(null,k)); e.appendChild(b); grid.appendChild(e); }
+      if(!g.length){ const e=el("div","kind-empty"); e.appendChild(el("span",null,"Siin pole veel lugu.")); grid.appendChild(e); }
     });
     if(list.length!==items.length) $("count").textContent = "Näitan "+list.length+" lugu "+items.length+"-st";
   }
@@ -742,126 +560,12 @@ details.more[open] summary::after{transform:rotate(180deg)}
     }catch(e){}
   }
 
-  // Vorm
-  const toolSel=new Set();
-  // Pooleli jäänud loo mustand jääb selle kasutaja brauserisse alles, kuni lugu on salvestatud
-  const DRAFT_KEY="ai-edulood-mustand";
-  const DRAFT_IDS=["fTitle","fDept","fCat","fStat","fBeforeShort","fAfterShort","fBefore","fSolution","fResult","fSaved","fTip","fAlso","fTags","fToolOther"];
-  const TEXT_IDS=DRAFT_IDS.filter(id=>id!=="fCat"&&id!=="fStat");
-  function loadDraft(){ try{ return JSON.parse(localStorage.getItem(DRAFT_KEY)||"null"); }catch(e){ return null; } }
-  function clearDraft(){ try{ localStorage.removeItem(DRAFT_KEY); }catch(e){} }
-  function saveDraft(){
-    if(S.editing) return;
-    try{
-      const d={tools:[...toolSel], showName:$("fShowName").checked};
-      DRAFT_IDS.forEach(id=>{ d[id]=$(id).value; });
-      const any=TEXT_IDS.some(id=>d[id].trim());
-      if(any) localStorage.setItem(DRAFT_KEY, JSON.stringify(d)); else localStorage.removeItem(DRAFT_KEY);
-    }catch(e){}
-  }
-  function buildToolPick(){
-    const box=$("toolPick"); box.textContent="";
-    TOOLS.forEach(t=>{ const b=el("button","chip",t); b.type="button"; b.setAttribute("aria-pressed",String(toolSel.has(t)));
-      b.addEventListener("click",()=>{ toolSel.has(t)?toolSel.delete(t):toolSel.add(t); b.setAttribute("aria-pressed",String(toolSel.has(t))); saveDraft(); });
-      box.appendChild(b); });
-  }
-  function openForm(item, preKind){
-    if(!S.db){ notice("Lugude salvestamine ei ole selles brauseris võimalik."); return; }
-    if(S.writeBlocked || S.canWrite===false){ notice("Lugude salvestamine ei ole selles brauseris võimalik."); return; }
-    S.editing=item||null;
-    $("dlgTitle").textContent = item ? "Muuda lugu" : "Lisa oma lugu";
-    $("fTitle").value=item?item.title:""; $("fDept").value=item?item.dept:""; $("fCat").value=item?(kindOf(item)==="Muu"?"":kindOf(item)):(preKind||"");
-    $("fStat").value=item?item.status:""; $("fBefore").value=item?item.before:""; $("fSolution").value=item?item.solution:"";
-    $("fResult").value=item?item.result:""; $("fSaved").value=item?item.saved:""; $("fTip").value=item?item.tip:""; $("fAlso").value=item?item.alsoFor:""; $("fBeforeShort").value=item?item.beforeShort:""; $("fAfterShort").value=item?item.afterShort:"";
-    $("fShowName").checked=item?item.showName:false; $("fConfirm").checked=!!item;
-    toolSel.clear(); const others=[];
-    (item?item.tools:[]).forEach(t=>TOOLS.includes(t)?toolSel.add(t):others.push(t));
-    $("fToolOther").value=others.join(", ");
-    $("fTags").value=item?item.tags.join(", "):"";
-    $("optBox").open = !!(item && (item.tip||item.saved||item.alsoFor||item.tags.length));
-    buildToolPick(); $("formMsg").textContent="";
-    let dn=$("draftNote"); if(!dn){ dn=el("p","draft-note"); dn.id="draftNote"; $("form").insertBefore(dn,$("form").firstChild); }
-    dn.textContent=""; dn.hidden=true;
-    if(!item){ const d=loadDraft(); if(d){
-      DRAFT_IDS.forEach(id=>{ if(typeof d[id]==="string" && d[id]) $(id).value=d[id]; });
-      if(Array.isArray(d.tools)){ toolSel.clear(); d.tools.forEach(t=>{ if(typeof t==="string") toolSel.add(t); }); buildToolPick(); }
-      $("fShowName").checked=!!d.showName;
-      if(d.fSaved||d.fTip||d.fAlso||d.fTags) $("optBox").open=true;
-      dn.appendChild(document.createTextNode("Jätkad pooleli jäänud lugu. "));
-      const nb=el("button","linkbtn","Alusta tühjalt"); nb.type="button"; nb.addEventListener("click",()=>{ clearDraft(); openForm(null, preKind); }); dn.appendChild(nb);
-      dn.hidden=false;
-    } }
-    $("overlay").classList.add("open"); $("overlay").setAttribute("aria-hidden","false");
-    setTimeout(()=>$("fTitle").focus(),30);
-  }
-  function closeForm(){ const wasNew=!S.editing; $("overlay").classList.remove("open"); $("overlay").setAttribute("aria-hidden","true"); S.editing=null; if(wasNew && loadDraft()) notice("Sinu lugu jäi mustandina alles. Jätkamiseks vajuta uuesti „Lisa oma lugu“."); }
-
-  async function writeDoc(docId, items){
-    const ref=S.db.collection("stories").doc(docId);
-    await ref.set({items:items, updatedAt:Date.now()});
-  }
-  function docItems(docId){
-    const d=S.docs.find(x=>x.id===docId);
-    return d && Array.isArray(d.data.items) ? d.data.items.map(x=>Object.assign({},x)) : [];
-  }
-
-  async function save(ev){
-    ev.preventDefault();
-    const msg=$("formMsg"); msg.textContent="";
-    const other=$("fToolOther").value.split(",").map(s=>s.trim()).filter(Boolean);
-    const tools=[...toolSel].concat(other).slice(0,8);
-    const v={beforeShort:$("fBeforeShort").value.trim(), afterShort:$("fAfterShort").value.trim(), title:$("fTitle").value.trim(), dept:$("fDept").value.trim(), category:$("fCat").value, status:$("fStat").value,
-             before:$("fBefore").value.trim(), solution:$("fSolution").value.trim(), result:$("fResult").value.trim(),
-             saved:$("fSaved").value.trim(), tip:$("fTip").value.trim(), alsoFor:$("fAlso").value.trim(), showName:$("fShowName").checked, tools,
-             tags:$("fTags").value.split(",").map(s=>s.trim().replace(/^#/,"")).filter(Boolean).slice(0,6)};
-    if(!v.title||!v.dept||!v.category||!v.status||!v.beforeShort||!v.afterShort||!v.before||!v.solution||!v.result){ msg.textContent="Täida kõik tärniga väljad."; return; }
-    if(!tools.length){ msg.textContent="Vali vähemalt üks tööriist."; return; }
-    if(!$("fConfirm").checked){ msg.textContent="Kinnita, et loos ei ole isikuandmeid ega ärisaladusi."; return; }
-    const btn=$("saveBtn"); btn.disabled=true; btn.textContent="Salvestan…";
-    try{
-      const ed=S.editing;
-      const docId = ed ? ed.docId : S.me;
-      if(!docId) throw {code:"no_id"};
-      const items=docItems(docId);
-      if(ed){
-        const ix=items.findIndex(x=>x && x.id===ed.id);
-        const base= ix>=0 ? items[ix] : {id:ed.id, createdAt:ed.createdAt||Date.now()};
-        const upd=Object.assign({},base,v,{updatedAt:Date.now()});
-        if(ix>=0) items[ix]=upd; else items.push(upd);
-      } else {
-        items.push(Object.assign({id:"l"+Date.now().toString(36)+Math.random().toString(36).slice(2,6), createdAt:Date.now()}, v));
-      }
-      await writeDoc(docId, items);
-      if(!ed) clearDraft();
-      closeForm();
-      notice(ed ? "Muudatus on salvestatud." : "Valmis! Sinu lugu on lehel. Seda näed ainult sina, kuni jagad seda kolleegidega.");
-    }catch(e){
-      const code=e&&e.code;
-      if(code==="invalid_argument"){ S.writeBlocked=true; msg.textContent="Salvestamine ei ole selles brauseris võimalik."; render(); }
-      else if(code==="no_id"){ msg.textContent="Salvestamine ei õnnestunud."; }
-      else if(code==="quota_exceeded"){ msg.textContent="Brauseri salvestusruum on täis."; }
-      else { msg.textContent="Salvestamine ei õnnestunud. Proovi mõne hetke pärast uuesti."; }
-    }finally{ btn.disabled=false; btn.textContent="Salvesta lugu"; }
-  }
-
-  function askDelete(item, btn){
-    if(btn.dataset.armed!=="1"){ btn.dataset.armed="1"; btn.textContent="Kinnita kustutamine"; setTimeout(()=>{ if(btn.isConnected){ btn.dataset.armed=""; btn.textContent="Kustuta"; } },4000); return; }
-    btn.disabled=true;
-    const items=docItems(item.docId).filter(x=>!(x && x.id===item.id));
-    writeDoc(item.docId, items).then(()=>notice("Lugu on kustutatud.")).catch(e=>{
-      if(e&&e.code==="invalid_argument"){ S.writeBlocked=true; render(); }
-      notice("Kustutamine ei õnnestunud. Proovi uuesti."); btn.disabled=false;
-    });
-  }
-
   $("q").addEventListener("input",e=>{ S.q=e.target.value; if(location.hash && location.hash!=="#lood") location.hash="lood"; render(); });
   $("fTool").addEventListener("change",e=>{ S.tool=e.target.value; render(); });
   $("fStatus").addEventListener("change",e=>{ S.status=e.target.value; render(); });
-  $("addTop").addEventListener("click",()=>openForm(null));
-  $("addGuide").addEventListener("click",()=>openForm(null));
 
   // Menüü
-  const VIEWS=["lood","lisamine","andmekaitse"];
+  const VIEWS=["lood"];
   let curView=null;
   function route(){
     const h=(location.hash||"").slice(1);
@@ -874,30 +578,15 @@ details.more[open] summary::after{transform:rotate(180deg)}
   }
   window.addEventListener("hashchange",route);
   route();
-  $("closeDlg").addEventListener("click",closeForm);
-  $("cancelDlg").addEventListener("click",closeForm);
-  $("overlay").addEventListener("click",e=>{ if(e.target.id==="overlay") closeForm(); });
-  document.addEventListener("keydown",e=>{ if(e.key==="Escape" && $("overlay").classList.contains("open")) closeForm(); });
-  $("form").addEventListener("submit",save);
-  $("form").addEventListener("input",saveDraft);
-  $("form").addEventListener("change",saveDraft);
-
   render();
 
 
-  // Kohalik andmehoidla: näidislood + külastaja enda lood (ainult selle brauseri sees)
-  const SEED_STORIES = [{"title": "Tervituskiri uuele töötajale ühe lausega", "dept": "HR", "category": "Skill", "status": "kasutusel", "tools": ["Claude", "Claude skill"], "beforeShort": "Iga kiri nullist", "afterShort": "Kiri valmis minutiga", "before": "Iga uue töötaja tervituskiri kirjutati uuesti. Vahel jäi mõni oluline asi mainimata, näiteks kuhu esimesel päeval tulla või kellelt küsida.", "solution": "Kirja vorm, kohustuslik info ja toon pandi üks kord skilli kirja. Nüüd piisab lausest „Tee tervituskiri: nimi, ametikoht, alguskuupäev, juht“.", "result": "Kõik kirjad on ühesugused ja täielikud. Kirjutamise asemel kulub aeg ülelugemisele.", "saved": "umbes 20 min iga uue töötaja kohta", "tip": "Vali töö, mida teed vähemalt kord kuus samas vormis. See on sinu esimene skill.", "alsoFor": "lahkumise checklist, ametijuhendid, töölepingu saatekirjad", "tags": ["skill", "onboarding"], "id": "n1", "createdAt": 1782864000000, "showName": false, "author": ""}, {"title": "Pakkumise saatekiri kliendi keeles ilma hirmuta", "dept": "Müük", "category": "Vestlus ja prompt", "status": "kasutusel", "tools": ["Claude"], "beforeShort": "Tõlkeprogramm ja kahtlus", "afterShort": "Tõlge koos tagasitõlkega", "before": "Soome ja Läti klientidele kirjutati kiri inglise keeles, sest tõlkimisel ei olnud kindlust, kas toon jääb viisakaks.", "solution": "Kiri kirjutatakse eesti keeles ja AI-lt küsitakse tõlget koos eestikeelse tagasitõlkega. Nii saab ise kontrollida, et sisu ja toon jäid samaks.", "result": "Kliendid vastavad kiiremini, sest kiri on nende emakeeles. Hinnad ja tähtajad lisatakse alles pärast tõlget käsitsi.", "saved": "paar kirja nädalas kiiremini", "tip": "Palu alati tagasitõlget. Kui tagasitõlge ütleb midagi muud kui sinu algtekst, on tõlkes viga.", "alsoFor": "tarnijatele vastamine, juhendid võõrkeelsetele töötajatele", "tags": ["tõlge", "kliendikiri"], "id": "n2", "createdAt": 1783641600000, "showName": false, "author": ""}, {"title": "Ohutusjuhend, mida ka päriselt loetakse", "dept": "Tootmine", "category": "Vestlus ja prompt", "status": "katsetamisel", "tools": ["Claude"], "beforeShort": "Pikk ja ametlik tekst", "afterShort": "Lühikesed sammud kahes keeles", "before": "Ohutusjuhend oli pikk ja ametlikus keeles. Uued töötajad allkirjastasid selle, aga sisust jäi vähe meelde.", "solution": "Juhend anti AI-le ja paluti see muuta lihtsateks sammudeks: mida teha, mida mitte ja miks. Seejärel tõlge vene keelde koos tagasitõlkega. Lõpptekst vaadati üle töökeskkonnaspetsialistiga.", "result": "Meistrid kasutavad lühiversiooni esmajuhendamisel. Ametlik juhend jääb kehtima, lühiversioon aitab sellest aru saada.", "saved": "", "tip": "AI teeb lihtsamaks, aga vastutus jääb inimesele. Lase lõpptekst üle vaadata kellelgi, kes valdkonda tunneb.", "alsoFor": "töökorralduse reeglid, kvaliteedijuhendid", "tags": ["tööohutus", "lihtne keel"], "id": "n3", "createdAt": 1784419200000, "showName": false, "author": ""}, {"title": "Esmaspäeva hommikul on tasumata arvete ülevaade juba valmis", "dept": "Finants", "category": "Cowork ja ajastatud ülesanne", "status": "kasutusel", "tools": ["Claude Cowork", "Excel"], "beforeShort": "Tabelite kokkupanek käsitsi", "afterShort": "Ülevaade ootab postkastis", "before": "Igal esmaspäeval kulus tund aega, et panna eri tabelitest kokku tasumata arved ja otsustada, kellele meeldetuletus saata.", "solution": "Coworkis on ajastatud ülesanne, mis loeb kaustas olevad tabelid läbi ja koostab lühikese ülevaate: mis on üle tähtaja, kui palju ja mida soovitab teha. Meeldetuletuste mustandid on valmis, aga saatmise otsustab inimene.", "result": "Esmaspäeva hommik algab otsustamisest, mitte tabelite kokkupanekust.", "saved": "umbes 1 h nädalas", "tip": "Mõtle, mis on sul iga nädal samal päeval ees. Kui see algab „ma panen kokku…“, sobib see ajastatud ülesandeks.", "alsoFor": "nädala müügiülevaade, puudumiste kokkuvõte", "tags": ["ajastatud ülesanne", "aruandlus"], "id": "n4", "createdAt": 1785196800000, "showName": false, "author": ""}, {"title": "Projekti mälu, mis ei lähe puhkusele", "dept": "Projektijuhtimine", "category": "Claude'i projekt", "status": "kasutusel", "tools": ["Claude"], "beforeShort": "Info laiali kirjades", "afterShort": "Kõik ühes projektis", "before": "Projekti otsused olid laiali kirjades ja märkmetes. Kui projektijuht oli puhkusel, ei teadnud keegi, mida oli kokku lepitud.", "solution": "Igal suuremal projektil on Claude'is oma projekt, kuhu lisatakse koosolekute kokkuvõtted ja olulised dokumendid. Juhistes on kirjas projekti eesmärk ja kes mille eest vastutab.", "result": "Küsimusele „mida me tarnetähtajas kokku leppisime?“ saab vastuse sekunditega koos viitega koosolekule.", "saved": "", "tip": "Pane projekti juhistesse ka see, mida AI teha ei tohi, näiteks lubadusi kliendile.", "alsoFor": "värbamisprojektid, iga-aastased üritused", "tags": ["projekt", "koosolekud"], "id": "n5", "createdAt": 1785974400000, "showName": false, "author": ""}, {"title": "Kõrvalekalde teade otse telefonist", "dept": "Kvaliteet", "category": "Muu automaatika", "status": "katsetamisel", "tools": ["Microsoft Forms", "Power Automate"], "beforeShort": "Paberlehed ja meeldetuletused", "afterShort": "Teade jõuab kohe õigele inimesele", "before": "Kõrvalekalded pandi kirja paberile ja need jõudsid kvaliteedijuhini alles päeva lõpus, kui üldse.", "solution": "QR-kood viib lihtsale vormile. Pärast saatmist läheb teade automaatselt vastutajale ja rida lisandub tabelisse. Vormi ja töövoo kirjeldused kirjutati AI abiga.", "result": "Teated jõuavad kohe kohale ja kuu lõpus on kokkuvõte olemas.", "saved": "", "tip": "Alusta kõige väiksemast sammust: üks vorm ja üks automaatne kiri. Täienda alles siis, kui inimesed on seda kasutama hakanud.", "alsoFor": "ideede kogumine, töövahendite tellimine", "tags": ["Forms", "Power Automate"], "id": "n6", "createdAt": 1786752000000, "showName": false, "author": ""}, {"title": "Vastuargumendid enne koosolekut, mitte koosolekul", "dept": "Juhtkond", "category": "Vestlus ja prompt", "status": "idee", "tools": ["Claude"], "beforeShort": "Arutelu venis", "afterShort": "Kriitika on juba laual", "before": "Otsuse ettepanekud tulid koosolekule ühe variandiga ja arutelu läks vastuväidete otsimiseks.", "solution": "Enne koosolekut antakse AI-le ettepanek ja palutakse: „Mängi skeptilist juhatuse liiget. Too välja 5 kõige tugevamat vastuargumenti ja üks alternatiiv.“ Vastused lisatakse ettepanekusse.", "result": "Idee on alles katsetamata. Esimesed proovid näitavad, et ettepanekud on läbimõeldumad.", "saved": "", "tip": "Ära palu AI-lt, kas su idee on hea. Palu, miks see võiks ebaõnnestuda.", "alsoFor": "eelarve põhjendused, uue tööviisi tutvustamine", "tags": ["otsused", "juhtimine"], "id": "n7", "createdAt": 1787529600000, "showName": false, "author": ""}, {"title": "Puhkuste planeerija, mille tegin ise", "dept": "HR", "category": "Vaibkoodimine (vibe coding)", "status": "prototuup", "tools": ["Claude", "Claude Code"], "beforeShort": "Tabel, mida keegi ei uuendanud", "afterShort": "Lihtne vaade, kus kattuvused on näha", "before": "Puhkuste tabelis ei olnud näha, kui samast meeskonnast olid mitu inimest korraga ära.", "solution": "Kirjeldasin oma sõnadega, millist vaadet vajan, ja AI kirjutas lihtsa veebilehe. Katsetasin seda ainult väljamõeldud nimedega. Päris kasutuseks peab IT selle turvaliseks tegema.", "result": "Prototüüp näitas juhtidele kohe, milline võiks lahendus olla. Arutelu läks palju kiiremini kui sõnadega selgitades.", "saved": "", "tip": "Prototüüp demoandmetega on parim viis ideed tutvustada. Päris andmed alles siis, kui IT on lahenduse üle vaadanud.", "alsoFor": "koolituste register, töövahendite nimekiri", "tags": ["vaibkoodimine", "prototüüp"], "id": "n8", "createdAt": 1788307200000, "showName": false, "author": ""}, {"title": "Sama küsimus, sama vastus kõigile", "dept": "Klienditugi", "category": "Claude'i projekt", "status": "kasutusel", "tools": ["Claude"], "beforeShort": "Igaüks vastas omamoodi", "afterShort": "Ühine alus kõigi vastuste jaoks", "before": "Samale küsimusele vastasid eri inimesed erinevalt. Uus kolleeg pidi kõike teistelt küsima.", "solution": "Projekti lisati korduma kippuvad küsimused, tingimused ja head näidisvastused. AI teeb vastuse mustandi, inimene kohandab selle konkreetsele kliendile.", "result": "Vastused on ühtlasemad ja uus kolleeg saab iseseisvalt hakkama juba esimesel nädalal.", "saved": "umbes 5 min vastuse kohta", "tip": "Kogu kokku 10 vastust, mille üle oled kõige uhkem. Need õpetavad AI-le sinu stiili paremini kui pikk juhend.", "alsoFor": "sisemised IT-küsimused, HR-i korduvad küsimused", "tags": ["klienditugi", "projekt"], "id": "n9", "createdAt": 1789084800000, "showName": false, "author": ""}];
+  // Näidislood
+  const SEED_STORIES = [{"title": "Tervituskiri uuele töötajale ühe lausega", "dept": "HR", "category": "Skill", "status": "kasutusel", "tools": ["Claude", "Claude skill"], "beforeShort": "Iga kiri nullist", "afterShort": "Kiri valmis minutiga", "before": "Iga uue töötaja tervituskiri kirjutati uuesti. Vahel jäi mõni oluline asi mainimata, näiteks kuhu esimesel päeval tulla või kellelt küsida.", "solution": "Kirja vorm, kohustuslik info ja toon pandi üks kord skilli kirja. Nüüd piisab lausest „Tee tervituskiri: nimi, ametikoht, alguskuupäev, juht“.", "result": "Kõik kirjad on ühesugused ja täielikud. Kirjutamise asemel kulub aeg ülelugemisele.", "saved": "umbes 20 min iga uue töötaja kohta", "tip": "Vali töö, mida teed vähemalt kord kuus samas vormis. See on sinu esimene skill.", "alsoFor": "lahkumise checklist, ametijuhendid, töölepingu saatekirjad", "tags": ["skill", "onboarding"], "id": "n1", "createdAt": 1782864000000, "showName": false, "author": ""}, {"title": "Pakkumise saatekiri kliendi keeles ilma hirmuta", "dept": "Müük", "category": "Vestlus ja prompt", "status": "kasutusel", "tools": ["Claude"], "beforeShort": "Tõlkeprogramm ja kahtlus", "afterShort": "Tõlge koos tagasitõlkega", "before": "Soome ja Läti klientidele kirjutati kiri inglise keeles, sest tõlkimisel ei olnud kindlust, kas toon jääb viisakaks.", "solution": "Kiri kirjutatakse eesti keeles ja AI-lt küsitakse tõlget koos eestikeelse tagasitõlkega. Nii saab ise kontrollida, et sisu ja toon jäid samaks.", "result": "Kliendid vastavad kiiremini, sest kiri on nende emakeeles. Hinnad ja tähtajad lisatakse alles pärast tõlget käsitsi.", "saved": "paar kirja nädalas kiiremini", "tip": "Palu alati tagasitõlget. Kui tagasitõlge ütleb midagi muud kui sinu algtekst, on tõlkes viga.", "alsoFor": "tarnijatele vastamine, juhendid võõrkeelsetele töötajatele", "tags": ["tõlge", "kliendikiri"], "id": "n2", "createdAt": 1783641600000, "showName": false, "author": ""}, {"title": "Ohutusjuhend, mida ka päriselt loetakse", "dept": "Tootmine", "category": "Vestlus ja prompt", "status": "katsetamisel", "tools": ["Claude"], "beforeShort": "Pikk ja ametlik tekst", "afterShort": "Lühikesed sammud kahes keeles", "before": "Ohutusjuhend oli pikk ja ametlikus keeles. Uued töötajad allkirjastasid selle, aga sisust jäi vähe meelde.", "solution": "Juhend anti AI-le ja paluti see muuta lihtsateks sammudeks: mida teha, mida mitte ja miks. Seejärel tõlge vene keelde koos tagasitõlkega. Lõpptekst vaadati üle töökeskkonnaspetsialistiga.", "result": "Meistrid kasutavad lühiversiooni esmajuhendamisel. Ametlik juhend jääb kehtima, lühiversioon aitab sellest aru saada.", "saved": "", "tip": "AI teeb lihtsamaks, aga vastutus jääb inimesele. Lase lõpptekst üle vaadata kellelgi, kes valdkonda tunneb.", "alsoFor": "töökorralduse reeglid, kvaliteedijuhendid", "tags": ["tööohutus", "lihtne keel"], "id": "n3", "createdAt": 1784419200000, "showName": false, "author": ""}, {"title": "Esmaspäeva hommikul on tasumata arvete ülevaade juba valmis", "dept": "Finants", "category": "Cowork ja ajastatud ülesanne", "status": "kasutusel", "tools": ["Claude Cowork", "Excel"], "beforeShort": "Tabelite kokkupanek käsitsi", "afterShort": "Ülevaade ootab postkastis", "before": "Igal esmaspäeval kulus tund aega, et panna eri tabelitest kokku tasumata arved ja otsustada, kellele meeldetuletus saata.", "solution": "Coworkis on ajastatud ülesanne, mis loeb kaustas olevad tabelid läbi ja koostab lühikese ülevaate: mis on üle tähtaja, kui palju ja mida soovitab teha. Meeldetuletuste mustandid on valmis, aga saatmise otsustab inimene.", "result": "Esmaspäeva hommik algab otsustamisest, mitte tabelite kokkupanekust.", "saved": "umbes 1 h nädalas", "tip": "Mõtle, mis on sul iga nädal samal päeval ees. Kui see algab „ma panen kokku…“, sobib see ajastatud ülesandeks.", "alsoFor": "nädala müügiülevaade, puudumiste kokkuvõte", "tags": ["ajastatud ülesanne", "aruandlus"], "id": "n4", "createdAt": 1785196800000, "showName": false, "author": ""}, {"title": "Projekti mälu, mis ei lähe puhkusele", "dept": "Projektijuhtimine", "category": "Claude'i projekt", "status": "kasutusel", "tools": ["Claude"], "beforeShort": "Info laiali kirjades", "afterShort": "Kõik ühes projektis", "before": "Projekti otsused olid laiali kirjades ja märkmetes. Kui projektijuht oli puhkusel, ei teadnud keegi, mida oli kokku lepitud.", "solution": "Igal suuremal projektil on Claude'is oma projekt, kuhu lisatakse koosolekute kokkuvõtted ja olulised dokumendid. Juhistes on kirjas projekti eesmärk ja kes mille eest vastutab.", "result": "Küsimusele „mida me tarnetähtajas kokku leppisime?“ saab vastuse sekunditega koos viitega koosolekule.", "saved": "", "tip": "Pane projekti juhistesse ka see, mida AI teha ei tohi, näiteks lubadusi kliendile.", "alsoFor": "värbamisprojektid, iga-aastased üritused", "tags": ["projekt", "koosolekud"], "id": "n5", "createdAt": 1785974400000, "showName": false, "author": ""}, {"title": "Kõrvalekalde teade otse telefonist", "dept": "Kvaliteet", "category": "Muu automaatika", "status": "katsetamisel", "tools": ["Microsoft Forms", "Power Automate"], "beforeShort": "Paberlehed ja meeldetuletused", "afterShort": "Teade jõuab kohe õigele inimesele", "before": "Kõrvalekalded pandi kirja paberile ja need jõudsid kvaliteedijuhini alles päeva lõpus, kui üldse.", "solution": "QR-kood viib lihtsale vormile. Pärast saatmist läheb teade automaatselt vastutajale ja rida lisandub tabelisse. Vormi ja töövoo kirjeldused kirjutati AI abiga.", "result": "Teated jõuavad kohe kohale ja kuu lõpus on kokkuvõte olemas.", "saved": "", "tip": "Alusta kõige väiksemast sammust: üks vorm ja üks automaatne kiri. Täienda alles siis, kui inimesed on seda kasutama hakanud.", "alsoFor": "ideede kogumine, töövahendite tellimine", "tags": ["Forms", "Power Automate"], "id": "n6", "createdAt": 1786752000000, "showName": false, "author": ""}, {"title": "Vastuargumendid enne koosolekut, mitte koosolekul", "dept": "Juhtkond", "category": "Vestlus ja prompt", "status": "idee", "tools": ["Claude"], "beforeShort": "Arutelu venis", "afterShort": "Kriitika on juba laual", "before": "Otsuse ettepanekud tulid koosolekule ühe variandiga ja arutelu läks vastuväidete otsimiseks.", "solution": "Enne koosolekut antakse AI-le ettepanek ja palutakse: „Mängi skeptilist juhatuse liiget. Too välja 5 kõige tugevamat vastuargumenti ja üks alternatiiv.“ Vastused lisatakse ettepanekusse.", "result": "Idee on alles katsetamata. Esimesed proovid näitavad, et ettepanekud on läbimõeldumad.", "saved": "", "tip": "Ära palu AI-lt, kas su idee on hea. Palu, miks see võiks ebaõnnestuda.", "alsoFor": "eelarve põhjendused, uue tööviisi tutvustamine", "tags": ["otsused", "juhtimine"], "id": "n7", "createdAt": 1787529600000, "showName": false, "author": ""}, {"title": "Puhkuste planeerija, mille tegin ise", "dept": "HR", "category": "Vaibkoodimine (vibe coding)", "status": "prototuup", "tools": ["Claude", "Claude Code"], "beforeShort": "Tabel, mida keegi ei uuendanud", "afterShort": "Lihtne vaade, kus kattuvused on näha", "before": "Puhkuste tabelis ei olnud näha, kui samast meeskonnast olid mitu inimest korraga ära.", "solution": "Kirjeldasin oma sõnadega, millist vaadet vajan, ja AI kirjutas lihtsa veebilehe. Katsetasin seda ainult väljamõeldud nimedega. Päris kasutuseks peab IT selle turvaliseks tegema.", "result": "Prototüüp näitas juhtidele kohe, milline võiks lahendus olla. Arutelu läks palju kiiremini kui sõnadega selgitades.", "saved": "", "tip": "Prototüüp demoandmetega on parim viis ideed tutvustada. Päris andmed alles siis, kui IT on lahenduse üle vaadanud.", "alsoFor": "koolituste register, töövahendite nimekiri", "tags": ["vaibkoodimine", "prototüüp"], "id": "n8", "createdAt": 1788307200000, "showName": false, "author": ""}, {"title": "Sama küsimus, sama vastus kõigile", "dept": "Klienditugi", "category": "Claude'i projekt", "status": "kasutusel", "tools": ["Claude"], "beforeShort": "Igaüks vastas omamoodi", "afterShort": "Ühine alus kõigi vastuste jaoks", "before": "Samale küsimusele vastasid eri inimesed erinevalt. Uus kolleeg pidi kõike teistelt küsima.", "solution": "Projekti lisati korduma kippuvad küsimused, tingimused ja head näidisvastused. AI teeb vastuse mustandi, inimene kohandab selle konkreetsele kliendile.", "result": "Vastused on ühtlasemad ja uus kolleeg saab iseseisvalt hakkama juba esimesel nädalal.", "saved": "umbes 5 min vastuse kohta", "tip": "Kogu kokku 10 vastust, mille üle oled kõige uhkem. Need õpetavad AI-le sinu stiili paremini kui pikk juhend.", "alsoFor": "sisemised IT-küsimused, HR-i korduvad küsimused", "tags": ["klienditugi", "projekt"], "id": "n9", "createdAt": 1789084800000, "showName": false, "author": ""}, {"title":"Üks uudis, kolm kanalit","dept":"Turundus","category":"Skill","status":"kasutusel","tools":["Claude","Claude skill"],"beforeShort":"Sama tekst kolm korda ümber","afterShort":"Kolm versiooni ühest mustandist","before":"Iga uudis kirjutati eraldi kodulehele, LinkedIni ja uudiskirja. Toon kõikus ja mõni kanal jäi ajapuudusel vahele.","solution":"Skillis on kirjas iga kanali pikkus, toon ja ülesehitus. Lähtetekst antakse üks kord ja AI teeb sellest kolm versiooni. Faktid ja tsitaadid kontrollib inimene enne avaldamist üle.","result":"Kanalid räägivad sama lugu ühes stiilis. Aeg kulub sõnumi lihvimisele, mitte ümberkirjutamisele.","saved":"","tip":"Anna skillile kaasa kaks või kolm oma varasemat postitust, mis sulle meeldivad. Nii tabab AI sinu tooni.","alsoFor":"tootekirjeldused, messimaterjalid, töökuulutused","tags":["skill","sisuloome"],"id":"n10","createdAt":1790294400000,"showName":false,"author":""}, {"title":"Juhend valmib samal päeval kui uus tööriist","dept":"IT","category":"Claude'i projekt","status":"katsetamisel","tools":["Claude"],"beforeShort":"Juhendid jäid kirjutamata","afterShort":"Lühijuhend märksõnade põhjal","before":"Uue tarkvara kasutuselevõtul jäi juhend sageli kirjutamata. Samad küsimused jõudsid IT-sse ikka ja jälle.","solution":"Projektis on juhendi vorm ja varasemad head juhendid. IT kirjeldab sammud märksõnadega ja AI vormistab neist lihtsa juhendi tavakasutajale. Paroole ega sisevõrgu aadresse projekti ei lisata.","result":"Esimesed juhendid said valmis sama päevaga ja korduvaid küsimusi on vähem.","saved":"","tip":"Palu AI-l kirjutada inimesele, kes näeb seda programmi esimest korda. Siis ei jää ükski samm vahele.","alsoFor":"korduvad küsimused uuele töötajale, seadmete kasutusjuhendid","tags":["juhend","projekt"],"id":"n11","createdAt":1790899200000,"showName":false,"author":""}, {"title":"Kliendikohtumiseks valmis ilma kaustades tuhnimata","dept":"Müük","category":"Cowork ja ajastatud ülesanne","status":"katsetamisel","tools":["Claude Cowork"],"beforeShort":"Info eri failides","afterShort":"Ühe lehe ülevaade enne kohtumist","before":"Enne kliendikohtumist tuli varasemad pakkumised, kirjad ja märkmed eri kohtadest kokku otsida. Kiirel päeval jäi see tegemata.","solution":"Cowork loeb kliendi kaustas olevad pakkumised ja koosolekumärkmed ning teeb ühe lehe ülevaate: mida on pakutud, mis jäi lahtiseks ja mida tasub küsida. Hinnad ja lubadused kontrollib müügijuht ise.","result":"Kohtumisele minnes on varasem ajalugu meeles ja lahtised otsad kirjas.","saved":"","tip":"Hoia iga kliendi materjalid ühes kaustas. Mida korrastatum on kaust, seda parem on ülevaade.","alsoFor":"tarnijakohtumised, arenguvestluste ettevalmistus","tags":["Cowork","kohtumised"],"id":"n12","createdAt":1791504000000,"showName":false,"author":""}, {"title":"Vahetuse üleandmine ühel ekraanil","dept":"Tootmine","category":"Vaibkoodimine (vibe coding)","status":"prototuup","tools":["Claude","Claude Code"],"beforeShort":"Märkmed vihikus","afterShort":"Lihtne vorm ja ülevaade","before":"Vahetuse lõpus pandi tähelepanekud vihikusse. Järgmine vahetus ei leidnud alati üles, mis jäi pooleli.","solution":"Meister kirjeldas AI-le oma sõnadega, millist vormi ja ülevaadet oleks vaja. AI kirjutas lihtsa veebilehe, mida prooviti väljamõeldud andmetega. Päris kasutuseks peab IT lahenduse üle vaatama.","result":"Prototüüp aitas kokku leppida, mis info peab üleandmisel kindlasti kirjas olema.","saved":"","tip":"Alusta küsimusest, mida järgmine vahetus kõige sagedamini küsib. Ehita vorm selle ümber.","alsoFor":"hoolduspäevik, tööriistade laenutus","tags":["vaibkoodimine","prototüüp"],"id":"n13","createdAt":1792108800000,"showName":false,"author":""}, {"title":"Exceli valem tavalises keeles","dept":"Finants","category":"Vestlus ja prompt","status":"kasutusel","tools":["Claude","Excel"],"beforeShort":"Valemi otsimine võttis aega","afterShort":"Kirjeldan soovi ja saan valemi","before":"Keerulisema valemi jaoks tuli otsida näiteid internetist ja katsetada, kuni tulemus klappis.","solution":"AI-le kirjeldatakse tabeli veerud ja soovitud tulemus oma sõnadega. Vastuseks tuleb valem koos selgitusega, mida iga osa teeb. Valemit proovitakse enne paari reaga, mille õige vastus on teada.","result":"Valemid saavad kiiremini valmis ja kolleeg mõistab ka hiljem, mida valem teeb.","saved":"","tip":"Päris andmeid ei ole vaja kleepida. Valemi saamiseks piisab veergude nimedest ja ühest väljamõeldud näitereast.","alsoFor":"liigendtabelid, tingimusvorming, andmete puhastamine","tags":["Excel","valemid"],"id":"n14","createdAt":1792713600000,"showName":false,"author":""}, {"title":"Pahase kliendi kirjale rahulik vastus","dept":"Klienditugi","category":"Vestlus ja prompt","status":"kasutusel","tools":["Claude"],"beforeShort":"Vastus venis ja toon kõikus","afterShort":"Mustand, mis jääb viisakaks","before":"Pahase kliendi kirjale vastamine võttis kaua aega, sest õiget tooni oli raske leida.","solution":"Kliendi kirjast eemaldatakse nimed ja kontaktid ning AI-lt palutakse rahulik ja konkreetne vastuse mustand: tunnusta muret, selgita olukorda ja paku järgmine samm. Lubadused ja summad lisab inimene ise.","result":"Vastused lähevad välja kiiremini ja toon püsib rahulik ka kiirel päeval.","saved":"","tip":"Palu kaks varianti, lühem ja pikem. Vali see, mis sobib selle kliendiga paremini.","alsoFor":"kaebustele vastamine, hilinemise teated","tags":["kliendikiri","toon"],"id":"n15","createdAt":1793318400000,"showName":false,"author":""}, {"title":"Auditi märkmetest aruande mustand","dept":"Kvaliteet","category":"Skill","status":"idee","tools":["Claude","Claude skill"],"beforeShort":"Märkmed ootasid vormistamist","afterShort":"Mustand kohe pärast auditit","before":"Siseauditi märkmed jäid sageli päevadeks vormistamata, sest aruande kirjutamine oli tüütu.","solution":"Aruande vorm ja nõuded pannakse skilli kirja. Audiitor annab märkmed ja skill teeb neist mustandi: tähelepanek, viide nõudele ja soovituslik tegevus. Hinnangu ja lõppsõnastuse annab audiitor.","result":"Idee ootab proovimist. Eesmärk on, et aruanne jõuaks osakonnani siis, kui audit on veel värskelt meeles.","saved":"","tip":"Hea skill algab heast näidisest. Vali üks varasem aruanne, millega oled rahul, ja kasuta seda eeskujuna.","alsoFor":"tööohutuse ringkäigud, tarnijate hindamine","tags":["skill","audit"],"id":"n16","createdAt":1793923200000,"showName":false,"author":""}, {"title":"Reedene seisukiri ootab mustandina ülevaatamist","dept":"Projektijuhtimine","category":"Cowork ja ajastatud ülesanne","status":"kasutusel","tools":["Claude Cowork"],"beforeShort":"Kokkuvõte käsitsi igal reedel","afterShort":"Mustand ootab ülevaatamist","before":"Iga nädala lõpus tuli projekti seis eri failidest ja kirjadest kokku koguda ning kliendile või juhtrühmale saata.","solution":"Coworkis on ajastatud ülesanne, mis vaatab projekti kausta ja nädala märkmed läbi ning koostab seisukirja mustandi: mis sai tehtud, mis on töös ja mis vajab otsust. Projektijuht loeb üle, parandab ja saadab ise.","result":"Seisukiri läheb välja õigel ajal ja samas vormis. Reede pärastlõuna jääb sisulisele tööle.","saved":"","tip":"Lepi kokku kindel vorm: tehtud, töös, vajab otsust. Kui vorm on sama, on ka mustand iga kord parem.","alsoFor":"kuuaruanne juhtkonnale, meeskonna nädalakiri","tags":["ajastatud ülesanne","seisukiri"],"id":"n17","createdAt":1794528000000,"showName":false,"author":""}, {"title":"Töötajate ideed ühest kohast kokku","dept":"Juhtkond","category":"Muu automaatika","status":"idee","tools":["Microsoft Forms","Power Automate","Claude"],"beforeShort":"Head mõtted ununesid ära","afterShort":"Vorm ja kord kuus kokkuvõte","before":"Head ettepanekud öeldi välja kohvinurgas või koosoleku lõpus ja ununesid ära.","solution":"Lihtne vorm, kuhu igaüks saab ettepaneku kirja panna. Vastused kogunevad tabelisse ja kord kuus teeb AI neist teemade kaupa kokkuvõtte. Nimesid kokkuvõttesse ei panda ja otsused teeb juhtkond.","result":"Idee ootab proovimist. Eesmärk on, et ükski hea mõte ei läheks kaduma ja inimesed näeksid, mis nende ettepanekust sai.","saved":"","tip":"Anna ettepanekute tegijatele alati tagasisidet. Vorm töötab ainult siis, kui inimesed näevad, et seda loetakse.","alsoFor":"rahulolu-uuringu vabad vastused, koolitussoovid","tags":["Forms","ideed"],"id":"n18","createdAt":1795132800000,"showName":false,"author":""}];
   const LOCAL = (function(){
-    const KEY="ai-edulood-v1"; const subs=[];
-    const load=()=>{ try{ return JSON.parse(localStorage.getItem(KEY)||"{}")||{}; }catch(e){ return {}; } };
-    const snap=()=>{ const st=load(); const docs=[{id:"naited",exists:true,data:()=>({items:SEED_STORIES})}];
-      Object.keys(st).forEach(id=>docs.push({id,exists:true,data:()=>st[id]})); return {metadata:{fromCache:false},docs}; };
-    const db={collection:()=>({
-      doc:id=>({set:async data=>{ const st=load(); st[id]=data; try{ localStorage.setItem(KEY,JSON.stringify(st)); }catch(e){ throw {code:"quota_exceeded"}; } subs.forEach(cb=>cb(snap())); }}),
-      onSnapshot:cb=>{ subs.push(cb); setTimeout(()=>cb(snap()),0); }
-    })};
-    let ok=true; try{ localStorage.setItem("ai-edulood-test","1"); localStorage.removeItem("ai-edulood-test"); }catch(e){ ok=false; }
-    const user={isOwner:()=>false,can:()=>ok,id:async()=>"minu",profiles:async()=>({})};
+    const snap=()=>({metadata:{fromCache:false},docs:[{id:"naited",exists:true,data:()=>({items:SEED_STORIES})}]});
+    const db={collection:()=>({onSnapshot:cb=>{ setTimeout(()=>cb(snap()),0); }})};
+    const user={isOwner:()=>false,can:()=>false,id:async()=>"",profiles:async()=>({})};
     return {use:async n=> n==="db"?db : n==="user"?user : null};
   })();
   async function init(){
@@ -912,7 +601,6 @@ details.more[open] summary::after{transform:rotate(180deg)}
     }
     if(!db){ clearTimeout(timer); S.loaded=true; render(); notice("Lugusid ei saa praegu laadida."); return; }
     S.db=db;
-    if(S.canWrite===false){ $("addTop").title="Sul on ainult lugemisõigus"; }
     db.collection("stories").onSnapshot(snap=>{
       S.docs = snap.docs.filter(d=>d.exists).map(d=>({id:d.id, data:d.data()||{}}));
       if(!snap.metadata.fromCache){ clearTimeout(timer); if(S.timerFired){ S.timerFired=false; notice(""); } }

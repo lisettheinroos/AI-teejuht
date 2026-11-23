@@ -16,7 +16,7 @@ Häkkide lehel saab nippe märkida kasulikuks. Märked salvestuvad ainult külas
 
 ## Kellele
 
-Töötajatele, meeskonnajuhtidele ja HR-ile, kes tahavad AI-d tööl kasutada või kolleegidele tutvustada. Juhend sobib kohandamiseks ka oma ettevõtte sisejuhendiks.
+Töötajatele, meeskonnajuhtidele ja HR-ile, kes tahavad AI-d tööl kasutada või kolleegidele tutvustada.
 
 ## Tehniliselt
 

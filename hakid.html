@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
-/* Värvid nagu juhendis: pastelne roosa-sinine päis, hele taust. Paigutus: vasakul põhihäkkide nimekiri filtriga, paremal kleepuv lemmikute ja saatmisvormi veerg, all kolleegide häkid. */
+/* Värvid nagu juhendis: pastelne roosa-sinine päis, hele taust. Paigutus: vasakul põhihäkkide nimekiri filtriga, paremal kleepuv lemmikute veerg, all häkid, mis panevad mõtlema. */
 :root{
   --violet:#324871;
   --violet-2:#425a87;
@@ -248,7 +248,7 @@ html{scroll-behavior:smooth}
     </div>
     <h1>AI-häkid</h1>
     <p class="lead">Lühikesed nipid, mis säästavad iga päev aega.<br>Kopeeri prompt, kohanda see oma töö jaoks ja märgi „Kasulik“, et nipp jõuaks sinu lemmikutesse.</p>
-    <p class="howto"><span><b>27</b> põhihäkki</span><span>Enamik töötab nii ChatGPT-s kui ka Claude'is</span><span>Pane kirja ka oma nipid</span></p>
+    <p class="howto"><span><b>27</b> põhihäkki</span><span>Enamik töötab nii ChatGPT-s kui ka Claude'is</span></p>
     <p class="safe">Enne kasutamist vaata AI-teejuhist <a href="index.html#andmed">andmete valgusfoori</a>: mida tohib AI-sse panna.</p>
   </div></div>
 </header>
@@ -278,34 +278,19 @@ html{scroll-behavior:smooth}
       <p class="small">Häkid, mille oled märkinud kasulikuks. Need jäävad alles sinu brauserisse.</p>
       <ol id="hk-toplist" class="toplist"><li class="empty">Laadin…</li></ol>
     </div>
-    <form class="card" id="hk-form" novalidate>
-      <h2>Pane oma häkk kirja</h2>
-      <p class="small">Mis on sulle kõige rohkem aega säästnud? Häkk salvestub ainult sinu brauserisse. Kui see töötab, jaga seda ka kolleegidega.</p>
-      <label for="hk-title">Pealkiri</label>
-      <input type="text" id="hk-title" maxlength="80" placeholder="Nt Exceli valem sõnalise kirjelduse põhjal">
-      <label for="hk-text">Kuidas see töötab? Lisa näide või prompt</label>
-      <textarea id="hk-text" maxlength="600" rows="4" placeholder="Kirjeldan Claude'ile oma sõnadega, mida tahan arvutada. Vastuseks saan valmis valemi."></textarea>
-      <label for="hk-tool">Tööriist</label>
-      <select id="hk-tool"><option>Claude Chat</option><option>Claude Cowork</option><option>ChatGPT</option><option>Muu</option></select>
-      <input type="checkbox" id="hk-name" hidden>
-      <p class="hk-warn">Ära lisa isikuandmeid ega konfidentsiaalset infot. Kasuta näidetes demoandmeid. Vaata ka <a href="index.html#andmed">andmete valgusfoori</a>.</p>
-      <button type="submit" class="hk-btn" id="hk-submit" disabled>Salvesta häkk</button>
-      <p class="hk-msg" id="hk-msg" aria-live="polite"></p>
-    </form>
   </aside>
 </div></div>
 
 <section class="colleagues pad" id="kolleegid"><div class="wrap">
   <div class="chead">
-    <div><h2>Häkid, mis panevad mõtlema</h2><p class="small">Natuke julgemad ideed. Loe ja mõtle: kus sinu töös võiks see aidata? Siia ilmuvad ka sinu enda kirja pandud häkid.</p></div>
-    <div class="seg" role="group" aria-label="Järjestus"><button type="button" data-sort="top" class="on">Kõik</button><button type="button" data-sort="new">Minu omad ees</button></div>
+    <div><h2>Häkid, mis panevad mõtlema</h2><p class="small">Natuke julgemad ideed. Loe ja mõtle: kus sinu töös võiks see aidata?</p></div>
   </div>
   <div id="hk-list" class="cgrid"><p class="hk-empty">Laadin…</p></div>
 </div></section>
 
 <footer class="pad">
   <div class="wrap">
-    <span>Koostanud Lisett Heinroos · Kasuta ja kohanda julgelt oma meeskonnale</span>
+    <span>Koostanud Lisett Heinroos</span>
   </div>
 </footer>
 
@@ -340,7 +325,7 @@ html{scroll-behavior:smooth}
     {id:'b-tagasitolge',c:'kiir',t:'Tõlgi ja kontrolli tagasitõlkega',d:'Nii näed ise, kas sisu jäi samaks.',ex:'Tõlgi see tekst vene keelde ja lisa eestikeelne tagasitõlge, et saaksin sisu üle kontrollida.'},
     {id:'b-koosolek',c:'kiir',t:'Koosolekumärkmetest memo ja tegevuste tabel',d:'Kleebi märkmed ilma isikuandmeteta (asenda nimed tähistega, näiteks [Osaleja A]) ja anna AI-le memo struktuur ette. Nii on iga koosoleku kokkuvõte ühesugune ja otsused ning tähtajad ei kao ära.',ex:'Tee nendest märkmetest koosoleku memo. Struktuur: 1) teema ja kuupäev, 2) arutatud teemad lühidalt, 3) tehtud otsused, 4) tegevuste tabel veergudega: kes, mida ja mis kuupäevaks, 5) lahtised küsimused ja järgmine kohtumine. Ära lisa midagi, mida märkmetes ei ole. Kui tähtaeg puudub, kirjuta „täpsustada“.'},
     {id:'b-salvestus',c:'kiir',t:'Salvesta koosolek ja lase AI-l teha kokkuvõte',d:'Lülita Teamsi koosolekul sisse salvestamine ja transkriptsioon. Teavita osalejaid enne alustamist. Pärast koosolekut leiad transkriptsiooni koosoleku vestlusest, laadi see alla ja lisa Claude\'ile. Enne lisamist asenda nimed tähistega, näiteks [Osaleja A], ja eemalda muu tundlik info.',ex:'Siin on koosoleku transkriptsioon. Tee sellest koosoleku memo: teema, arutatud teemad, otsused, tegevuste tabel (kes, mida ja mis kuupäevaks) ja lahtised küsimused. Hoia memo ühe lehekülje piires.'},
-    {id:'b-esitlus',c:'kiir',cl:1,t:'Lase AI-l teha oma andmetest esitlus',d:'Lisa Exceli tabel, raport või märkmed ja Claude teeb neist valmis slaidid. Kui sul on esitluse skill, tuleb esitlus kohe ettevõtte kujunduses ja PowerPointi failina. Eemalda enne isikuandmed ja muu tundlik info.',ex:'Tee nendest andmetest 5-slaidiline esitlus juhtkonnale: peamised numbrid, muutus võrreldes eelmise perioodiga, 3 järeldust ja üks ettepanek. Kasuta Estanci kujundust.'},
+    {id:'b-esitlus',c:'kiir',cl:1,t:'Lase AI-l teha oma andmetest esitlus',d:'Lisa Exceli tabel, raport või märkmed ja Claude teeb neist valmis slaidid. Kui sul on esitluse skill, tuleb esitlus kohe ettevõtte kujunduses ja PowerPointi failina. Eemalda enne isikuandmed ja muu tundlik info.',ex:'Tee nendest andmetest 5-slaidiline esitlus juhtkonnale: peamised numbrid, muutus võrreldes eelmise perioodiga, 3 järeldust ja üks ettepanek. Kasuta oma ettevõtte kujundust.'},
     {id:'b-anonuumi',c:'kiir',t:'Asenda nimed enne kleepimist',d:'Kirjuta nimede asemele [Töötaja A] või [Klient B]. AI saab ülesandest aru ka ilma päris nimedeta.'},
     {id:'b-leia-3',c:'auto',t:'Leia oma tööst 3 asja, mida automatiseerida',d:'Pane tavalised tööülesanded kirja ilma nimede ja isikuandmeteta.',ex:'Minu ametikoht on [ametikoht]. Minu tavalises nädalas on need korduvad tööd: [loetle 5 kuni 7 tööd]. Too välja 3 tööd, mida saab AI abil kõige rohkem kiirendada. Kirjuta iga idee juurde, kas selleks sobib Chat, projekt, skill, Cowork, ajastatud ülesanne või vaibkoodimine. Lisa, mida mul selleks vaja on ja umbes kui palju aega see nädalas säästab.'},
     {id:'b-mustand',c:'auto',t:'Palu Outlooki mustandit, mitte saatmist',d:'Lase Claude\'il koostada mustand. Pärast ülelugemist saadad kirja ise.',ex:'Pane sellele kirjale vastuse mustand Outlooki valmis. Ära saada.'},
@@ -438,9 +423,7 @@ html{scroll-behavior:smooth}
     paintLikes();
   }
 
-  var msg=document.getElementById('hk-msg'),submit=document.getElementById('hk-submit'),form=document.getElementById('hk-form');
   var listEl=document.getElementById('hk-list'),topEl=document.getElementById('hk-toplist');
-  function setMsg(text,err){msg.textContent=text;msg.className='hk-msg'+(err?' err':'');}
 
   function paintLikes(){
     document.querySelectorAll('.like[data-like]').forEach(function(b){
@@ -468,15 +451,8 @@ html{scroll-behavior:smooth}
   function handleWriteError(e){
     var code=e&&e.code;
     if(code==='invalid_argument'||code==='not_granted'||code==='permission_denied'){S.canWrite=false;setReadOnly();}
-    else if(code==='quota_exceeded'){setMsg('Brauseri salvestusruum on täis.',true);}
-    else{setMsg('Salvestamine ebaõnnestus. Proovi hetke pärast uuesti.',true);}
   }
-  function setReadOnly(){
-    submit.disabled=true;
-    form.querySelectorAll('input,textarea,select').forEach(function(x){x.disabled=true;});
-    setMsg('Salvestamine ei ole selles brauseris võimalik. Häkke saad ikka lugeda ja kopeerida.');
-    paintLikes();
-  }
+  function setReadOnly(){paintLikes();}
 
   function fmtDate(ts){try{return new Date(ts).toLocaleDateString('et-EE');}catch(e){return '';}}
   function authorName(it){return it.authorId===S.uid?'Sinu häkk':'Mõtteaine';}
@@ -525,62 +501,18 @@ html{scroll-behavior:smooth}
       var actions=document.createElement('div');actions.className='actions';
       if(it.text){var cb=document.createElement('button');cb.type='button';cb.className='copy';cb.textContent='Kopeeri';cb.addEventListener('click',function(){copyText(cb,it.text);});actions.appendChild(cb);}
       actions.appendChild(likeButton(it.id));
-      if(S.canWrite&&(it.authorId===S.uid||S.isOwner)){
-        var d=document.createElement('button');d.type='button';d.className='hk-del';d.textContent='Kustuta';
-        d.addEventListener('click',function(){removeItem(it,d);});actions.appendChild(d);
-      }
       card.appendChild(actions);listEl.appendChild(card);
     });
     paintLikes();
   }
 
-  var itemWriting=false;
-  async function removeItem(it,btn){
-    if(itemWriting)return;
-    if(btn.dataset.confirm!=='1'){btn.dataset.confirm='1';btn.textContent='Kinnita kustutamine';setTimeout(function(){btn.dataset.confirm='';btn.textContent='Kustuta';},4000);return;}
-    itemWriting=true;btn.disabled=true;
-    try{
-      var ref=S.db.doc('suggestions/'+it.authorId);
-      var snap=await ref.get();var data=snap.exists?snap.data():{items:[]};
-      await ref.set({items:(data.items||[]).filter(function(x){return x.id!==it.id;})});
-    }catch(e){handleWriteError(e);btn.disabled=false;}
-    itemWriting=false;
-  }
-
-  form.addEventListener('submit',async function(ev){
-    ev.preventDefault();
-    if(!S.canWrite||!S.uid||itemWriting)return;
-    var title=document.getElementById('hk-title').value.trim();
-    var text=document.getElementById('hk-text').value.trim();
-    var tool=document.getElementById('hk-tool').value;
-    var anon=!document.getElementById('hk-name').checked;
-    if(!title){setMsg('Lisa häkile pealkiri.',true);document.getElementById('hk-title').focus();return;}
-    itemWriting=true;submit.disabled=true;setMsg('Saadan…');
-    var item={id:'s-'+Date.now().toString(36)+Math.random().toString(36).slice(2,6),title:title.slice(0,80),text:text.slice(0,600),tool:tool,anon:anon,createdAt:Date.now()};
-    try{
-      var ref=S.db.doc('suggestions/'+S.uid);
-      var snap=await ref.get();var data=snap.exists?snap.data():{items:[]};
-      var items=(data.items||[]).slice();items.push(item);
-      await ref.set({items:items});
-      form.reset();document.getElementById('hk-name').checked=false;
-      setMsg('Salvestatud! Leiad oma häki allpool. See on näha ainult sinu brauseris.');
-    }catch(e){handleWriteError(e);}
-    itemWriting=false;if(S.canWrite)submit.disabled=false;
-  });
-
-  document.querySelectorAll('.seg button').forEach(function(b){
-    b.addEventListener('click',function(){S.sort=b.dataset.sort;document.querySelectorAll('.seg button').forEach(function(x){x.classList.toggle('on',x===b);});renderList();});
-  });
-
   function unavailable(){
     S.available=false;
-    setMsg('Salvestamine ei ole selles brauseris võimalik. Häkke saad ikka lugeda ja kopeerida.');
-    submit.disabled=true;
     document.querySelectorAll('.like').forEach(function(b){b.hidden=true;});
   }
 
 
-  // Kohalik andmehoidla: kõik märked ja omad häkid jäävad ainult selle külastaja brauserisse
+  // Kohalik andmehoidla: „Kasulik“ märked jäävad ainult selle külastaja brauserisse
   var INSPO=[
     {t:'Lase AI-l olla sinu kõige kriitilisem lugeja',x:'Enne olulise kirja saatmist: Oled [juht või klient], kes on kiire ja skeptiline. Loe see kiri läbi ja ütle ausalt, mis sind ärritab, mis jääb arusaamatuks ja mida sa vastuseks küsiksid. [kleebi kiri]',tool:'Claude Chat'},
     {t:'Harjuta rasket vestlust enne päris vestlust',x:'Mängi kolleegi, kellele pean ütlema, et tema puhkusesoov sellele nädalale ei sobi. Reageeri nagu päris inimene, kes on pettunud. Pärast viit vahetust astu rollist välja ja anna mulle tagasisidet: mis töötas ja mida võiksin öelda teisiti.',tool:'Claude Chat'},
@@ -597,7 +529,7 @@ html{scroll-behavior:smooth}
     var seed={suggestions:{naited:{items:INSPO.map(function(h,i){return {id:'i-'+(i+1),title:h.t,text:h.x,tool:h.tool,anon:true,createdAt:0,ord:i+1};})}}};
     function load(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')||{};}catch(e){return {};}}
     function save(o){localStorage.setItem(KEY,JSON.stringify(o));}
-    function all(col){var st=load(),o={},k;var a=seed[col]||{},b=st[col]||{};for(k in a)o[k]=a[k];for(k in b)o[k]=b[k];return o;}
+    function all(col){var st=load(),o={},k;var a=seed[col]||{},b=col==='likes'?(st[col]||{}):{};for(k in a)o[k]=a[k];for(k in b)o[k]=b[k];return o;}
     function snap(col){var o=all(col);return {metadata:{fromCache:false},docs:Object.keys(o).map(function(id){return {id:id,exists:true,data:function(){return o[id];}};})};}
     function ref(col,id){return {
       get:function(){var o=all(col);return Promise.resolve(o[id]?{exists:true,data:function(){return o[id];}}:{exists:false,data:function(){return {};}});},
@@ -618,11 +550,11 @@ html{scroll-behavior:smooth}
       var cw=null;try{cw=await Promise.resolve(S.user.can('data.write'));}catch(e){}
       S.canWrite=!!S.uid&&cw!==false;
     }
-    var timer=setTimeout(function(){if(!S.ready)setMsg('Andmete laadimine võtab tavalisest kauem. Näidatud info ei pruugi olla värske.',true);},10000);
+    var timer=null;
     var gotS=false,gotL=false;
     function maybeReady(snap){
       if(snap&&!(snap.metadata&&snap.metadata.fromCache)){clearTimeout(timer);}
-      if(gotS&&gotL&&!S.ready){S.ready=true;if(S.canWrite){submit.disabled=false;setMsg('');}else{setReadOnly();}}
+      if(gotS&&gotL&&!S.ready){S.ready=true;if(!S.canWrite){setReadOnly();}}
     }
     S.db.collection('suggestions').onSnapshot(function(snap){
       var all=[];
@@ -631,7 +563,7 @@ html{scroll-behavior:smooth}
         all.push({ord:Number(it.ord)||0,id:it.id,title:String(it.title).slice(0,80),text:typeof it.text==='string'?it.text.slice(0,800):'',tool:typeof it.tool==='string'?it.tool.slice(0,30):'Muu',anon:!!it.anon,createdAt:Number(it.createdAt)||0,authorId:d.id});
       });});
       S.suggestions=all;gotS=true;maybeReady(snap);renderList();renderTop();
-    },function(){gotS=true;maybeReady();setMsg('Häkkide laadimine katkes. Värskenda lehte.',true);});
+    },function(){gotS=true;maybeReady();});
     S.db.collection('likes').onSnapshot(function(snap){
       var counts={};var mine=null;
       snap.docs.forEach(function(d){var ids=(d.data()||{}).ids;if(!Array.isArray(ids))return;
