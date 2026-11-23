@@ -12,7 +12,7 @@ Praktiline eestikeelne juhend, kuidas AI-st igapäevatöös rohkem kasu saada ja
 | [AI-häkid](hakid.html) | Lühikesed nipid koos promptidega, mida saab kopeerida ja oma töö jaoks kohandada |
 | [AI-ideed](edulood.html) | Ideed ja näidislood eri valdkondadest, mis näitavad, mida AI-ga teha saab |
 
-Häkkide ja ideede lehel saab kirja panna ka oma nipid ja lood. Need salvestuvad ainult külastaja enda brauserisse ega jõua kellegi teiseni.
+Häkkide lehel saab nippe märkida kasulikuks. Märked salvestuvad ainult külastaja enda brauserisse ega jõua kellegi teiseni.
 
 ## Kellele
 
