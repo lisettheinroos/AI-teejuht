@@ -1,0 +1,12 @@
+/* PilveAIm: ühine ülemine menüü (kasutusel lehtedel, millel pole oma site.css) */
+.skip{position:absolute;left:-999px;top:0;background:#59263B;color:#fff;padding:10px 16px;z-index:50;border-radius:0 0 8px 0;font-family:"Figtree",system-ui,sans-serif}
+.skip:focus{left:0}
+.site-head{position:sticky;top:0;z-index:20;background:rgba(252,250,248,.96);backdrop-filter:blur(6px);border-bottom:1px solid #EAD3DA;font-family:"Figtree",system-ui,sans-serif}
+.sh-in{max-width:1240px;margin:0 auto;padding:10px 24px;display:flex;align-items:center;justify-content:space-between;gap:10px 16px;flex-wrap:wrap}
+.sh-logo{display:block;line-height:0}
+.sh-logo img{height:34px;width:auto;display:block}
+.sh-nav{display:flex;gap:4px;flex-wrap:wrap}
+.sh-nav a{display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border-radius:999px;color:#59263B;text-decoration:none;font-weight:600;font-size:15px}
+.sh-nav a:hover{background:#F7ECEF}
+.sh-nav a[aria-current]{background:#59263B;color:#fff}
+@media (max-width:560px){.sh-in{padding:8px 16px}.sh-logo img{height:28px}.sh-nav a{padding:0 10px;font-size:14px;min-height:36px}.site-head{position:static}}
