@@ -10,13 +10,13 @@ Praktiline eestikeelne juhend, kuidas AI-st igapäevatöös rohkem kasu saada ja
 |---|---|
 | [AI-teejuht](index.html) | Põhitõed, turvaline kasutamine, hea prompt, seadistamine, automatiseerimine ja skillid |
 | [AI-häkid](hakid.html) | Lühikesed nipid koos promptidega, mida saab kopeerida ja oma töö jaoks kohandada |
-| [AI-ideed](edulood.html) | Ideed ja näidislood eri valdkondadest, mis näitavad, mida AI-ga teha saab |
+| [AI-edulood](edulood.html) | Näidislood eri valdkondadest, mis aitavad märgata, kus AI sinu töös aidata võiks |
 
-Häkkide lehel saab nippe märkida kasulikuks. Märked salvestuvad ainult külastaja enda brauserisse ega jõua kellegi teiseni.
+Häkkide ja edulugude lehel saab kirja panna ka oma nipid ja lood. Need salvestuvad ainult külastaja enda brauserisse ega jõua kellegi teiseni.
 
 ## Kellele
 
-Töötajatele, meeskonnajuhtidele ja HR-ile, kes tahavad AI-d tööl kasutada või kolleegidele tutvustada.
+Töötajatele, meeskonnajuhtidele ja HR-ile, kes tahavad AI-d tööl kasutada või kolleegidele tutvustada. Juhend sobib kohandamiseks ka oma ettevõtte sisejuhendiks.
 
 ## Tehniliselt
 
@@ -24,7 +24,7 @@ Lihtne staatiline veebileht: HTML, CSS ja JavaScript, ilma ehitussammu ja server
 
 ## Litsents
 
-© 2026 Lisett Heinroos. Kõik õigused kaitstud. Lehte võid vaadata ja selle linki jagada. Lehel olevaid prompte võid oma töös vabalt kasutada. Lehe sisu kopeerimiseks, muutmiseks või edasi avaldamiseks küsi autorilt luba.
+Sisu on avaldatud litsentsiga [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.et). Võid juhendit vabalt jagada ja kohandada, kui viitad autorile.
 
 ## Autor
 
