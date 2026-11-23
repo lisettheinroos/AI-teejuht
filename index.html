@@ -608,6 +608,13 @@ h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.005em}
 .tl-card .tl-check{margin-top:4px;font-size:14px}
 .tl-card ul.tl-q{margin-top:-6px;font-size:14px;color:var(--ink)}
 .tl-note{font-size:14px;line-height:1.45;color:var(--ink);background:color-mix(in srgb,var(--c) 14%,white);border-radius:8px;padding:8px 10px;margin-top:auto}
+.pl{display:inline-block;margin-left:6px;padding:1px 8px;border-radius:999px;font-size:12px;font-weight:700;line-height:1.4;white-space:normal;border:1px solid currentColor;vertical-align:1px}
+.where .pl{display:table;margin:4px 0 0}
+.pl-free{color:#1F6B55;background:#E6F4EE}
+.pl-paid{color:#59263B;background:#FBE9EF}
+.pl-plan{color:#7A4F00;background:#FFF3D6}
+.pl-org{color:#2D4A7A;background:#E8EFFA}
+.where td:not(:first-child){white-space:normal}
 .tl-share{margin-top:12px}
 .cta-line{display:inline-flex;align-items:center;gap:6px;min-height:44px;font-weight:700;color:var(--violet)}
 </style>
@@ -1025,6 +1032,52 @@ h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.005em}
   </div>
   <div class="tip"><b>Mis töötab tasuta kontoga?</b> Selle juhendi seadistamise sammud 1 kuni 5 saad teha ka tasuta kontoga. Tasulist paketti vajad Coworki, ajastatud ülesannete ja suurema kasutuse jaoks. Isiklikes pakettides saad andmete treenimiseks kasutamise ise välja lülitada.</div>
   
+  <h3 class="subhead" id="vordlus">Claude, ChatGPT ja teised: mis on sama ja mis erineb</h3>
+  <p class="sec-sub">Juhend lähtub Claude'ist, aga põhimõtted töötavad ka mujal. Funktsioonid, paketid ja nimed erinevad teenuseti ning muutuvad, seepärast on iga rea juures märgis, millest see sõltub.</p>
+  <div class="grid g3 keep">
+    <div class="card">
+      <h3>Kehtib kõigis assistentides</h3>
+      <ul class="list">
+        <li>Hea prompt: kontekst, eesmärk ja soovitud vorm</li>
+        <li>AI võib eksida, sina kontrollid ja otsustad</li>
+        <li>Andmete valgusfoor</li>
+        <li>Vestluse lihvimine järelsõnumitega</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Claude'ile omane selles juhendis</h3>
+      <ul class="list">
+        <li>Cowork ja Claude'i skillid <span class="pl pl-plan">sõltub paketist</span></li>
+        <li>Vestluste ja projektide seadistamine nii, nagu see juhend näitab</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>ChatGPT-s on teisiti</h3>
+      <ul class="list">
+        <li>Menüüde ja nuppude nimed on teised</li>
+        <li>Oma GPT-d ja ChatGPT agent <span class="pl pl-plan">sõltub paketist</span></li>
+        <li>Paketid: Free, Go, Plus, Pro</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card where">
+    <table>
+      <caption>Võrdlus: Claude ja ChatGPT</caption>
+      <thead><tr><th scope="col">Teema</th><th scope="col">Claude</th><th scope="col">ChatGPT</th></tr></thead>
+      <tbody>
+        <tr><td>Tasuta pakett</td><td>Free <span class="pl pl-free">tasuta</span></td><td>Free <span class="pl pl-free">tasuta</span></td></tr>
+        <tr><td>Isiklikud tasulised paketid</td><td>Pro, Max, Ultra <span class="pl pl-paid">tasuline</span></td><td>Go, Plus, Pro <span class="pl pl-paid">tasuline</span></td></tr>
+        <tr><td>Töökonto</td><td>Team, Enterprise <span class="pl pl-org">sõltub organisatsiooni seadistusest</span></td><td>Business, Enterprise <span class="pl pl-org">sõltub organisatsiooni seadistusest</span></td></tr>
+        <tr><td>Projektid</td><td>Projektid <span class="pl pl-plan">sõltub paketist</span></td><td>Projektid. Failide arv projektis sõltub paketist <span class="pl pl-plan">sõltub paketist</span></td></tr>
+        <tr><td>Ajastatud ülesanded</td><td>Pro, Max ja Ultra pakettides. Team ja Enterprise puhul kontrolli hinnalehelt <span class="pl pl-plan">sõltub paketist</span></td><td>Tasuta paketis ei ole. Millistes tasulistes pakettides on, vaata hinnalehelt <span class="pl pl-plan">sõltub paketist</span></td></tr>
+        <tr><td>Treenimise lüliti</td><td>Isiklikes kontodes seadetes: Privacy</td><td>Isiklikes kontodes seadetes: Data controls</td></tr>
+        <tr><td>Töökonto andmed treenimiseks</td><td>Team ja Enterprise: vaikimisi ei kasutata</td><td>Business ja Enterprise: vaikimisi ei kasutata</td></tr>
+        <tr><td>Ühekordne vestlus</td><td>Inkognito vestlus</td><td>Ajutine vestlus (Temporary Chat)</td></tr>
+      </tbody>
+    </table>
+    <p class="small" style="margin-top:10px">Võrdlus põhineb teenuste ametlikel lehtedel 23.11.2026 leitud infol: <a href="https://claude.com/pricing" target="_blank" rel="noopener">Claude'i paketid</a>, <a href="https://privacy.claude.com/en/articles/7996868-is-my-data-used-for-model-training" target="_blank" rel="noopener">Claude'i andmekasutus</a>, <a href="https://chatgpt.com/pricing/" target="_blank" rel="noopener">ChatGPT paketid</a> ja <a href="https://help.openai.com/en/articles/7730893-data-controls-in-chatgpt" target="_blank" rel="noopener">ChatGPT andmeseaded</a>. Mõnes allikas erinevad detailid, seepärast on need read märgitud „sõltub paketist". Töökonto puhul kehtib alati sinu organisatsiooni seadistus ja tööandja reeglid. Treenimise väljalülitamine ei tähenda, et konfidentsiaalset infot võib sisestada.</p>
+  </div>
+
   <h3 class="subhead">Hoia seaded korras</h3>
   <div class="grid g3 keep">
     <div class="card">
