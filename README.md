@@ -14,6 +14,24 @@ Praktiline eestikeelne juhend, kuidas AI-st igapäevatöös rohkem kasu saada ja
 
 Häkkide ja edulugude lehel saab kirja panna ka oma nipid ja lood. Need salvestuvad ainult külastaja enda brauserisse ega jõua kellegi teiseni.
 
+## Lühiaadressid (Instagrami jaoks)
+
+Iga kaust on lühike suunamisleht, et postituses saaks kirjutada näiteks „pilveaim.ee/promptid“.
+
+| Aadress | Viib |
+|---|---|
+| /alusta | AI põhitõed |
+| /turvalisus | Andmete valgusfoor |
+| /seadistamine | Claude'i seadistamine |
+| /promptid | Hea prompt |
+| /kontroll | Viis kontrolli enne saatmist |
+| /automatiseeri | Automatiseerimine |
+| /skillid | Skillid |
+| /hakid | AI-häkid |
+| /ideed | AI-ideed |
+
+Instagram: [@pilveaim](https://www.instagram.com/pilveaim/)
+
 ## Kellele
 
 Töötajatele, meeskonnajuhtidele ja HR-ile, kes tahavad AI-d tööl kasutada või kolleegidele tutvustada. Juhend sobib kohandamiseks ka oma ettevõtte sisejuhendiks.
