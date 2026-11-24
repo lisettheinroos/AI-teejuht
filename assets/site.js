@@ -130,3 +130,4 @@ document.querySelectorAll('.copy').forEach(function(btn){
   var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});},{rootMargin:'0px 0px -8% 0px',threshold:0.06});
   els.forEach(function(e){io.observe(e);});
 })();
+

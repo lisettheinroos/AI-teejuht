@@ -861,3 +861,15 @@ main.home{max-width:1100px;gap:56px;padding-top:16px}
 /* Esilehe pilv ilma fotota */
 .hm-art{aspect-ratio:62/34}
 .hm-cloud{width:120%;fill:#FCEFF2;fill-opacity:.85}
+
+/* Pilv: suur, serv lõigatud */
+@media (min-width:861px){
+ .hm-art{position:absolute;right:-9vw;top:50%;transform:translateY(-46%);width:min(64vw,900px);aspect-ratio:62/34;z-index:0}
+ .hm-cloud{width:100%;fill:url(#hmg);fill-opacity:1;stroke-opacity:.18}
+ .hm-in{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)}
+ .hm-text{max-width:540px}
+}
+@media (max-width:860px){
+ .hm-art{max-width:none;margin:10px -24px 0 0;overflow:visible}
+ .hm-cloud{width:125%;margin-left:20%;fill:url(#hmg);fill-opacity:1;stroke-opacity:.18}
+}
