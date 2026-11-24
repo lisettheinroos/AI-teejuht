@@ -856,3 +856,7 @@ main.home{max-width:1100px;gap:56px;padding-top:16px}
 .sf-notes p{color:#E7B9C6}
 .sf-me{color:#fff}
 .sf-foto{border-color:#F2D3DC;box-shadow:none}
+
+/* Esilehe pilv ilma fotota */
+.hm-art{aspect-ratio:62/34}
+.hm-cloud{width:120%;fill:#FCEFF2;fill-opacity:.85}
