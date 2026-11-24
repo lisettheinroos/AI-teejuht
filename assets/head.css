@@ -1,7 +1,7 @@
 /* PilveAIm: ühine ülemine menüü (kasutusel lehtedel, millel pole oma site.css) */
-.skip{position:absolute;left:-999px;top:0;background:#59263B;color:#fff;padding:10px 16px;z-index:50;border-radius:0 0 8px 0;font-family:"Figtree",system-ui,sans-serif}
+.skip{position:absolute;left:-999px;top:0;background:#59263B;color:#fff;padding:10px 16px;z-index:50;border-radius:0 0 8px 0;font-family:"DM Sans",system-ui,sans-serif}
 .skip:focus{left:0}
-.site-head{position:sticky;top:0;z-index:20;background:rgba(252,250,248,.96);backdrop-filter:blur(6px);border-bottom:1px solid #EAD3DA;font-family:"Figtree",system-ui,sans-serif}
+.site-head{position:sticky;top:0;z-index:20;background:rgba(252,250,248,.96);backdrop-filter:blur(6px);border-bottom:1px solid #EAD3DA;font-family:"DM Sans",system-ui,sans-serif}
 .sh-in{max-width:1240px;margin:0 auto;padding:10px 24px;display:flex;align-items:center;justify-content:space-between;gap:10px 16px;flex-wrap:wrap}
 .sh-logo{display:block;line-height:0}
 .sh-logo img{height:40px;width:auto;display:block}
@@ -12,7 +12,7 @@
 @media (max-width:560px){.sh-in{padding:8px 16px}.sh-logo img{height:34px}.sh-nav a{padding:0 10px;font-size:14px;min-height:36px}.site-head{position:static}}
 
 /* Ühtne jalus */
-.site-foot{border-top:1px solid #EAD3DA;background:#FBEFF2;margin-top:40px;font-family:"Figtree",system-ui,sans-serif}
+.site-foot{border-top:1px solid #EAD3DA;background:#FBEFF2;margin-top:40px;font-family:"DM Sans",system-ui,sans-serif}
 .sf-in{max-width:1240px;margin:0 auto;padding:22px 24px 26px;display:grid;gap:14px}
 .sf-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px}
 .sf-brand{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px}

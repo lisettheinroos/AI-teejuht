@@ -15,7 +15,7 @@
   --warn:#E3A93B;
   --bg:#FCFAF8;
   --card:#FFFFFF;
-  --font:"Figtree",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --font:"DM Sans",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
   --radius:10px;
   color-scheme:light;
 }
@@ -541,8 +541,8 @@ html{scroll-behavior:smooth}
 .hero .jstep{box-shadow:0 2px 10px rgba(40,60,110,.14)}
 .hero .jstep:hover{box-shadow:0 6px 18px rgba(40,60,110,.22)}
 
-/* PilveAIm brändi kiht: koidupilve palett, Fraunces pealkirjad, Figtree tekst */
-:root{--font:"Figtree",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;--serif:"Pilve J","Fraunces",Georgia,serif;--hand:"Caveat",cursive}
+/* PilveAIm brändi kiht: koidupilve palett, Fraunces pealkirjad, DM Sans tekst */
+:root{--font:"DM Sans",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;--serif:"Pilve J","Fraunces",Georgia,serif;--hand:"Caveat",cursive}
 h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.005em}
 .hero h1{font-weight:400!important;text-transform:none!important;letter-spacing:-.01em!important}
 .hero .layers{display:none}
@@ -764,7 +764,7 @@ summary:focus-visible{outline:3px solid var(--lav);outline-offset:2px;border-rad
 @media (max-width:820px){.hm-links{grid-template-columns:1fr}.hm-foot-in{flex-direction:column;align-items:flex-start;padding:28px 16px 18px}.hm-foot-bar{padding:14px 16px 22px}}
 
 /* Ühtne jalus */
-.site-foot{border-top:1px solid #EAD3DA;background:#FBEFF2;margin-top:40px;font-family:"Figtree",system-ui,sans-serif}
+.site-foot{border-top:1px solid #EAD3DA;background:#FBEFF2;margin-top:40px;font-family:"DM Sans",system-ui,sans-serif}
 .sf-in{max-width:1240px;margin:0 auto;padding:22px 24px 26px;display:grid;gap:14px}
 .sf-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px}
 .sf-brand{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px}
@@ -782,7 +782,7 @@ summary:focus-visible{outline:3px solid var(--lav);outline-offset:2px;border-rad
 .sf-foto{width:40px;height:40px;border-radius:50%;object-fit:cover;object-position:50% 25%;border:2px solid #fff;box-shadow:0 1px 6px rgba(52,37,45,.2)}
 .sf-ig{padding:9px 14px}
 
-/* ===== Koidupilv 2026: visuaalne täiendus (brändiraamat: Burgundia, Koidupilv, Fraunces, Figtree, Caveat, üks pilv) ===== */
+/* ===== Koidupilv 2026: visuaalne täiendus (brändiraamat: Burgundia, Koidupilv, Fraunces, DM Sans, Caveat, üks pilv) ===== */
 
 /* Esileht: koit */
 .hm-hero{position:relative;overflow:hidden;padding:clamp(40px,7vw,92px) 24px clamp(64px,9vw,128px);
