@@ -13,7 +13,7 @@ Praktiline eestikeelne juhend, kuidas AI-st igapäevatöös rohkem kasu saada ja
 | [1. AI põhitõed](juhend/pohitoed/index.html) | Mis on AI, otselingid, andmete valgusfoor |
 | [Seadistamine](seadistamine/index.html) | Viis sammu Claude'i kohandamiseks. Lisateemad: [paketid](seadistamine/paketid/index.html) ja [Claude vs ChatGPT](seadistamine/vordlus/index.html) |
 | [2. AI igapäevatöös](juhend/igapaev/index.html) | Hea prompt, projektid ja vestlused, kontroll enne saatmist, Chat või Cowork |
-| [3. Automatiseerimine](juhend/automatiseeri/index.html) | Automatiseerimine, ühised skillid, AI meeskonnas (edasijõudnutele) |
+| [3. Automatiseerimine](juhend/automatiseeri/index.html) | Automatiseerimine, oma skillid, AI koos teistega |
 | [Minust](minust/index.html) | Pikem lugu |
 | [AI-häkid](hakid.html) | Lühikesed nipid koos promptidega |
 | [AI-ideed](edulood.html) | Näidislood eri valdkondadest |

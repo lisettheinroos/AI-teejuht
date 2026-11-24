@@ -1,0 +1,41 @@
+/* PilveAIm: ühine ülemine menüü (kasutusel lehtedel, millel pole oma site.css) */
+.skip{position:absolute;left:-999px;top:0;background:#59263B;color:#fff;padding:10px 16px;z-index:50;border-radius:0 0 8px 0;font-family:"DM Sans",system-ui,sans-serif}
+.skip:focus{left:0}
+.site-head{position:sticky;top:0;z-index:20;background:rgba(252,250,248,.96);backdrop-filter:blur(6px);border-bottom:1px solid #EAD3DA;font-family:"DM Sans",system-ui,sans-serif}
+.sh-in{max-width:1240px;margin:0 auto;padding:10px 24px;display:flex;align-items:center;justify-content:space-between;gap:10px 16px;flex-wrap:wrap}
+.sh-logo{display:block;line-height:0}
+.sh-logo img{height:40px;width:auto;display:block}
+.sh-nav{display:flex;gap:4px;flex-wrap:wrap}
+.sh-nav a{display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border-radius:999px;color:#59263B;text-decoration:none;font-weight:600;font-size:15px}
+.sh-nav a:hover{background:#F7ECEF}
+.sh-nav a[aria-current]{background:#59263B;color:#fff}
+@media (max-width:560px){.sh-in{padding:8px 16px}.sh-logo img{height:34px}.sh-nav a{padding:0 10px;font-size:14px;min-height:36px}.site-head{position:static}}
+
+/* Ühtne jalus */
+.site-foot{border-top:1px solid #EAD3DA;background:#FBEFF2;margin-top:40px;font-family:"DM Sans",system-ui,sans-serif}
+.sf-in{max-width:1240px;margin:0 auto;padding:22px 24px 26px;display:grid;gap:14px}
+.sf-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px}
+.sf-brand{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px}
+.sf-brand img{height:32px;width:auto;display:block}
+.sf-slogan{font-family:"Caveat",cursive;font-size:22px;color:#59263B;line-height:1.1}
+.sf-ig{display:inline-flex;align-items:center;gap:8px;white-space:nowrap;background:#59263B;color:#fff!important;text-decoration:none;font-weight:600;font-size:14px;padding:9px 16px;border-radius:999px}
+.sf-ig:hover{background:#A0506C}
+.sf-ig svg{width:17px;height:17px;flex:none}
+.sf-ig span{opacity:.85;font-weight:500}
+.sf-notes{display:grid;gap:4px;border-top:1px solid #EAD3DA;padding-top:12px}
+.sf-notes p{margin:0;font-size:13px;line-height:1.45;color:#6B5560;max-width:90ch}
+@media (max-width:560px){.sf-in{padding:18px 16px 22px}}
+
+.sf-me{display:flex;align-items:center;gap:10px;font-weight:600;color:#59263B;font-size:15px}
+.sf-foto{width:40px;height:40px;border-radius:50%;object-fit:cover;object-position:50% 25%;border:2px solid #fff;box-shadow:0 1px 6px rgba(52,37,45,.2)}
+.sf-ig{padding:9px 14px}
+
+/* JALUS */
+.site-foot{background:#59263B;border-top:0;margin-top:48px}
+.sf-slogan{color:#F2D3DC}
+.sf-ig{background:#F2D3DC;color:#59263B!important}
+.sf-ig:hover{background:#fff}
+.sf-notes{border-top-color:rgba(242,211,220,.25)}
+.sf-notes p{color:#E7B9C6}
+.sf-me{color:#fff}
+.sf-foto{border-color:#F2D3DC;box-shadow:none}
