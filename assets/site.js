@@ -130,3 +130,16 @@ document.querySelectorAll('.copy').forEach(function(btn){
   var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});},{rootMargin:'0px 0px -8% 0px',threshold:0.06});
   els.forEach(function(e){io.observe(e);});
 })();
+
+/* Esilehe pilv: näidisküsimused kirjutuvad ise */
+(function(){var el=document.getElementById("hmType");if(!el)return;
+if(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+var P=["Tee mulle nädala menüü ja poenimekiri.","Aita mul viisakat kirja kirjutada.","Selgita mulle seda lihtsate sõnadega.","Võta see koosolek kolme lausega kokku.","Mis küsimusi peaksin enne kokkulepet esitama?"],i=0,n=el.textContent.length,del=true,wait=0;
+function tick(){
+ if(wait>0){wait--;return setTimeout(tick,60)}
+ var s=P[i];
+ if(del){n--;el.textContent=s.slice(0,Math.max(n,0));if(n<=0){del=false;i=(i+1)%P.length;wait=6}return setTimeout(tick,22)}
+ s=P[i];n++;el.textContent=s.slice(0,n);
+ if(n>=s.length){del=true;wait=36}
+ setTimeout(tick,48)}
+setTimeout(tick,2600);})();
