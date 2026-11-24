@@ -1,9 +1,55 @@
 <!-- PilveAImi uudiskirja plokk. Lisa see esilehe (index.html) sisse, näiteks enne jalust. -->
+<!-- Privaatsusteade avaneb hüpikaknas. Kui JavaScript ei tööta, avaneb tavaline leht privaatsus/. -->
 <section id="uudiskiri" class="uudiskiri" aria-labelledby="uudiskiri-h">
   <h2 id="uudiskiri-h">Uued nipid otse postkasti</h2>
   <p>Saadan aeg-ajalt kirja uute juhendite ja nippidega, mida saad kohe ise proovida. Loobuda saad igal ajal.</p>
 
   <!-- KLEEBI SIIA BREVO VORMI IFRAME KOOD (Brevo: vormi loomise viimane samm „Share“) -->
 
-  <p class="small">Kuidas sinu andmeid hoian, loe <a href="privaatsus/">privaatsusteatest</a>.</p>
+  <p class="small">Kuidas sinu andmeid hoian, loe <a href="privaatsus/" data-privaatsus>privaatsusteatest</a>.</p>
 </section>
+
+<dialog id="privaatsus-aken" class="pa-aken" aria-labelledby="pa-pealkiri">
+  <button type="button" class="pa-sulge" aria-label="Sulge">×</button>
+  <div class="pa-sisu"><p id="pa-pealkiri">Laen…</p></div>
+</dialog>
+
+<style>
+.pa-aken{max-width:640px;width:calc(100% - 32px);max-height:85vh;border:1px solid var(--line,#EAD3DA);border-radius:var(--radius,10px);padding:28px 28px 20px;color:var(--ink,#34252D);background:var(--card,#fff);box-shadow:0 12px 40px rgba(89,38,59,.25)}
+.pa-aken::backdrop{background:rgba(52,37,45,.45)}
+.pa-aken h1{font-family:"Fraunces",serif;font-size:26px;margin:0 0 4px;color:var(--violet,#59263B)}
+.pa-aken h2{font-size:17px;margin:18px 0 4px;color:var(--violet,#59263B)}
+.pa-aken p{margin:0 0 8px;line-height:1.55}
+.pa-sulge{position:absolute;top:10px;right:12px;width:34px;height:34px;border:0;border-radius:50%;background:var(--grey,#F7ECEF);color:var(--violet,#59263B);font-size:22px;line-height:1;cursor:pointer}
+.pa-sulge:hover,.pa-sulge:focus-visible{background:var(--lilac,#F2B9CB)}
+</style>
+
+<script>
+(function () {
+  var aken = document.getElementById('privaatsus-aken');
+  var link = document.querySelector('a[data-privaatsus]');
+  if (!aken || !link || typeof aken.showModal !== 'function' || !window.fetch) return;
+  var sisu = aken.querySelector('.pa-sisu');
+  var laetud = false;
+
+  link.addEventListener('click', function (e) {
+    e.preventDefault();
+    aken.showModal();
+    if (laetud) return;
+    fetch(link.getAttribute('href'))
+      .then(function (r) { if (!r.ok) throw new Error(); return r.text(); })
+      .then(function (html) {
+        var leht = new DOMParser().parseFromString(html, 'text/html');
+        var osa = leht.getElementById('privaatsus');
+        if (!osa) throw new Error();
+        osa.querySelector('h1').id = 'pa-pealkiri';
+        sisu.innerHTML = osa.innerHTML;
+        laetud = true;
+      })
+      .catch(function () { window.location.href = link.getAttribute('href'); });
+  });
+
+  aken.querySelector('.pa-sulge').addEventListener('click', function () { aken.close(); });
+  aken.addEventListener('click', function (e) { if (e.target === aken) aken.close(); });
+})();
+</script>
