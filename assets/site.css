@@ -1,3 +1,4 @@
+@font-face{font-family:"Pilve J";font-style:normal;font-weight:400 600;font-display:swap;src:url(pilve-j.woff2) format("woff2");unicode-range:U+006A}
 
 /* Tumesinine põhivärv, hele roosakas taust, punane ainult aktsendina. Ühe teemaga leht. Paigutus: pastelne roosa-sinine päis kihtidega, all kaardiruudustik teemade kaupa. */
 :root{
@@ -541,7 +542,7 @@ html{scroll-behavior:smooth}
 .hero .jstep:hover{box-shadow:0 6px 18px rgba(40,60,110,.22)}
 
 /* PilveAIm brändi kiht: koidupilve palett, Fraunces pealkirjad, Figtree tekst */
-:root{--font:"Figtree",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;--serif:"Fraunces",Georgia,serif;--hand:"Caveat",cursive}
+:root{--font:"Figtree",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;--serif:"Pilve J","Fraunces",Georgia,serif;--hand:"Caveat",cursive}
 h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.005em}
 .hero h1{font-weight:400!important;text-transform:none!important;letter-spacing:-.01em!important}
 .hero .layers{display:none}

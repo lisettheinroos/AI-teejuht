@@ -25,6 +25,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=DM+Sans:wght@400;500;600;700&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
 <style>
+@font-face{font-family:"Pilve J";font-style:normal;font-weight:400 600;font-display:swap;src:url(assets/pilve-j.woff2) format("woff2");unicode-range:U+006A}
+
 /* Layout: rahulik pastelne päis, algaja juhis, otsing ja osakonnad, lihtsad lugude kaardid */
 :root{
   --violet:#59263B;
@@ -346,7 +348,7 @@ details.more[open] summary::after{transform:rotate(180deg)}
 .hero .safe a{color:#59263B}
 
 /* PilveAIm brändi kiht: koidupilve palett, Fraunces pealkirjad, DM Sans tekst */
-:root{--font:"DM Sans",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;--serif:"Fraunces",Georgia,serif;--hand:"Caveat",cursive}
+:root{--font:"DM Sans",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;--serif:"Pilve J","Fraunces",Georgia,serif;--hand:"Caveat",cursive}
 h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.005em}
 .hero h1{font-weight:400!important;text-transform:none!important;letter-spacing:-.01em!important}
 .hero .layers{display:none}
