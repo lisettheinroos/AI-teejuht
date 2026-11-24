@@ -4,19 +4,19 @@
 .site-head{position:sticky;top:0;z-index:20;background:rgba(252,250,248,.96);backdrop-filter:blur(6px);border-bottom:1px solid #EAD3DA;font-family:"Figtree",system-ui,sans-serif}
 .sh-in{max-width:1240px;margin:0 auto;padding:10px 24px;display:flex;align-items:center;justify-content:space-between;gap:10px 16px;flex-wrap:wrap}
 .sh-logo{display:block;line-height:0}
-.sh-logo img{height:34px;width:auto;display:block}
+.sh-logo img{height:40px;width:auto;display:block}
 .sh-nav{display:flex;gap:4px;flex-wrap:wrap}
 .sh-nav a{display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border-radius:999px;color:#59263B;text-decoration:none;font-weight:600;font-size:15px}
 .sh-nav a:hover{background:#F7ECEF}
 .sh-nav a[aria-current]{background:#59263B;color:#fff}
-@media (max-width:560px){.sh-in{padding:8px 16px}.sh-logo img{height:28px}.sh-nav a{padding:0 10px;font-size:14px;min-height:36px}.site-head{position:static}}
+@media (max-width:560px){.sh-in{padding:8px 16px}.sh-logo img{height:34px}.sh-nav a{padding:0 10px;font-size:14px;min-height:36px}.site-head{position:static}}
 
 /* Ühtne jalus */
 .site-foot{border-top:1px solid #EAD3DA;background:#FBEFF2;margin-top:40px;font-family:"Figtree",system-ui,sans-serif}
 .sf-in{max-width:1240px;margin:0 auto;padding:22px 24px 26px;display:grid;gap:14px}
 .sf-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px}
 .sf-brand{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px}
-.sf-brand img{height:26px;width:auto;display:block}
+.sf-brand img{height:32px;width:auto;display:block}
 .sf-slogan{font-family:"Caveat",cursive;font-size:22px;color:#59263B;line-height:1.1}
 .sf-ig{display:inline-flex;align-items:center;gap:8px;white-space:nowrap;background:#59263B;color:#fff!important;text-decoration:none;font-weight:600;font-size:14px;padding:9px 16px;border-radius:999px}
 .sf-ig:hover{background:#A0506C}
