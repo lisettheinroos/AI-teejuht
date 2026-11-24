@@ -18,8 +18,6 @@ Praktiline eestikeelne juhend, kuidas AI-st igapäevatöös rohkem kasu saada ja
 | [AI-häkid](hakid.html) | Lühikesed nipid koos promptidega |
 | [AI-ideed](edulood.html) | Näidislood eri valdkondadest |
 
-Häkkide ja edulugude lehel saab kirja panna ka oma nipid ja lood. Need salvestuvad ainult külastaja enda brauserisse ega jõua kellegi teiseni.
-
 ## Lühiaadressid (Instagrami jaoks)
 
 Iga kaust on lühike suunamisleht, et postituses saaks kirjutada näiteks „pilveaim.ee/promptid“.
