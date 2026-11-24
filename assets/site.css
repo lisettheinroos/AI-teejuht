@@ -861,6 +861,14 @@ main.home{max-width:1100px;gap:56px;padding-top:16px}
 .hm-art{aspect-ratio:62/34}
 .hm-cloud{width:120%;fill:#FCEFF2;fill-opacity:.85}
 
-/* Pilve sisu: AI */
-.hm-ai{grid-area:1/1;z-index:1;margin:0;padding-top:12%;font-family:var(--serif);font-weight:400;font-size:clamp(84px,13vw,170px);line-height:1;color:var(--lav);letter-spacing:-.02em;animation:pa-drift 20s ease-in-out infinite alternate}
-@media (prefers-reduced-motion:reduce){.hm-ai{animation:none}}
+/* Pilv: suur, serv lõigatud */
+@media (min-width:861px){
+ .hm-art{position:absolute;right:-9vw;top:50%;transform:translateY(-46%);width:min(64vw,900px);aspect-ratio:62/34;z-index:0}
+ .hm-cloud{width:100%;fill:url(#hmg);fill-opacity:1;stroke-opacity:.18}
+ .hm-in{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)}
+ .hm-text{max-width:540px}
+}
+@media (max-width:860px){
+ .hm-art{max-width:none;margin:10px -24px 0 0;overflow:visible}
+ .hm-cloud{width:125%;margin-left:20%;fill:url(#hmg);fill-opacity:1;stroke-opacity:.18}
+}
